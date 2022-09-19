@@ -1,0 +1,21 @@
+.sel{
+    width: 300px;
+    padding: 5px;
+     background:rgba(0, 0, 0, 0.288);
+     margin-bottom: 9px;
+    }
+    .div{
+        height: 400PX;
+    }
+    bc3
+{background-color:black;
+     
+    border: none;
+    color: white;
+    padding: 4px 12px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 14px;
+    border-radius: 9px
+}
