@@ -34,6 +34,8 @@ const API_URL = "/auth";
 
 const logout = () => {
   localStorage.removeItem("user");
+  localStorage.removeItem("roles");
+  localStorage.removeItem("token");
 };
 
 const getCurrentUser = () => {

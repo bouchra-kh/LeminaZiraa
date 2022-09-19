@@ -18,6 +18,7 @@ import { useSelector, useDispatch } from "react-redux";
 import AuthService from "./components/Users/authservice";
 import Login from "./components/Login";
 import Home from "./components/home";
+import { fontFamily } from "@mui/system";
 //import { useState, useEffect } from "react";
 // function App() {
 //   const [clicked, setClicked] = useState(3);
@@ -101,8 +102,11 @@ function App() {
     if (role) {
       setCurrentrole(role);
     }
+   
   }, []);
 
+  
+   
   const logOut = () => {
     AuthService.logout();
   };
@@ -117,7 +121,7 @@ function App() {
             </Link>
           </li>
 
-          {currentUser &&  currentRole=="ADMIN"(
+          {currentUser &&(
             <li className="nav-item">
               <Link to={"/dashboard"} className="nav-link">
                 Dashboard
@@ -155,7 +159,7 @@ function App() {
         <Routes>
           <Route path="/home" element={<Home />} />
           <Route path="/dashboard" element={<Dashboards />} />
-          
+
           <Route path="/login" element={<Login/>} />
           <Route path="/signup" element={<SignUp />} />
         </Routes>
