@@ -28,11 +28,9 @@
     height: 50;
     width: 50;
 }
-
-.side-by-side {
-    display: flex;
-    flex-direction: row;
-  }
-  .inputp{
-    margin-right: 5px;
-  }
+.centerdiv{
+    text-align: center;
+    margin-top:150px ;
+    margin: 300px;
+    color: orange;
+}

@@ -4,7 +4,7 @@ import { BsCardList, BsFillGrid1X2Fill } from "react-icons/bs";
 import { BiSort, BiDotsHorizontalRounded } from "react-icons/bi";
 import { useSelector, useDispatch } from "react-redux";
 import { SwitchMode, toGrid, ToList } from "../../app/features/local-config";
-import { NavLink } from "react-router-dom";
+import { NavLink ,Link} from "react-router-dom";
 import { moughataaSlice,useGetMoughataasQuery,useDeleteMoughataaMutation} from "./moughataas-services";
 import './style.css';
 export default function Moughataas() {
@@ -13,6 +13,7 @@ export default function Moughataas() {
   const show = () => {
     document.getElementById("slide").classList.remove("d-none");
   };
+ 
   const [inputText, setInputText] = useState("");
   let inputHandler = (e) => {
     setInputText( e.target.value);
@@ -192,7 +193,7 @@ export default function Moughataas() {
       </NavLink>
     </div>
     <div class="product-cell category">
-    <NavLink to={"update/"+moughataa.id}>
+    <NavLink to={"moughp/"+moughataa.id}>
             {" "}
       <button class="bc3">Publication</button>
       </NavLink>
@@ -232,9 +233,10 @@ export default function Moughataas() {
   <div class="product-cell category">
   
     <button class="bc3">Publication</button>
-    
+  
+
   </div>
-              
+         
 
               
             </div>

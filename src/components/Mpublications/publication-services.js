@@ -8,16 +8,16 @@ export const usepublicationsApi = createApi({
   baseQuery: axiosBaseQuery({
     baseUrl: "http://localhost:8080/publication",
   }),
-  
   endpoints: (builder) => ({
     getPublications: builder.query({
-      query: (obj) => ({
-        url: "/list",
-        method: "GET",
-      }),
-
-
-    }),
+      query: (id) => {
+        console.log("ID:", id)
+       return {
+        url: `/listpublication/${id}`,
+        method: 'GET'
+       }
+      }
+     }),
     getpublicationById: builder.query({
       query: (id) => {
        console.log("ID:", id)
@@ -52,24 +52,7 @@ export const usepublicationsApi = createApi({
      }
     }
    }),
-   photopublication: builder.mutation({
-    query: (newPost) => {
-     console.log("photo: ", newPost.name);
-     var fd = new FormData();
-     fd.append('img', newPost,newPost.name);
-     
-     return {
-      url: `/photo`,
-      method: 'POST',
-     // body: newPost,
-     data: fd,
-      headers: {
-       'Content-type': 'application/json',
-       'No-Auth':'True'
-      }
-     }
-    }
-   }),
+
    updatepublication: builder.mutation({
     query: (updatepublicationData) => {
      console.log("Update Post: ", updatepublicationData)
@@ -91,7 +74,7 @@ export const usepublicationsApi = createApi({
 });
 
 
-export const { useGetPublicationsQuery,useDeletepublicationMutation,useCreatepublicationMutation,usePhotopublicationMutation,useUpdatepublicationMutation}  = usepublicationsApi;
+export const {useGetPublicationsQuery,useDeletepublicationMutation,useCreatepublicationMutation,useUpdatepublicationMutation}  = usepublicationsApi;
 
 
 const initialState = {};

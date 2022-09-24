@@ -10,11 +10,14 @@ export default function MoughataasNew() {
   const navigate = useNavigate();
   const [username, setUsername] = useState("");
   const [zone_agricoles, setzone_agricoles] = useState("");
-
+ 
   const [wilaya, setWilaya] = useState("");
   const [newMoughataa] = useCreateMoughataaMutation();
   const responseInfo =useGetWilayasQuery();
   console.log("wilaya",responseInfo.data)
+  if (responseInfo.isLoading) {
+    return <div>recherch....</div>
+  }
   return (
     
     <div class="login d-flex flex-column">

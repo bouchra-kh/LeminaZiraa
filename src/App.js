@@ -12,6 +12,7 @@ import PublicationRoutes from "./components/Publications/publication-routes";
 import UsersRoutes from "./components/Users/users-routes";
 import RolesRoutes from "./components/Roles/roles-routes";
 import WilayasRoutes from "./components/Wilayas/wilayas-routes";
+import MPublicationRoutes from "./components/Mpublications/publication-routes";
 import React, { useState,useEffect, Component } from "react";
 import Dashboards from "./components/Dashboard";
 import { useSelector, useDispatch } from "react-redux";
@@ -86,6 +87,9 @@ import { fontFamily } from "@mui/system";
 //   );
 // }
 function App() {
+    const [clicked, setClicked] = useState(3);
+  const { isAuthenticated } = useSelector((state) => state.authentifications);
+
   const [currentUser, setCurrentUser] = useState(undefined);
   const [currentRole, setCurrentrole] = useState(undefined);
 
@@ -113,6 +117,7 @@ function App() {
 
   return (
     <div className="Appn" >
+      
       <nav className="navbar navbar-expand navbar-light bg-light">
         <div className="navbar-nav mr-auto">
           <li className="nav-item">
@@ -123,7 +128,7 @@ function App() {
 
           {currentUser &&(
             <li className="nav-item">
-              <Link to={"/dashboard"} className="nav-link">
+              <Link to={"/"} className="nav-link">
                 Dashboard
               </Link>
             </li>
@@ -155,14 +160,35 @@ function App() {
         )}
       </nav>
 
-      <div className="container mt-3">
+      <div className="App  d-flex flex-row text-white">
+     
+               
+       <Main clicked={clicked} setClicked={setClicked} /> 
         <Routes>
-          <Route path="/home" element={<Home />} />
-          <Route path="/dashboard" element={<Dashboards />} />
+        <Route path="/home" element={<Home />} />
+          <Route path="/" element={<Dashboards />} />
 
           <Route path="/login" element={<Login/>} />
           <Route path="/signup" element={<SignUp />} />
-        </Routes>
+
+              
+            <Route path="/produits/*" element={<ProduitRoutes />} />
+            <Route
+              path="/ligne_commande/*"
+              element={<LigneCommandesRoutes />}
+            />
+            <Route path="/livraison/*" element={<LivraisonRoutes />} />
+            <Route path="/commandes/*" element={<CommandeRoutes />} />
+            <Route path="/payments/*" element={<PaymentRoutes />} />
+            <Route path="/wilayas/*" element={<WilayasRoutes />} />
+            <Route path="/moughataas/*" element={<MoughataaRoutes />} />
+            <Route path="/publications/*" element={<PublicationRoutes />} />
+            <Route path="/users/*" element={<UsersRoutes />} />
+            <Route path="/roles/*" element={<RolesRoutes />} />
+            {/* <Route path="/mp/:id" element={<MPublicationRoutes />} /> */}
+                  </Routes>
+
+                  
       </div>
     </div>
   );
