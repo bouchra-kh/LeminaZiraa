@@ -117,7 +117,7 @@ console.log("publiiiiiiiicmmmmough")
             </button>
           </NavLink>
         </div> */}
-        <div class="app-content-actions ">
+        <div class="card row ">
           <div className="blog-posts">
             {responseInfop.data.map((publication,key) => {
               return (

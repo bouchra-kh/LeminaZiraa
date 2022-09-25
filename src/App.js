@@ -23,6 +23,7 @@ import Login from "./components/Login";
 import Home from "./components/home";
 import { fontFamily } from "@mui/system";
 import Statistiques from "./components/statistiques";
+import { ADMIN, CONSEILLER_AGRICOLE, UserHasAccess } from "./components/extends/GlobalFunctions";
 //import { useState, useEffect } from "react";
 // function App() {
 //   const [clicked, setClicked] = useState(3);
@@ -167,8 +168,6 @@ function App() {
 
           <Route path="/login" element={<Login/>} />
           <Route path="/signup" element={<SignUp />} />
-
-              
             <Route path="/produits/*" element={<ProduitRoutes />} />
             <Route
               path="/ligne_commande/*"
@@ -180,9 +179,13 @@ function App() {
             <Route path="/wilayas/*" element={<WilayasRoutes />} />
             <Route path="/moughataas/*" element={<MoughataaRoutes />} />
             <Route path="/publications/*" element={<PublicationRoutes />} />
-            <Route path="/users/*" element={<UsersRoutes />} />
+            {
+              UserHasAccess(ADMIN) && <Route path="/users/*" element={<UsersRoutes />} />
+            }
             <Route path="/roles/*" element={<RolesRoutes />} />
-            <Route path="/statistiques" element={<Statistiques />}/>
+            {
+              (UserHasAccess(ADMIN)) && <Route path="/statistiques" element={<Statistiques />}/>
+            }
             {/* <Route path="/mp/:id" element={<MPublicationRoutes />} /> */}
                   </Routes>
 

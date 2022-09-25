@@ -3,15 +3,22 @@ import "./dashboard.scss";
 import { useSelector, useDispatch } from "react-redux";
 import { SwitchMode } from "../../app/features/local-config";
 import {  ADMIN, getUser, UserHasAccess } from "../extends/GlobalFunctions";
-import { MapContainer, TileLayer, useMap } from 'react-leaflet'
+import { MapContainer, TileLayer, useMap,Marker,Popup } from 'react-leaflet'
 import axios from "axios";
+
 
 const Dashboards = (props) => {
   const user = getUser();
   const dispatch = useDispatch();
-  const position = [51.505, -0.09]
+  const position = [18.07988680008646, -15.96489325263382]
   const [moughataas,setMoutghataas] = useState()
-
+  const defaultProps = {
+    center: {
+      lat: 10.99835602,
+      lng: 77.01502627
+    },
+    zoom: 11
+  };
   useEffect(() => {
     axios.get('http://localhost:8080/moughataaa/list')
     .then(res => {
@@ -29,14 +36,23 @@ const Dashboards = (props) => {
     <>
       <div class="app-container ">
        <div className="app-main p-3">
-       <MapContainer center={position} zoom={43} scrollWheelZoom={true}>
+       <MapContainer
+       style={{ height: '100%', width: '100wh' }}
+        center={position} zoom={13} scrollWheelZoom={true}>
     <TileLayer
       attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
       url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
     />
-   
-  </MapContainer>,
+    <Marker position={position}>
+      <Popup>
+        A pretty CSS3 popup. <br /> Easily customizable.
+      </Popup>
+    </Marker>
+  </MapContainer>
        </div>
+       
+       <div style={{ height: '100vh', width: '200wh' }}>
+    </div>
       <div class="app-right   ">
           <button class="close-right">
             <svg
@@ -63,7 +79,7 @@ const Dashboards = (props) => {
               />
             </div>
             <p class="profile-text">{user?.username } </p>
-            <p class="profile-subtext">{user?.roles[0].roleName} </p>
+            <p class="profile-subtext">{user?.roles[0]?.roleName} </p>
           </div>
         </div>
       </div>
