@@ -10,13 +10,14 @@ const Login = () => {
   
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const baseURL = "http://localhost:8000/login";
+  const baseURL = "http://localhost:8080/login";
   const navigate = useNavigate();
  
 const handleSubmit = (event) => {
+  event.preventDefault();
   console.log(username)
   console.log(password)
-  event.preventDefault();
+  
   const params = new URLSearchParams();
   params.append('username', username);
   params.append('password', password);
@@ -31,10 +32,10 @@ const handleSubmit = (event) => {
   })
 
     .then((res) => {
-      console.log(res)
+      console.log("idci front")
       localStorage.setItem("token", res.data.user.jwtToken)
       localStorage.setItem('user', JSON.stringify(res.data.user.user));
-   //   localStorage.setItem('roles', JSON.stringify(res.data.user.roles.roleName));
+      
       navigate("/home");
       window.location.reload();
       

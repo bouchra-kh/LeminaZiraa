@@ -21,12 +21,7 @@ export default function Publications() {
 
   const responseInfop = useGetPublicationsQuery();
   const  [deletepublication]  =useDeletepublicationMutation();
-console.log("publiiiiiiiic")
-  console.log("ReponsePublicat: ", responseInfop)
-  console.log("Data: ", responseInfop.data);
-  console.log("Delete: ", deletepublication)
-  console.log("success: ", responseInfop.isSuccess);
-  
+
   if (responseInfop.isLoading) {
     return (
     <div class="app-content  ">
@@ -177,16 +172,16 @@ console.log("publiiiiiiiic")
                   <img 
                     class="blog-post-image sti"
                    
-                    src={`http://localhost:8080/publication/sid/${publication.image}`}
+                    src={`http://localhost:8080/publication/${publication.image}`}
                     
                     alt="image"
                   />
-                  <h2 class="blog-post-heading"> date de la recolte  : {publication.anneerecolte.toString().substring(0, 10)}</h2>
+                  <h2 class="blog-post-heading"> date de la recolte  : {publication.anneerecolte?.toString().substring(0, 10)}</h2>
                   <h2 class="blog-post-subheading">
-                  date de publication :  {publication.date_publication.toString().substring(0, 10)}
+                  date de publication :  {publication.date_publication?.toString().substring(0, 10)}
                   </h2>
                   <h2 class="blog-post-subheading">
-                  Moughataa :  {publication.moughataa.nom}
+                  Moughataa :  {publication.moughataa?.nom}
                   </h2>
                
                   <p class="text">{publication.semences}</p>

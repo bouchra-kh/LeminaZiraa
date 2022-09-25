@@ -1,3 +1,4 @@
+import React from "react";
 import { Route, Routes } from "react-router-dom";
 import PublicationsNew from "./new";
 import Publications from "./index";

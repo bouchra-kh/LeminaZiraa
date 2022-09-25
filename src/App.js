@@ -1,4 +1,6 @@
 import "./App.css";
+import React from "react";
+
 import {  Routes, Route, Link, Navigate } from "react-router-dom";
 import Main from "./components/Main";
 import SignUp from "./components/SignUp";
@@ -13,13 +15,14 @@ import UsersRoutes from "./components/Users/users-routes";
 import RolesRoutes from "./components/Roles/roles-routes";
 import WilayasRoutes from "./components/Wilayas/wilayas-routes";
 import MPublicationRoutes from "./components/Mpublications/publication-routes";
-import React, { useState,useEffect, Component } from "react";
+import  { useState,useEffect, Component } from "react";
 import Dashboards from "./components/Dashboard";
 import { useSelector, useDispatch } from "react-redux";
 import AuthService from "./components/Users/authservice";
 import Login from "./components/Login";
 import Home from "./components/home";
 import { fontFamily } from "@mui/system";
+import Statistiques from "./components/statistiques";
 //import { useState, useEffect } from "react";
 // function App() {
 //   const [clicked, setClicked] = useState(3);
@@ -100,14 +103,8 @@ function App() {
       setCurrentUser(user);
     }
   }, []);
-  useEffect(() => {
-    const role= AuthService.getCurrentrole();
 
-    if (role) {
-      setCurrentrole(role);
-    }
-   
-  }, []);
+
 
   
    
@@ -185,6 +182,7 @@ function App() {
             <Route path="/publications/*" element={<PublicationRoutes />} />
             <Route path="/users/*" element={<UsersRoutes />} />
             <Route path="/roles/*" element={<RolesRoutes />} />
+            <Route path="/statistiques" element={<Statistiques />}/>
             {/* <Route path="/mp/:id" element={<MPublicationRoutes />} /> */}
                   </Routes>
 

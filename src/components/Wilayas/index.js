@@ -8,11 +8,14 @@ import { SwitchMode, toGrid, ToList } from "../../app/features/local-config";
 import { NavLink } from "react-router-dom";
 import React, { useState } from "react";
 import { wilayaSlice,useGetWilayasQuery,useDeleteWilayaMutation } from "./wilayas-services";
+import { ADMIN, UserHasAccess } from "../extends/GlobalFunctions";
 
 export default function Wilayas()  {
   
   const dispatch = useDispatch();
 const responseInfos=[];
+
+  
 
   const show = () => {
     document.getElementById("slide").classList.remove("d-none");
@@ -180,15 +183,18 @@ const responseInfos=[];
                
            
     <div class="product-cell category">
-    
-      <button class="bc"onClick={() => {deleteWilaya(wilaya.id)}}>Suprimer</button>
+    {
+      UserHasAccess(ADMIN) &&
+      <button class="bc"onClick={() => {deleteWilaya(wilaya.id)}}>Suprimer</button>}
     </div>
   
 
     <div class="product-cell category">
     <NavLink to={"update/"+wilaya.id}>
             {" "}
-      <button class="bc2">Modifier</button>
+            {
+              UserHasAccess(ADMIN) &&
+              <button class="bc2">Modifier</button>}
       </NavLink>
     </div>
    

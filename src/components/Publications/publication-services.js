@@ -15,8 +15,6 @@ export const usepublicationsApi = createApi({
         url: "/list",
         method: "GET",
       }),
-
-
     }),
     getpublicationById: builder.query({
       query: (id) => {
@@ -103,7 +101,12 @@ export const publicationSlice = createSlice({
   extraReducers: (builder) => {
     builder.addMatcher(
       usepublicationsApi.endpoints.getPublications.matchFulfilled,
-      (state, { payload }) => {}
+      (state, { payload }) => {
+
+        state.isLoading = true;
+        state.hasError = false;
+        console.log("state"+state);
+      }
     );
   },
 });

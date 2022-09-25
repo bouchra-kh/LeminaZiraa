@@ -7,6 +7,7 @@ import { SwitchMode, toGrid, ToList } from "../../app/features/local-config";
 import { NavLink ,Link} from "react-router-dom";
 import { moughataaSlice,useGetMoughataasQuery,useDeleteMoughataaMutation} from "./moughataas-services";
 import './style.css';
+import { ADMIN, UserHasAccess } from "../extends/GlobalFunctions";
 export default function Moughataas() {
   const dispatch = useDispatch();
   const responseInfos=[];
@@ -143,7 +144,7 @@ export default function Moughataas() {
               </button>
             </div>
             <div class="product-cell category">
-            Supprimer
+            Supprimer 
               <button class="sort-button">
                 <BiSort />
               </button>
@@ -181,15 +182,18 @@ export default function Moughataas() {
                   {moughataa.nom}
                 </div>
                 <div class="product-cell category">
+               
     
-      <button class="bc"onClick={() => {deleteMoughataa(moughataa.id)}}>Suprimer</button>
-    </div>
+    {
+      UserHasAccess(ADMIN) && <button class="bc"onClick={() => {deleteMoughataa(moughataa.id)}}>supprimer</button>}
+    </div>  
   
 
     <div class="product-cell category">
     <NavLink to={"update/"+moughataa.id}>
             {" "}
-      <button class="bc2">Modifier</button>
+            {
+      UserHasAccess(ADMIN) && <button class="bc2">Modifier</button>}
       </NavLink>
     </div>
     <div class="product-cell category">
@@ -220,7 +224,10 @@ export default function Moughataas() {
               </div>
               <div class="product-cell category">
   
-    <button class="bc"onClick={() => {deleteMoughataa(responseInfos[0].id)}}>Suprimer</button>
+    {
+      UserHasAccess(ADMIN) && <button class="bc"onClick={() => {deleteMoughataa(responseInfos[0].id)}}>Suprimer  okiojdijdiojdokojoi</button>
+    }
+    
   </div>
 
 
