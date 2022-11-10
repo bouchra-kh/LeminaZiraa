@@ -48,7 +48,24 @@ export const useWilayasApi = createApi({
        }
       }
      }),
-
+     importWilaya: builder.mutation({
+      query: (newPost) => {
+       console.log("Create Post: ", newPost)
+       var fd = new FormData();
+     fd.append('file', newPost,newPost.name);
+     
+       return {
+        url: `/upload`,
+        method: 'POST',
+       // body: newPost,
+       data: fd,
+        headers: {
+         'Content-type': 'application/json',
+         'No-Auth':'True'
+        }
+       }
+      }
+     }),
      updateWilaya: builder.mutation({
       query: (updateWilayaData) => {
        console.log("Update Post: ", updateWilayaData)
@@ -71,7 +88,7 @@ export const useWilayasApi = createApi({
  
 });
 
-export const { useGetWilayasQuery,useGetWilayaByIdQuery,useDeleteWilayaMutation,useCreateWilayaMutation,useUpdateWilayaMutation} = useWilayasApi;
+export const { useGetWilayasQuery,useGetWilayaByIdQuery,useDeleteWilayaMutation,useCreateWilayaMutation,useImportWilayaMutation,useUpdateWilayaMutation} = useWilayasApi;
 const initialState = {};
 
 export const wilayaSlice = createSlice({

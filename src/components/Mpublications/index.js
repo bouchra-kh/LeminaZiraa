@@ -5,15 +5,17 @@ import { BsCardList, BsFillGrid1X2Fill } from "react-icons/bs";
 import { BiSort, BiDotsHorizontalRounded } from "react-icons/bi";
 import { useSelector, useDispatch } from "react-redux";
 import { SwitchMode, toGrid, ToList } from "../../app/features/local-config";
-import { NavLink } from "react-router-dom";
+import { NavLink ,useNavigate}  from "react-router-dom";
+
 import {
   BrowserRouter as Router,
-  
+
   useParams
 } from 'react-router-dom'
 import { publicationSlice,useGetPublicationsQuery,useDeletepublicationMutation } from "./publication-services";
 export default function MPublications() {
   const { id } = useParams();
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const show = () => {
     document.getElementById("slide").classList.remove("d-none");
@@ -21,7 +23,7 @@ export default function MPublications() {
   const [inputText, setInputText] = useState("");
   let inputHandler = (e) => {
     setInputText( e.target.value);
-    
+
   };
 
 
@@ -32,7 +34,7 @@ console.log("publiiiiiiiicmmmmough")
   console.log("Data: ", responseInfop.data);
   console.log("Delete: ", deletepublication)
   console.log("success: ", responseInfop.isSuccess);
-  
+
   if (responseInfop.isLoading) {
     return <div>recherch....</div>
   }
@@ -46,24 +48,23 @@ console.log("publiiiiiiiicmmmmough")
     responseInfop.data.map((moughataa, position) => {
       if (inputText==moughataa.nom) {
         console.log("hhhhhhhhhh")
-        
+
          ;
          responseInfop.push(moughataa);
          //const wilaya=responseInfos[0];
-        
-      
+
+
       }
-  
+
     }
-  
+
     );
   }
 
-
   return (
     <>
-      <div class="app-content  ">
-        <div className="d-flex flex-row  justify-content-between mb-3">
+      <div class="app-content scr ">
+        <div className="d-flex flex-row  justify-content-between mb-20">
           <h1 class="app-content-headerText">Publications</h1>
           <div class="action-buttons">
             <button
@@ -91,8 +92,8 @@ console.log("publiiiiiiiicmmmmough")
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   id="menu"
-                  width="24"
-                  height="24"
+                  width="12"
+                  height="12"
                   viewBox="0 0 24 24"
                   fill="none"
                   stroke="currentColor"
@@ -109,44 +110,55 @@ console.log("publiiiiiiiicmmmmough")
             </div>
           </div>
         </div>
-        {/* <div class="app-content-header justify-content-end  fixed">
-          <NavLink to={"new"}>
-            {" "}
-            <button class="app-content-headerButton">
-              Ajouter publication
-            </button>
-          </NavLink>
-        </div> */}
-        <div class="card row ">
-          <div className="blog-posts">
+
+        <div >
+        <div class="row">
             {responseInfop.data.map((publication,key) => {
+              console.log("dddddddd",publication.moughataa?.nom)
               return (
-                <article class="blog-post">
-                  <img 
-                    class="blog-post-image sti"
-                    src={`http://localhost:8080/publication/sid/${publication.image}`}
-                    
-                    alt="image"
-                  />
-                  <h2 class="blog-post-heading"> date de la recolte  : {publication.anneerecolte.toString().substring(0, 10)}</h2>
-                  <h2 class="blog-post-subheading">
-                  date de publication :  {publication.date_publication.toString().substring(0, 10)}
-                  </h2>
-                  <h2 class="blog-post-subheading">
-                  Moughataa :  {publication.moughataa.nom}
-                  </h2>
-               
-                  <p class="text">{publication.semences}</p>
-                  <p class="text">{publication.typesol}</p>
-                  <p class="text">{publication.description}</p>
-                  
-                   
-                </article>
+
+                <div class="coll divb">
+              <section class="product">
+                <div class="product__photo">
+                  <div class="photo-container">
+                    <div class="photo-main">
+
+
+                      <img
+                      src={`http://localhost:8080/publication/sid/${publication.image}`} />
+                    </div>
+
+                  </div>
+                </div>
+                <div class="product__info">
+                  <div class="price">
+                    <p className="description">{publication.description}</p>
+                    <span className="price">Publié le :</span> <span className="bl">{publication.date_publication.toString().substring(0, 10)}</span>
+
+                  </div>
+                  <div class="price">
+                  <span className="price">pour le wilaya de : </span> <span className="bl">{publication.moughataa?.nom}</span><br></br><br></br>
+                  </div>
+                  <br></br>
+                  <NavLink to={"detail2/"+publication.id_publication}>
+                  <button class="buy--btn  btn-success"
+                  >Lire la suite</button>
+                  </NavLink>
+                </div>-
+              </section>
+              <br></br>
+            </div>
+
+
+
               );
-            })}
-          </div>
-        </div>
+
+            })
+            }
+             </div>
+         </div>
       </div>
     </>
   );
+
 }

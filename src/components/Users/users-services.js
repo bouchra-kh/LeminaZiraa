@@ -6,7 +6,7 @@ import { axiosBaseQuery } from "../../app/config/rtk_query.ts";
 export const useUsersApi = createApi({
   reducerPath: "UsersApi",
   baseQuery: axiosBaseQuery({
-    baseUrl: "http://localhost:8080/users",
+    baseUrl: "http://localhost:8080",
   }),
   endpoints: (builder) => ({
     getUsers: builder.query({

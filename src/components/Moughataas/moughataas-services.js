@@ -48,7 +48,24 @@ export const useMoughataasApi = createApi({
        }
       }
      }),
-
+     importMoughataa: builder.mutation({
+      query: (newPost) => {
+       console.log("Create Post: ", newPost)
+       var fd = new FormData();
+     fd.append('file', newPost,newPost.name);
+     
+       return {
+        url: `/upload2`,
+        method: 'POST',
+       // body: newPost,
+       data: fd,
+        headers: {
+         'Content-type': 'application/json',
+         'No-Auth':'True'
+        }
+       }
+      }
+     }),
      updateMoughataa: builder.mutation({
       query: (updateMoughataaData) => {
        console.log("Update Post: ", updateMoughataaData)
@@ -76,7 +93,7 @@ export const useMoughataasApi = createApi({
   
 
 
-export const { useGetMoughataasQuery,useGetMoughataaByIdQuery,useDeleteMoughataaMutation,useCreateMoughataaMutation,useUpdateMoughataaMutation}  = useMoughataasApi;
+export const { useGetMoughataasQuery,useGetMoughataaByIdQuery,useDeleteMoughataaMutation,useCreateMoughataaMutation,useImportMoughataaMutation,useUpdateMoughataaMutation}  = useMoughataasApi;
 const initialState = {};
 
 export const moughataasSlice = createSlice({

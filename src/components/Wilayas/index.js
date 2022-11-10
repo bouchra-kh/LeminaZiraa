@@ -1,4 +1,7 @@
 
+
+
+
 import wilayas from "../data/data-wilaya";
 import './style.css';
 import { BsCardList, BsFillGrid1X2Fill } from "react-icons/bs";
@@ -7,15 +10,16 @@ import {  useDispatch } from "react-redux";
 import { SwitchMode, toGrid, ToList } from "../../app/features/local-config";
 import { NavLink } from "react-router-dom";
 import React, { useState } from "react";
-import { wilayaSlice,useGetWilayasQuery,useDeleteWilayaMutation } from "./wilayas-services";
 import { ADMIN, UserHasAccess } from "../extends/GlobalFunctions";
+import { wilayaSlice,useImportWilayaMutation,useGetWilayasQuery,useDeleteWilayaMutation } from "./wilayas-services";
+import { MdDelete } from 'react-icons/md';
+
+import { MdModeEdit} from 'react-icons/md';
 
 export default function Wilayas()  {
   
   const dispatch = useDispatch();
 const responseInfos=[];
-
-  
 
   const show = () => {
     document.getElementById("slide").classList.remove("d-none");
@@ -26,9 +30,10 @@ const responseInfos=[];
     
   };
 
+  const [image, setImage] = useState("");
   const responseInfo =useGetWilayasQuery();
  const  [deleteWilaya]  =useDeleteWilayaMutation();
-
+ const [responseInfo4] =useImportWilayaMutation();
  
   console.log("Reponse: ", responseInfo)
   console.log("Data: ", responseInfo.data);
@@ -110,11 +115,28 @@ const responseInfos=[];
             </div>
           </div>
         </div>
-        <div class="app-content-header justify-content-end  fixed">
+        <div class="row ">
+        <div class="col  col-6">
+        {/* <NavLink to={"importer"}>
+            {" "}
+            <button class="app-content-headerButton">Importer wilayas</button>
+         
+          </NavLink> */}
+        </div>
+        {
+              UserHasAccess(ADMIN) &&           <div class="col col-6  app-content-header justify-content-end  fixed">
+        <NavLink to={"importer"}>
+            {" "}
+            <button class="m-2 app-content-headerButton">Importer wilayas</button>
+         
+          </NavLink>
+          
           <NavLink to={"new"}>
             {" "}
             <button class="app-content-headerButton">Ajouter wilayas</button>
+         
           </NavLink>
+        </div>}
         </div>
         <div class="app-content-actions fixed">
           <input onChange={inputHandler} class="search-bar" placeholder="Search..." type="text" />
@@ -137,7 +159,7 @@ const responseInfos=[];
           </div>
         </div>
         <div
-          class="products-area-wrapper tableView  "
+          class="products-area-wrapper tableView scr "
           style={{ overflow: "scroll", height: "80vh" }}
         >
           <div class="products-header">
@@ -154,14 +176,15 @@ const responseInfos=[];
               </button>
             </div>
            
-            <div class="product-cell category">
-              Supprimer
+            {
+              UserHasAccess(ADMIN) &&        <div class="product-cell category">
              
-            </div>
-            <div class="product-cell category">
-              Modifier
+            </div>}
+            {
+              UserHasAccess(ADMIN) &&         <div class="product-cell category" style={{ marginRight:"100px" }}  >
+              Actions
               
-            </div>
+            </div>}
           </div>
 
           {
@@ -182,22 +205,23 @@ const responseInfos=[];
                 </div>
                
            
-    <div class="product-cell category">
-    {
-      UserHasAccess(ADMIN) &&
-      <button class="bc"onClick={() => {deleteWilaya(wilaya.id)}}>Suprimer</button>}
+                {
+               UserHasAccess(ADMIN) &&   <div class="product-cell category">
+                  <MdDelete style={{   fontSize:"22px" , color:"red" , marginLeft:"250px" }} onClick={() => {deleteWilaya(wilaya.id)}}/>
+             
+    
+      
     </div>
   
-
-    <div class="product-cell category">
+                }
+  {
+               UserHasAccess(ADMIN) &&  <div class="product-cell category">
     <NavLink to={"update/"+wilaya.id}>
             {" "}
-            {
-              UserHasAccess(ADMIN) &&
-              <button class="bc2">Modifier</button>}
+      <MdModeEdit style={{   fontSize:"22px" , color:"green", marginRight:"200px" }}/>
       </NavLink>
     </div>
-   
+          }
               </div>
             );
           }):
@@ -214,19 +238,21 @@ const responseInfos=[];
             {responseInfos[0].nom}
           </div>
          
-     
+          {
+      UserHasAccess(ADMIN) &&      
 <div class="product-cell category">
 
 <button class="bc"onClick={() => {deleteWilaya(responseInfos[0].id)}}>Suprimer</button>
 </div>
-
-
+}
+{
+      UserHasAccess(ADMIN) &&   
 <div class="product-cell category">
 <NavLink to={"update/"+responseInfos[0].id}>
       {" "}
 <button class="bc2">Modifier</button>
 </NavLink>
-</div>
+</div>}
 
         </div>
             

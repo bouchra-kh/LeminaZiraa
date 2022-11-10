@@ -1,3 +1,8 @@
+
+
+
+
+
 import React, { useState } from "react";
 import moughataas from "../data/data-moughataa";
 import { BsCardList, BsFillGrid1X2Fill } from "react-icons/bs";
@@ -6,8 +11,13 @@ import { useSelector, useDispatch } from "react-redux";
 import { SwitchMode, toGrid, ToList } from "../../app/features/local-config";
 import { NavLink ,Link} from "react-router-dom";
 import { moughataaSlice,useGetMoughataasQuery,useDeleteMoughataaMutation} from "./moughataas-services";
+
 import './style.css';
 import { ADMIN, UserHasAccess } from "../extends/GlobalFunctions";
+import { MdDelete } from 'react-icons/md';
+import {MdModeEdit } from 'react-icons/md';
+import {FcEditImage } from 'react-icons/fc';
+  
 export default function Moughataas() {
   const dispatch = useDispatch();
   const responseInfos=[];
@@ -27,8 +37,7 @@ export default function Moughataas() {
 
   console.log("Reponse: ", responseInfo)
   console.log("Data: ", responseInfo.data);
- // console.log("Delete: ", deleteWilaya)
-  console.log("success: ", responseInfo.isSuccess);
+
   
   if (responseInfo.isLoading) {
     return <div>recherch....</div>
@@ -101,11 +110,32 @@ export default function Moughataas() {
             </div>
           </div>
         </div>
-        <div class="app-content-header justify-content-end  fixed">
+    
+        <div class="row ">
+        <div class="col  col-6">
+        {/* <NavLink to={"importer"}>
+            {" "}
+            <button class="app-content-headerButton">Importer wilayas</button>
+         
+          </NavLink> */}
+        </div>
+        {
+              UserHasAccess(ADMIN)  &&     <div class="col col-6  app-content-header justify-content-end  fixed">
+        <NavLink to={"importer"}>
+            {" "}
+            <button class="m-2 app-content-headerButton">Importer moughataas</button>
+         
+          </NavLink>
+          
           <NavLink to={"new"}>
             {" "}
             <button class="app-content-headerButton">Ajouter moughataa</button>
-          </NavLink>{" "}
+         
+          </NavLink>
+        </div>
+
+
+        }
         </div>
         <div class="app-content-actions fixed">
           <input onChange={inputHandler} class="search-bar" placeholder="Search..." type="text" />
@@ -143,24 +173,24 @@ export default function Moughataas() {
                 <BiSort />
               </button>
             </div>
-            <div class="product-cell category">
-            Supprimer 
-              <button class="sort-button">
-                <BiSort />
-              </button>
+            {
+      UserHasAccess(ADMIN) &&         
+      <div class="product-cell category">
+            
+             
+            </div>}
+            {
+      UserHasAccess(ADMIN) &&          <div class="product-cell category" style={{    marginRight:"60px" }}>
+             
+              Actions
             </div>
-            <div class="product-cell category">
-              Modifier
-              <button class="sort-button">
-                <BiSort />
-              </button>
+            }
+           {
+      UserHasAccess(ADMIN) &&          <div class="product-cell category"style={{     marginRight:"30px" ,fontSize:"14px"}}>
+             
+              Publications
             </div>
-            <div class="product-cell category">
-            Publier
-              <button class="sort-button">
-                <BiSort />
-              </button>
-            </div>
+            }
             
             
             
@@ -168,6 +198,8 @@ export default function Moughataas() {
 
           {
           responseInfos.length==0?responseInfo.data.map((moughataa, position) => {
+       
+           
             return (
               <div class="products-row" key={position}>
                 <button class="cell-more-button">
@@ -181,25 +213,25 @@ export default function Moughataas() {
                   <span class="cell-label">Nom Moughataa :</span>
                   {moughataa.nom}
                 </div>
-                <div class="product-cell category">
-               
+                {
+      UserHasAccess(ADMIN) &&             <div class="product-cell category">
     
-    {
-      UserHasAccess(ADMIN) && <button class="bc"onClick={() => {deleteMoughataa(moughataa.id)}}>supprimer</button>}
-    </div>  
+    
+ <MdDelete style={{   fontSize:"22px" , color:"red" , marginLeft:"200px" }} onClick={() => {deleteMoughataa(moughataa.id) }}/>
+    </div>
   
-
-    <div class="product-cell category">
+                }
+   {
+     UserHasAccess(ADMIN) &&    <div class="product-cell category">
     <NavLink to={"update/"+moughataa.id}>
             {" "}
-            {
-      UserHasAccess(ADMIN) && <button class="bc2">Modifier</button>}
+            <MdModeEdit style={{   fontSize:"22px" , color:"green"  }}/>
       </NavLink>
-    </div>
+    </div>}
     <div class="product-cell category">
     <NavLink to={"moughp/"+moughataa.id}>
             {" "}
-      <button class="bc3">Publication</button>
+            < FcEditImage style={{     marginRight:"30px" ,fontSize:"22px"}}/>
       </NavLink>
     </div>
                 
@@ -222,24 +254,23 @@ export default function Moughataas() {
                 <span class="cell-label">Nom Moughataa :</span>
                 {responseInfos[0].nom}
               </div>
-              <div class="product-cell category">
+              {
+      UserHasAccess(ADMIN) &&          <div class="product-cell category">
   
-    {
-      UserHasAccess(ADMIN) && <button class="bc"onClick={() => {deleteMoughataa(responseInfos[0].id)}}>Suprimer  okiojdijdiojdokojoi</button>
-    }
-    
-  </div>
+    <button class="bc"onClick={() => {deleteMoughataa(responseInfos[0].id)}}><MdDelete/></button>
+  </div>}
 
-
+  {
+      UserHasAccess(ADMIN) &&   
   <div class="product-cell category">
   <NavLink to={"update/"+responseInfos[0].id}>
           {" "}
-    <button class="bc2">Modifier</button>
+    <button class="bc2">dd</button>
     </NavLink>
-  </div>
+  </div>}
   <div class="product-cell category">
   
-    <button class="bc3">Publication</button>
+    <button class="bc3">Publication </button>
   
 
   </div>

@@ -18,7 +18,15 @@ export default function PublicationsNew() {
   const [ts, setTs] = useState("");
   const [quantite, setQuantite] = useState("");
   const [semences, setSemences] = useState("");
-  const [sa, setSa] = useState("");
+  const [Superficies_agricoles, setSuperficie] = useState("");
+  const [type_dirrigation, setType] = useState("");
+  const [Typologies_agricoles ,setTypologie] = useState("");
+ 
+
+
+
+
+  
   const [date, setDate] = useState("");
   const [aff,setAff ] = useState("");
   //const current = new Date();
@@ -76,10 +84,13 @@ console.log("date",formattedDate.toString().substring(0, 10));
             typesol:ts,
             semences:semences,
             quantite:quantite,
-            Suagr:sa,
+            Suagr:Superficies_agricoles,
             anneerecolte:date,
             est_affiche:aff,
             image:image.name,
+            type:type_dirrigation,
+            Typologies:Typologies_agricoles,
+
            moughataa:{"id":moughataa}
          
           });
@@ -131,12 +142,28 @@ console.log("date",formattedDate.toString().substring(0, 10));
         />
          <input
           type="text"
-          value={sa}
-          onChange={(e) => setSa(e.target.value)}
+          value={Superficies_agricoles}
+          onChange={(e) => setSuperficie(e.target.value)}
           placeholder="Superficies_agricoles"
           required="required"
         />
-        </div>
+         <input
+          type="text"
+          value={type_dirrigation}
+          onChange={(e) => setType(e.target.value)}
+          placeholder="Types_d'irrigation"
+          required="required"
+          />
+        
+          <input
+          type="text"
+          value={Typologies_agricoles}
+          onChange={(e) => setTypologie(e.target.value)}
+          placeholder="Typologies_agricoles"
+          required="required"
+          />
+
+       
           <input
           type="date"
           value={date}
@@ -144,6 +171,7 @@ console.log("date",formattedDate.toString().substring(0, 10));
           placeholder="Annee_Recolte"
           required="required"
         />
+        </div>
         <div class="libele">estAffiche</div>
          <select value={aff} name={aff} onChange={(e) => setAff(e.target.value)} component="select" class="sel">
              <option></option>

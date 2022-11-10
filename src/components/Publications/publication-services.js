@@ -16,7 +16,7 @@ export const usepublicationsApi = createApi({
         method: "GET",
       }),
     }),
-    getpublicationById: builder.query({
+    getPublicationById: builder.query({
       query: (id) => {
        console.log("ID:", id)
        return {
@@ -89,7 +89,7 @@ export const usepublicationsApi = createApi({
 });
 
 
-export const { useGetPublicationsQuery,useDeletepublicationMutation,useCreatepublicationMutation,usePhotopublicationMutation,useUpdatepublicationMutation}  = usepublicationsApi;
+export const { useGetPublicationsQuery,useGetPublicationByIdQuery,useDeletepublicationMutation,useCreatepublicationMutation,usePhotopublicationMutation,useUpdatepublicationMutation}  = usepublicationsApi;
 
 
 const initialState = {};

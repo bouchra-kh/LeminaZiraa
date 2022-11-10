@@ -44,6 +44,11 @@ import {
   reducer as WilayaReducer,
   
 } from "../../components/Wilayas/wilayas-services";
+import {
+  useDashboardApi,
+  reducer as DashboardReducer,
+  
+} from "../../components/Dashboard/dashboard-services";
 
 export const store = configureStore({
   reducer: 
@@ -71,6 +76,8 @@ export const store = configureStore({
     users: UsersReducer,
     [useWilayasApi.reducerPath]: useWilayasApi.reducer,
     wilayas: WilayaReducer,
+    [useDashboardApi.reducerPath]: useDashboardApi.reducer,
+    dashboard: DashboardReducer,
     
   },
   middleware: getDefaultMiddleware => getDefaultMiddleware({

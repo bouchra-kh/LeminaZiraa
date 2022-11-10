@@ -1,5 +1,7 @@
 import { getUser } from "../extends/GlobalFunctions"
-
+const show = () => {
+  document.getElementById("slide").classList.remove("d-none");
+};
 const Statistiques = () => {
     const user = getUser()
     return (
@@ -12,6 +14,7 @@ const Statistiques = () => {
               title="Switch Theme"
               
             >
+    
               <svg
                 class="moon"
                 fill="none"
@@ -38,6 +41,9 @@ const Statistiques = () => {
                   fill="none"
                   stroke="currentColor"
                   stroke-width="2"
+
+
+                  
                   stroke-linecap="round"
                   stroke-linejoin="round"
                   class="feather feather-menu"
@@ -53,7 +59,7 @@ const Statistiques = () => {
             <div class="chart-container-wrapper">
               <div class="chart-container  ">
                 <div class="chart-info-wrapper">
-                  <h2>Taux de Livraisons</h2>
+                  <h2></h2>
                   <span>19</span>
                 </div>
                 <div class="chart-svg">
@@ -109,7 +115,7 @@ const Statistiques = () => {
             <div class="chart-container-wrapper">
               <div class="chart-container">
                 <div class="chart-info-wrapper">
-                  <h2>Nombre de Commandes</h2>
+                  <h2>Nombre de Publications</h2>
                   <span>78</span>
                 </div>
                 <div class="chart-svg">
@@ -153,7 +159,7 @@ const Statistiques = () => {
             <div class="chart-container-wrapper small">
               <div class="chart-container">
                 <div class="chart-container-header">
-                  <h2>Taux de livraison</h2>
+                  <h2>Taux de Publications</h2>
                   <span href="#">Ce mois-ci</span>
                 </div>
                 <div class="acquisitions-bar">
@@ -176,17 +182,17 @@ const Statistiques = () => {
                 </div>
                 <div class="progress-bar-info">
                   <span class="progress-color applications"></span>
-                  <span class="progress-type">Livraison</span>
+                  <span class="progress-type">Moughataas</span>
                   <span class="progress-amount">64%</span>
                 </div>
                 <div class="progress-bar-info">
                   <span class="progress-color shortlisted"></span>
-                  <span class="progress-type">Commandes</span>
+                  <span class="progress-type">Wilayaas</span>
                   <span class="progress-amount">18%</span>
                 </div>
                 <div class="progress-bar-info">
                   <span class="progress-color on-hold"></span>
-                  <span class="progress-type">ligne de commandes</span>
+                  <span class="progress-type">Users</span>
                   <span class="progress-amount">10%</span>
                 </div>
                 <div class="progress-bar-info">
@@ -224,11 +230,12 @@ const Statistiques = () => {
               />
             </div>
             <p class="profile-text">{user?.username } </p>
-            <p class="profile-subtext">{user?.roles[0].roleName} </p>
+            <p class="profile-subtext">{user?.roles[0]?.roleName} </p>
           </div>
         </div>
+        
         </>
-    )
-}
+    );
+};
 
 export default Statistiques;

@@ -6,8 +6,14 @@ import { BiSort, BiDotsHorizontalRounded } from "react-icons/bi";
 import { useSelector, useDispatch } from "react-redux";
 import { SwitchMode, toGrid, ToList } from "../../app/features/local-config";
 import { NavLink } from "react-router-dom";
-import { publicationSlice,useGetPublicationsQuery,useDeletepublicationMutation } from "./publication-services";
-export default function Publications() {
+import {
+    BrowserRouter as Router,
+
+    useParams
+  } from 'react-router-dom'
+import { publicationSlice,useGetPublicationsQuery,useGetPublicationByIdQuery,useDeletepublicationMutation } from "../Publications/publication-services";
+export default function PublicationsDetail2() {
+    const { id } = useParams();
   const dispatch = useDispatch();
   const show = () => {
     document.getElementById("slide").classList.remove("d-none");
@@ -15,17 +21,18 @@ export default function Publications() {
   const [inputText, setInputText] = useState("");
   let inputHandler = (e) => {
     setInputText( e.target.value);
-    
+
   };
 
-
-  const responseInfop = useGetPublicationsQuery();
+  console.log("rrrrrrrrrrrrrrr")
+  const responseInfop = useGetPublicationByIdQuery(id);
+  console.log(responseInfop.data)
   const  [deletepublication]  =useDeletepublicationMutation();
 
   if (responseInfop.isLoading) {
     return (
     <div class="app-content  ">
-    <div className="d-flex flex-row  justify-content-between mb-10">
+    <div className="d-flex flex-row  justify-content-between mb-20">
       <h1 class="app-content-headerText">Publications</h1>
       <div class="action-buttons">
         <button
@@ -79,12 +86,12 @@ export default function Publications() {
         </button>
       </NavLink>
     </div>
-  
+
     <div>recherche</div>
-    
+
     </div>
     )
-    
+
   }
   if (responseInfop.isError) {
     return <div>erreur :{responseInfop.error.data}</div>
@@ -93,25 +100,25 @@ export default function Publications() {
     responseInfop.data.map((moughataa, position) => {
       if (inputText==moughataa.nom) {
         console.log("hhhhhhhhhh")
-        
+
          ;
          responseInfop.push(moughataa);
          //const wilaya=responseInfos[0];
-        
-      
+
+
       }
-  
+
     }
-  
+
     );
   }
 
 
   return (
     <>
-      <div class="app-content scr">
-        <div className="d-flex flex-row  justify-content-between mb-3 ml-3">
-          <h1 class="app-content-headerText">Publications</h1>
+      <div class="app-content  mb-0">
+        <div className="d-flex flex-row  justify-content-between mb-0">
+          <h1 class="app-content-headerText">Détail de la Publication</h1>
           <div class="action-buttons">
             <button
               class="mode-switch"
@@ -156,60 +163,66 @@ export default function Publications() {
             </div>
           </div>
         </div>
-        <div class="app-content-header justify-content-end  fixed">
-          <NavLink to={"new"}>
-            {" "}
-            <button class="app-content-headerButton">
-              Ajouter publication
-            </button>
-          </NavLink>
-        </div>
-        <div >
-        <div class="row">
-            {responseInfop.data.map((publication,key) => {
-              console.log("dddddddd",publication.moughataa?.nom)
-              return (
-               
-                <div class="coll divb">
-              <section class="product">
+
+        <div class="scr">
+
+
+
+
+                <div class=" divb2">
+              <section class="product2">
                 <div class="product__photo">
                   <div class="photo-container">
-
                     <div class="photo-main">
-                     
-                      {/* src="https://res.cloudinary.com/john-mantas/image/upload/v1537291846/codepen/delicious-apples/green-apple-with-slice.png
-                       */}
-                      <img
-                      src={`http://localhost:8080/publication/sid/${publication.image}`} alt="green apple slice" />
+                      <div class="controls">
+                        <i class="material-icons">share</i>
+                        <i class="material-icons">favorite_border</i>
+                      </div>
+
+                      {/* <img
+                      src={`http://localhost:8080/publication/sid/${responseInfop.data.image}`} alt="green apple slice"/>
+                  */}
                     </div>
-                    
+
                   </div>
                 </div>
                 <div class="product__info">
                   <div class="price">
-                    <p className="description">{publication.description}</p>
-                    <span className="price">Publié le :</span> <span className="bl">{publication.date_publication.toString().substring(0, 10)}</span>
-                    <div class="price">
-                    <p className="type_d'irrigation">{publication.type_dirrigation}</p>
-                    </div>
-                  
+                    <p className="description2">{ responseInfop.data.description}</p>
+
                   </div>
-                  <div class="price">
-                  <span className="price">pour le wilaya de : </span> <span className="bl">{publication.moughataa?.nom}</span>
+
                   </div>
-                  <NavLink to={"detail/"+publication.id_publication}>
-                  <button class="buy--btn  btn-success">Lire la suite</button></NavLink>
-                </div>
+
               </section>
-              <br></br>
-            </div>
-            
-              
-               
-              );
-             
-            })
-            }
+
+              <section class="product">
+                <div class="product__photo">
+
+                </div>
+                <div class="product__info">
+                  <div class="price">
+                     <p className="description2">{ responseInfop.data.description}</p>
+
+                  </div>
+                  <span className="price">Semences    : </span> <span className="bl">{responseInfop.data.semences}</span>
+                  <br></br>
+                  <img
+                      src={`http://localhost:8080/publication/sid/${responseInfop.data.image}`} alt="green apple slice"/>
+
+                  <span className="price">Publié le :</span> <span className="bl">{responseInfop.data.date_publication.toString().substring(0, 10)}</span>
+                  <br></br>
+                  <span className="price">jjjwilaya de : </span> <span className="bl">{responseInfop.data.moughataa?.nom}</span>
+
+                  </div>
+
+              </section>
+
+
+
+
+
+
              </div>
          </div>
       </div>

@@ -1,5 +1,11 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500&display=swap');
+//@import "../node_modules/bootstrap/scss/bootstrap.scss";
 
+
+.iconc{
+  color: red;
+  background-color: red;
+}
 * { box-sizing: border-box; }
 
 :root {
@@ -535,12 +541,7 @@ body {
     display: flex;
     align-items: center;
         
-    img {
-      width: 32px;
-      height: 32px;
-      border-radius: 6px;
-      margin-right: 6px;
-    }
+  
     
     @media screen and (max-width: 780px) {&{
       font-size: 12px;
@@ -705,8 +706,9 @@ body {
       height: 140px;
       object-fit: cover;
       border-radius: 4px;
-      margin-bottom: 16px;
+      
     }
+    
   }
   
   .cell-label { opacity: 0.6; }
@@ -716,3 +718,4 @@ body {
  
 
 }
+

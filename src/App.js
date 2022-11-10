@@ -1,6 +1,7 @@
 import "./App.css";
 import React from "react";
-
+import PublicationsDetail from "./components/Mpublications/pdetail";
+import PublicationsDetail2 from "./components/Mpublications/pdetail2";
 import {  Routes, Route, Link, Navigate } from "react-router-dom";
 import Main from "./components/Main";
 import SignUp from "./components/SignUp";
@@ -24,6 +25,10 @@ import Home from "./components/home";
 import { fontFamily } from "@mui/system";
 import Statistiques from "./components/statistiques";
 import { ADMIN, CONSEILLER_AGRICOLE, UserHasAccess } from "./components/extends/GlobalFunctions";
+import "../node_modules/leaflet/dist/leaflet.css";
+import "../node_modules/leaflet/dist/images/marker-icon.png";
+import { MdLogout } from 'react-icons/md';
+import log from './log.png'
 //import { useState, useEffect } from "react";
 // function App() {
 //   const [clicked, setClicked] = useState(3);
@@ -78,7 +83,7 @@ import { ADMIN, CONSEILLER_AGRICOLE, UserHasAccess } from "./components/extends/
 //           </Routes>
 //           <Routes>
 //           <Route path="/publications/*" element={<PublicationRoutes />} />
-          
+
 //             {/* <Route path="/" element={<Dashboards />} /> */}
 //             <Route path="/" element={<Dashboards />} roles={['ROLE_ADMIN']}/>
 //             <Route path="/login" element={<Login />} />
@@ -107,20 +112,34 @@ function App() {
 
 
 
-  
-   
+
+
   const logOut = () => {
     AuthService.logout();
   };
 
   return (
     <div className="Appn" >
-      
-      <nav className="navbar navbar-expand navbar-light bg-light">
-        <div className="navbar-nav mr-auto">
+       <li >
+      <img src={log} alt="logo" className="logo" style={{ color: "white" ,height:"70px" , marginBottom:"30px",width:"80px", marginLeft:"110px" }}  />
+
+      </li>
+
+
+      <nav className="navbar navbar-expand  bg-white">
+
+
+
+
+
+      <div className="navbar-nav ">
+
+
+
+
           <li className="nav-item">
             <Link to={"/home"} className="nav-link">
-              Home
+             Accueil
             </Link>
           </li>
 
@@ -136,8 +155,8 @@ function App() {
         {currentUser ? (
           <div className="navbar-nav ms-auto">
             <li className="nav-item">
-              <a href="/login" className="nav-link" onClick={logOut}>
-                Logout
+              <a href="/login" className="nav-link" onClick={logOut}  style={{  color: "green",marginTop:"14px" , fontSize:"25px" , marginRight:"30px"  }} >
+              <MdLogout/>
               </a>
             </li>
           </div>
@@ -145,13 +164,13 @@ function App() {
           <div className="navbar-nav ms-auto">
             <li className="nav-item">
               <Link to={"/login"} className="nav-link">
-                Login
+               Se Connecter
               </Link>
             </li>
 
             <li className="nav-item">
               <Link to={"/signup"} className="nav-link">
-                Sign up
+                S'inscrire
               </Link>
             </li>
           </div>
@@ -159,13 +178,15 @@ function App() {
       </nav>
 
       <div className="App  d-flex flex-row text-white">
-     
-               
-       <Main clicked={clicked} setClicked={setClicked} /> 
+
+
+       <Main clicked={clicked} setClicked={setClicked} />
         <Routes>
         <Route path="/home" element={<Home />} />
           <Route path="/" element={<Dashboards />} />
-
+          <Route path="/moughp/:id"  element={<MPublicationRoutes />} />
+          <Route path="/moughp/:id/detail/:id" element={<PublicationsDetail />} />
+          <Route path="/moughataas/moughp/:id/detail2/:id" element={<PublicationsDetail2 />} />
           <Route path="/login" element={<Login/>} />
           <Route path="/signup" element={<SignUp />} />
             <Route path="/produits/*" element={<ProduitRoutes />} />
@@ -189,7 +210,7 @@ function App() {
             {/* <Route path="/mp/:id" element={<MPublicationRoutes />} /> */}
                   </Routes>
 
-                  
+
       </div>
     </div>
   );
