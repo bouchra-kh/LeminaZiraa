@@ -33,7 +33,7 @@ public class UserController {
     public utilisateur register(@RequestBody  UserForm userForm){
         utilisateur ui =   accountService.saveUser(
                 userForm.getUsername(),userForm.getPassword(),userForm.getConfirmedPassword(),userForm.getEmail(),userForm.getAdresse(),userForm.getTelephone());
-        accountService.addRoleToUser(ui.getUsername(),"Utilisateur");
+        accountService.addRoleToUser(ui.getUsername(),"Admin");
         return ui;
     }
 

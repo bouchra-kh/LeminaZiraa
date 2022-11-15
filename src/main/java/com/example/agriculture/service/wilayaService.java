@@ -24,7 +24,7 @@ public List<wilaya>getallWilaya( ){
             wilayaRepository.save(w);
         }
         public  wilaya findbyid(long id){
-            return wilayaRepository.findById(id).get();
+            return wilayaRepository.findById(id).isPresent()?wilayaRepository.findById(id).get():null;
         }
         public void deletewilaya(long id){
 

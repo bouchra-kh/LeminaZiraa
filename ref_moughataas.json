@@ -1,0 +1,443 @@
+[
+  {
+    "id": 1,
+    "nom": "Amourj",
+    "wilaya": {
+      "id": 1
+    }
+  },
+  {
+    "id": 2,
+    "nom": "Bassiknou",
+    "wilaya": {
+      "id": 1
+    }
+  },
+  {
+    "id": 3,
+    "nom": "Djiguenni",
+    "wilaya": {
+      "id": 1
+    }
+  },
+  {
+    "id": 4,
+    "nom": "Néma",
+    "wilaya": {
+      "id": 1
+    }
+  },
+  {
+    "id": 5,
+    "nom": "Oualata",
+    "wilaya": {
+      "id": 1
+    }
+  },
+  {
+    "id": 6,
+    "nom": "Timbedra",
+    "wilaya": {
+      "id": 1
+    }
+  },
+  {
+    "id": 8,
+    "nom": "N’Beiket Lehwach",
+    "wilaya": {
+      "id": 1
+    }
+  },
+  {
+    "id": 9,
+    "nom": "Ould Yengé",
+    "wilaya": {
+      "id": 10
+    }
+  },
+  {
+    "id": 10,
+    "nom": "Sélibaby",
+    "wilaya": {
+      "id": 10
+    }
+  },
+  {
+    "id": 11,
+    "nom": "Barkeol",
+    "wilaya": {
+      "id": 3
+    }
+  },
+  {
+    "id": 12,
+    "nom": "Boumdeid",
+    "wilaya": {
+      "id": 3
+    }
+  },
+  {
+    "id": 13,
+    "nom": "Guerrou",
+    "wilaya": {
+      "id": 3
+    }
+  },
+  {
+    "id": 14,
+    "nom": "Kankossa",
+    "wilaya": {
+      "id": 3
+    }
+  },
+  {
+    "id": 15,
+    "nom": "Kiffa",
+    "wilaya": {
+      "id": 3
+    }
+  },
+  {
+    "id": 16,
+    "nom": "Aïoun El Atrouss",
+    "wilaya": {
+      "id": 2
+    }
+  },
+  {
+    "id": 17,
+    "nom": "Kobenni",
+    "wilaya": {
+      "id": 2
+    }
+  },
+  {
+    "id": 18,
+    "nom": "Tamchakett",
+    "wilaya": {
+      "id": 2
+    }
+  },
+  {
+    "id": 19,
+    "nom": "Tintane",
+    "wilaya": {
+      "id": 2
+    }
+  },
+  {
+    "id": 20,
+    "nom": "Kaédi",
+    "wilaya": {
+      "id": 4
+    }
+  },
+  {
+    "id": 21,
+    "nom": "Maghama",
+    "wilaya": {
+      "id": 4
+    }
+  },
+  {
+    "id": 22,
+    "nom": "M’bout",
+    "wilaya": {
+      "id": 4
+    }
+  },
+  {
+    "id": 23,
+    "nom": "Monguel",
+    "wilaya": {
+      "id": 4
+    }
+  },
+  {
+    "id": 24,
+    "nom": "Akjoujt",
+    "wilaya": {
+      "id": 12
+    }
+  },
+  {
+    "id": 25,
+    "nom": "Aleg",
+    "wilaya": {
+      "id": 5
+    }
+  },
+  {
+    "id": 26,
+    "nom": "Bababé",
+    "wilaya": {
+      "id": 5
+    }
+  },
+  {
+    "id": 27,
+    "nom": "Boghé",
+    "wilaya": {
+      "id": 5
+    }
+  },
+  {
+    "id": 28,
+    "nom": "Maghta lahjar",
+    "wilaya": {
+      "id": 5
+    }
+  },
+  {
+    "id": 29,
+    "nom": "M’bagne",
+    "wilaya": {
+      "id": 5
+    }
+  },
+  {
+    "id": 30,
+    "nom": "Boutilimitt",
+    "wilaya": {
+      "id": 6
+    }
+  },
+  {
+    "id": 31,
+    "nom": "Keur macene",
+    "wilaya": {
+      "id": 6
+    }
+  },
+  {
+    "id": 32,
+    "nom": "Mederdra",
+    "wilaya": {
+      "id": 6
+    }
+  },
+  {
+    "id": 33,
+    "nom": "Ouad nagha",
+    "wilaya": {
+      "id": 6
+    }
+  },
+  {
+    "id": 34,
+    "nom": "R’kiz",
+    "wilaya": {
+      "id": 6
+    }
+  },
+  {
+    "id": 35,
+    "nom": "Rosso",
+    "wilaya": {
+      "id": 6
+    }
+  },
+  {
+    "id": 36,
+    "nom": "Nouadhibou",
+    "wilaya": {
+      "id": 8
+    }
+  },
+  {
+    "id": 37,
+    "nom": "Chami",
+    "wilaya": {
+      "id": 8
+    }
+  },
+  {
+    "id": 38,
+    "nom": "Bir moghrein",
+    "wilaya": {
+      "id": 11
+    }
+  },
+  {
+    "id": 39,
+    "nom": "F’derick",
+    "wilaya": {
+      "id": 11
+    }
+  },
+  {
+    "id": 40,
+    "nom": "Zoueiratt",
+    "wilaya": {
+      "id": 11
+    }
+  },
+  {
+    "id": 41,
+    "nom": "Aoujeft",
+    "wilaya": {
+      "id": 7
+    }
+  },
+  {
+    "id": 42,
+    "nom": "Atar",
+    "wilaya": {
+      "id": 7
+    }
+  },
+  {
+    "id": 43,
+    "nom": "Chinguitty",
+    "wilaya": {
+      "id": 7
+    }
+  },
+  {
+    "id": 44,
+    "nom": "Wadane",
+    "wilaya": {
+      "id": 7
+    }
+  },
+  {
+    "id": 45,
+    "nom": "Moudjeria",
+    "wilaya": {
+      "id": 9
+    }
+  },
+  {
+    "id": 46,
+    "nom": "Tichit",
+    "wilaya": {
+      "id": 9
+    }
+  },
+  {
+    "id": 47,
+    "nom": "Tidjikja",
+    "wilaya": {
+      "id": 9
+    }
+  },
+  {
+    "id": 48,
+    "nom": "El Mina",
+    "wilaya": {
+      "id": 13
+    }
+  },
+  {
+    "id": 49,
+    "nom": "Arafat",
+    "wilaya": {
+      "id": 13
+    }
+  },
+  {
+    "id": 50,
+    "nom": "Riyadh",
+    "wilaya": {
+      "id": 13
+    }
+  },
+  {
+    "id": 51,
+    "nom": "Toujounine",
+    "wilaya": {
+      "id": 14
+    }
+  },
+  {
+    "id": 52,
+    "nom": "Dar naïm",
+    "wilaya": {
+      "id": 14
+    }
+  },
+  {
+    "id": 53,
+    "nom": "Teyarett",
+    "wilaya": {
+      "id": 14
+    }
+  },
+  {
+    "id": 54,
+    "nom": "Tevragh zeina",
+    "wilaya": {
+      "id": 15
+    }
+  },
+  {
+    "id": 55,
+    "nom": "Ksar",
+    "wilaya": {
+      "id": 15
+    }
+  },
+  {
+    "id": 56,
+    "nom": "Sebkha",
+    "wilaya": {
+      "id": 15
+    }
+  },
+  {
+    "id": 57,
+    "nom": "Benichab",
+    "wilaya": {
+      "id": 12
+    }
+  },
+  {
+    "id": 58,
+    "nom": "Ghabou",
+    "wilaya": {
+      "id": 10
+    }
+  },
+  {
+    "id": 59,
+    "nom": "Wompou",
+    "wilaya": {
+      "id": 10
+    }
+  },
+  {
+    "id": 60,
+    "nom": "Teikane",
+    "wilaya": {
+      "id": 6
+    }
+  },
+  {
+    "id": 61,
+    "nom": "Adel Beghrou",
+    "wilaya": {
+      "id": 1
+    }
+  },
+  {
+    "id": 62,
+    "nom": "Male",
+    "wilaya": {
+      "id": 5
+    }
+  },
+  {
+    "id": 63,
+    "nom": "Twil",
+    "wilaya": {
+      "id": 2
+    }
+  },
+  {
+    "id": 64,
+    "nom": "Lexeiba",
+    "wilaya": {
+      "id": 4
+    }
+  }
+]

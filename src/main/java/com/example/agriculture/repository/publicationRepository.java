@@ -10,4 +10,5 @@ import java.util.List;
 public interface publicationRepository extends JpaRepository<publication,Long>{
     //List<wilaya> getAllByRegion(wilaya region);
     List<publication>findAllByMoughataa(moughataa moughataa);
+    int countByMoughataa_Id(Long id);
 }

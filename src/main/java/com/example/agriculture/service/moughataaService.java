@@ -21,7 +21,7 @@ public class moughataaService {
         moughataaRepository.save(m);
     }
     public moughataa findbyid(long id){
-        return moughataaRepository.findById(id).get();
+        return moughataaRepository.findById(id).isPresent()?moughataaRepository.findById(id).get():null;
     }
     public void deletemoghata(long id){
 
@@ -35,4 +35,7 @@ public class moughataaService {
         //    =m;
         return newu;
 
-    }}
+    }
+
+
+}

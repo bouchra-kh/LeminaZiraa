@@ -20,6 +20,9 @@ public class publicationService {
     public List<publication> getallpublicationmough(moughataa m){
         return  publicationRepository.findAllByMoughataa( m);
     }
+    public int countpublicationmough(Long id){
+        return  publicationRepository.countByMoughataa_Id(id);
+    }
 
     public void save(publication p){
         publicationRepository.save(p);
