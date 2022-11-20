@@ -145,10 +145,18 @@ public class publicationController {
          publication publication= publicationService.findbyid(Long.parseLong(id));
          String fileExtension = publication.getImage().substring(publication.getImage().lastIndexOf("."));
          var imgFile = new ClassPathResource("images/"+publication.getId_publication()+fileExtension);
+        System.out.println(imgFile);
         return ResponseEntity
                 .ok()
                 .contentType(MediaType.IMAGE_JPEG)
                 .body(new InputStreamResource(imgFile.getInputStream()));
+
+    }
+    /// validate
+    @RequestMapping(value = "/validate/{id}", method = RequestMethod.PUT)
+    public publication validate(@PathVariable("id") long id){
+
+        return publicationService.validate(id);
 
     }
 

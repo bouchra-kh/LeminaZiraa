@@ -4,6 +4,7 @@ import com.auth0.jwt.JWT;
 import com.auth0.jwt.JWTVerifier;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.interfaces.DecodedJWT;
+import com.example.agriculture.model.role;
 import com.example.agriculture.model.utilisateur;
 import com.example.agriculture.sec.SecurityParams;
 import com.example.agriculture.service.AccountService;
@@ -75,6 +76,23 @@ public class UserController {
         }else{
             throw new RuntimeException("refresh requierd !");
         }
+    }
+    // get user by id
+    @GetMapping("/user/{id}")
+    public utilisateur getUser(@PathVariable("id") long id){
+        return accountService.findbyId(id);
+    }
+
+
+    @PutMapping("/user_update/{id}")
+    public utilisateur updateUser(@PathVariable("id") long id, @RequestBody utilisateur u){
+        return accountService.updateUser(id,u);
+    }
+
+    // get all roles
+    @GetMapping("/roles")
+    public List<role> getRoles(){
+        return accountService.getallRoles();
     }
 }
 

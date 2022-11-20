@@ -13,6 +13,10 @@ public interface AccountService {
     public utilisateur loadUserByUsername(String username);
     public void addRoleToUser(String username,String rolename);
     public List<utilisateur> getallUsers();
+    public List<role> getallRoles();
+    public utilisateur updateUser(long id,utilisateur u);
+
+    public utilisateur findbyId(long id);
 }
 
 

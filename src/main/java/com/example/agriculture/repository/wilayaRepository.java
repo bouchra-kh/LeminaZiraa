@@ -5,4 +5,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface wilayaRepository extends JpaRepository<wilaya,Long> {
     wilaya findByNom(String nom);
+
 }

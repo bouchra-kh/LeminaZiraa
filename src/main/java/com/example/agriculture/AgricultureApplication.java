@@ -31,7 +31,7 @@ public class AgricultureApplication {
 			TypeReference<List<wilaya>> typeReferenceWilaya = new TypeReference<List<wilaya>>(){};
 			List<wilaya> wilayas = mapper.readValue(new File("ref_wilayas.json"), typeReferenceWilaya);
                 wilayas.forEach(wilaya -> {
-					if (wilayaService.findbyid(wilaya.getId())==null){
+					if (wilayaService.findByNom(wilaya.getNom())==null){
 						wilayaService.save(wilaya);
 					}
 				});
@@ -42,7 +42,7 @@ public class AgricultureApplication {
            List<moughataa> moughataas = mapper.readValue(new File("ref_moughataas.json"), typeReference);
 			moughataas.forEach(moughataa -> {
 				//System.out.println(moughataa.getId());
-				if (moughataaService.findbyid(moughataa.getId())==null){
+				if (moughataaService.findByNom(moughataa.getNom())==null){
 					moughataaService.save(moughataa);
 				}
 			});

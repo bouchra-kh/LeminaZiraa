@@ -25,11 +25,5 @@ userRepository userRepository;
         userRepository.deleteById(id);
     }
 
-    public utilisateur updateuser(long id, utilisateur u){
-        userRepository.findById(id);
-        u.setId(id);
-        utilisateur newu=u;
-       return newu;
 
-    }
 }

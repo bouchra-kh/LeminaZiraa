@@ -39,6 +39,10 @@ public List<wilaya>getallWilaya( ){
             return newu;
 
         }
+
+        public wilaya findByNom(String nom){
+            return wilayaRepository.findByNom(nom);
+        }
     }
 
 

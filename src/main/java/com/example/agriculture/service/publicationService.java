@@ -42,4 +42,20 @@ public class publicationService {
         return newu;
 
     }
+
+    public publication validate(long id) {
+        publication p = publicationRepository.findById(id).get();
+        p.setValide(true);
+        publication newu=publicationRepository.save(p);
+        return newu;
+    }
+    public long count(){
+        return publicationRepository.count();
+    }
+    public double prctVlider(){
+        return (double)publicationRepository.countByValide(true)/publicationRepository.count()*100;
+    }
+    public double totalSuperfecie(){
+        return publicationRepository.totalSuperfecie();
+    }
 }

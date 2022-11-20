@@ -6,6 +6,7 @@ package com.example.agriculture.service;
 import com.example.agriculture.model.moughataa;
 import com.example.agriculture.repository.moughataaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 
@@ -15,7 +16,7 @@ public class moughataaService {
     @Autowired
     com.example.agriculture.repository.moughataaRepository moughataaRepository;
     public List<moughataa> getallMoughataa( ){
-        return moughataaRepository.findAll();
+        return moughataaRepository.findAll(Sort.by("id").descending());
     }
     public void save(moughataa m){
         moughataaRepository.save(m);
@@ -35,6 +36,9 @@ public class moughataaService {
         //    =m;
         return newu;
 
+    }
+    public moughataa findByNom(String nom){
+        return moughataaRepository.findByNom(nom);
     }
 
 

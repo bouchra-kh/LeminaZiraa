@@ -6,6 +6,7 @@ import com.example.agriculture.repository.wilayaRepository;
 import com.example.agriculture.service.ExcelService;
 import com.example.agriculture.service.wilayaService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -67,8 +68,8 @@ public class wilayaController {
 
     @RequestMapping(value = "/list", method = RequestMethod.GET)
     public List<wilaya> listrrr(){
-        List<wilaya> lm =wilayaReposirory.findAll();
-        return lm;
+
+        return wilayaReposirory.findAll(Sort.by("id").descending());
     }
 
     @RequestMapping(value = "/save", method = RequestMethod.POST)

@@ -1,6 +1,7 @@
 package com.example.agriculture.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -26,8 +27,7 @@ public class moughataa {
     private wilaya wilaya;
     @OneToMany(
             mappedBy = "moughataa",
-            cascade = CascadeType.ALL,
-            orphanRemoval = true
+            cascade = javax.persistence.CascadeType.ALL
     )
-    @JsonIgnore
+    @JsonManagedReference
     List<publication> publicationList= new ArrayList<>();}

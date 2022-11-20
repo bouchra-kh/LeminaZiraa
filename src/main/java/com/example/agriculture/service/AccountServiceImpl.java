@@ -30,6 +30,34 @@ public class AccountServiceImpl implements AccountService {
     }
 
     @Override
+    public List<role> getallRoles() {
+        return roleRepository.findAll();
+    }
+
+    @Override
+    public utilisateur updateUser(long id, utilisateur u) {
+        // update user
+        userRepository.findById(id).map(user -> {
+            user.setEmail(u.getEmail());
+            user.setAdresse(u.getAdresse());
+            user.setTelephone(u.getTelephone());
+            user.setUsername(u.getUsername());
+            user.setRoles(u.getRoles());
+            return userRepository.save(user);
+        }).orElseGet(() -> {
+            u.setId(id);
+            return userRepository.save(u);
+        });
+
+        return u;
+    }
+
+    @Override
+    public utilisateur findbyId(long id) {
+        return userRepository.findById(id).isPresent()?userRepository.findById(id).get():null;
+    }
+
+    @Override
     public utilisateur saveUser(String username, String password, String confirmedPassword, String email,
     String adresse,String telephone) {
         utilisateur user=userRepository.findByUsername(username);
