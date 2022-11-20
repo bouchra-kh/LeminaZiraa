@@ -123,10 +123,10 @@ h3 {
 	color:  #a6a6a6;
 }
 
-img {
-			max-width: 100%;
-			filter: drop-shadow(1px 1px 3px  #a6a6a6);
-		}
+/*img {*/
+/*			max-width: 100%;*/
+/*			filter: drop-shadow(1px 1px 3px  #a6a6a6);*/
+/*		}*/
 
 /* ----- Product Section ----- */
 .product {
@@ -186,14 +186,14 @@ img {
 
 
 }
-img {
-	position: absolute;
-	left: -3.5em;
-	top: 2em;
-	max-width: 110%;
-	filter: saturate(150%) contrast(120%) hue-rotate(10deg)
-		drop-shadow(1px 20px 10px rgba(0, 0, 0, 0.3));
-}
+/*img {*/
+/*	position: absolute;*/
+/*	left: -3.5em;*/
+/*	top: 2em;*/
+/*	max-width: 110%;*/
+/*	filter: saturate(150%) contrast(120%) hue-rotate(10deg)*/
+/*		drop-shadow(1px 20px 10px rgba(0, 0, 0, 0.3));*/
+/*}*/
 .photo-album {
 	padding: 0.7em 1em;
 	border-radius: 0 0 6px 6px;

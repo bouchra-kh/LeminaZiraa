@@ -12,6 +12,13 @@ import {
     useParams
   } from 'react-router-dom'
 import { publicationSlice,useGetPublicationsQuery,useGetPublicationByIdQuery,useDeletepublicationMutation } from "./publication-services";
+import moment from "moment";
+import {Card, CardActionArea, Divider} from "@mui/material";
+import CardMedia from "@mui/material/CardMedia";
+import CardContent from "@mui/material/CardContent";
+import Typography from "@mui/material/Typography";
+import {Co2} from "@mui/icons-material";
+import {Col} from "react-bootstrap";
 export default function PublicationsDetail() {
     const { id } = useParams();
   const dispatch = useDispatch();
@@ -31,22 +38,22 @@ export default function PublicationsDetail() {
 
   if (responseInfop.isLoading) {
     return (
-    <div class="app-content  ">
+    <div className="app-content">
     <div className="d-flex flex-row  justify-content-between mb-3">
-      <h1 class="app-content-headerText">Publications</h1>
-      <div class="action-buttons">
+      <h1 className="app-content-headerText">Publications</h1>
+      <div className="action-buttons">
         <button
-          class="mode-switch"
+          className="mode-switch"
           title="Switch Theme"
           onClick={() => dispatch(SwitchMode())}
         >
           <svg
-            class="moon"
+            className="moon"
             fill="none"
             stroke="currentColor"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-width="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth="2"
             width="24"
             height="24"
             viewBox="0 0 24 24"
@@ -55,8 +62,8 @@ export default function PublicationsDetail() {
             <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
           </svg>
         </button>
-        <div class="action-buttons">
-          <button class="menu-button" onClick={() => show()}>
+        <div className="action-buttons">
+          <button className="menu-button" onClick={() => show()}>
             <svg
               xmlns="http://www.w3.org/2000/svg"
               id="menu"
@@ -65,10 +72,10 @@ export default function PublicationsDetail() {
               viewBox="0 0 24 24"
               fill="none"
               stroke="currentColor"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              class="feather feather-menu"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              className="feather feather-menu"
             >
               <line x1="3" y1="12" x2="21" y2="12" />
               <line x1="3" y1="6" x2="21" y2="6" />
@@ -78,10 +85,10 @@ export default function PublicationsDetail() {
         </div>
       </div>
     </div>
-    <div class="app-content-header justify-content-end  fixed">
+    <div className="app-content-header justify-content-end  fixed">
       <NavLink to={"new"}>
         {" "}
-        <button class="app-content-headerButton">
+        <button className="app-content-headerButton">
           Ajouter publication
         </button>
       </NavLink>
@@ -96,12 +103,10 @@ export default function PublicationsDetail() {
   if (responseInfop.isError) {
     return <div>erreur :{responseInfop.error.data}</div>
   }
-  if(inputText!=''){
-    responseInfop.data.map((moughataa, position) => {
-      if (inputText==moughataa.nom) {
-        console.log("hhhhhhhhhh")
-
-         ;
+  if(inputText!==''){
+    // eslint-disable-next-line array-callback-return
+    responseInfop.data.map((moughataa) => {
+      if (inputText===moughataa.nom) {
          responseInfop.push(moughataa);
          //const wilaya=responseInfos[0];
 
@@ -116,22 +121,22 @@ export default function PublicationsDetail() {
 
   return (
     <>
-      <div class="app-content  mb-0">
+      <div className="app-content  mb-0">
         <div className="d-flex flex-row  justify-content-between mb-0">
-          <h1 class="app-content-headerText">Détail de la Publication</h1>
-          <div class="action-buttons">
+          <h1 className="app-content-headerText">Détail de la Publication</h1>
+          <div className="action-buttons">
             <button
-              class="mode-switch"
+              className="mode-switch"
               title="Switch Theme"
               onClick={() => dispatch(SwitchMode())}
             >
               <svg
-                class="moon"
+                className="moon"
                 fill="none"
                 stroke="currentColor"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
                 width="24"
                 height="24"
                 viewBox="0 0 24 24"
@@ -140,8 +145,8 @@ export default function PublicationsDetail() {
                 <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
               </svg>
             </button>
-            <div class="action-buttons">
-              <button class="menu-button" onClick={() => show()}>
+            <div className="action-buttons">
+              <button className="menu-button" onClick={() => show()}>
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   id="menu"
@@ -150,10 +155,10 @@ export default function PublicationsDetail() {
                   viewBox="0 0 24 24"
                   fill="none"
                   stroke="currentColor"
-                  stroke-width="2"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  class="feather feather-menu"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  className="feather feather-menu"
                 >
                   <line x1="3" y1="12" x2="21" y2="12" />
                   <line x1="3" y1="6" x2="21" y2="6" />
@@ -163,26 +168,90 @@ export default function PublicationsDetail() {
             </div>
           </div>
         </div>
+        <Card className="mx-4 px-4 my-4">
+          <CardActionArea>
+            <CardMedia
+                component="img"
+                style={{width:'100%',height:'150px',objectFit: 'contain'}}
+                image={`http://localhost:8080/publication/sid/${responseInfop.data?.id_publication}`}
+                alt="green iguana"
+            />
+            <CardContent>
+              <Typography gutterBottom variant="h5" component="div">
+                {responseInfop.data?.titre?responseInfop.data?.titre:responseInfop.data?.description}
+              </Typography>
+              <Typography variant="body2" color="text.secondary">
+                {responseInfop.data?.description}
+              </Typography>
+               <Col>
+                 <span>Date Publication : <strong>{moment(responseInfop.data.date_publication).format("DD/MM/YY")}</strong></span>
+               </Col>
+              <Divider color="#BFBFBF" />
+              <Col>
+                 <span>Annee recolte : <strong>{moment(responseInfop.data.anneerecolte).format("DD/MM/YY")}</strong></span>
+               </Col>
+              <Divider color="#BFBFBF"/>
+              <Col>
+                 <span>Semences : <strong>{responseInfop.data.semences}</strong></span>
+               </Col>
+              <Divider color="#BFBFBF"/>
+              <Col>
+                 <span>Quantite : <strong>{responseInfop.data.quantite}</strong></span>
+               </Col>
+              <Divider color="#BFBFBF"/>
+              <Col>
+                 <span>Superficies agricoles : <strong>{responseInfop.data.Superficies_agricoles}</strong></span>
+               </Col>
 
-        <div class="scr">
+              <Divider color="#BFBFBF"/>
+              <Col>
+                 <span>Decrues : <strong>{responseInfop.data.decrues}</strong></span>
+               </Col>
+              <Divider color="#BFBFBF"/>
+              <Col>
+                 <span>Prix semance : <strong>{responseInfop.data.prix_semance}</strong></span>
+               </Col>
 
+              <Divider color="#BFBFBF"/>
+              <Col>
+                 <span>main ouvre : <strong>{responseInfop.data.main_ouvre}</strong></span>
+               </Col>
 
+              <Divider color="#BFBFBF"/>
+              <Col>
+                 <span>prix outils : <strong>{responseInfop.data.prix_outils}</strong></span>
+               </Col>
+              <Divider color="#BFBFBF"/>
+              <Col>
+                 <span>moughataa : <strong>{responseInfop.data.moughataa?.nom}</strong></span>
+               </Col>
+              <Divider color="#BFBFBF"/>
+              <Col>
+                 <span>type Sole : <strong>{responseInfop.data.typeSole?.nom}</strong></span>
+               </Col>
 
+              <Divider color="#BFBFBF"/>
+              <Col>
+                 <span>type Irrigation : <strong>{responseInfop.data.typeIrrigation?.nom}</strong></span>
+               </Col>
+              <Divider color="#BFBFBF"/>
+              <Col>
+                 <span>typologie Agricole : <strong>{responseInfop.data.typologieAgricole?.nom}</strong></span>
+               </Col>
 
-                <div class=" divb2">
-              <section class="product2">
-                <div class="product__photo">
-                  <div class="photo-container">
-                    <div class="photo-main">
-                      {/* <div class="controls">
-                        <i class="material-icons">share</i>
-                        <i class="material-icons">favorite_border</i>
-                      </div> */}
-                      {/* src="https://res.cloudinary.com/john-mantas/image/upload/v1537291846/codepen/delicious-apples/green-apple-with-slice.png
-                       */}
+            </CardContent>
+          </CardActionArea>
+        </Card>
+        {/*<div className="scr">
+
+                <div className=" divb2">
+              <section className="product2">
+                <div className="product__photo">
+                  <div className="photo-container">
+                    <div className="photo-main">
                       <img
-                      src={`http://localhost:8080/publication/sid/${responseInfop.data.image}`} height={300}
-                      width={500}
+                      src={`http://localhost:8080/publication/sid/${responseInfop.data?.id_publication}`} height={300}
+                      width={150}
                       style={{ alignSelf: 'center', marginLeft:"60px" }} alt="green apple slice"
 
                       />
@@ -190,16 +259,16 @@ export default function PublicationsDetail() {
 
                   </div>
                 </div>
-                <div class="product__info">
+                <div className="product__info">
 
 
                   </div>
 
               </section>
 
-              <section class="prod">
+              <section className="prod">
 
-                <div class="product__info">
+                <div className="product__info">
                 <span className="des">{responseInfop.data.description}</span>
                 <br></br><br></br>
 
@@ -207,22 +276,22 @@ export default function PublicationsDetail() {
                   <span className="price">Semences    : </span> <span className="bl">{responseInfop.data.semences}</span>
                   <br></br>
 
-                  <span className="price">anneerecolte   : </span> <span className="bl">{responseInfop.data.anneerecolte}</span>
+                  <span className="price">annee recolte   : </span> <span className="bl">{moment(responseInfop.data.anneerecolte).format('DD/MM/yy')}</span>
                   <br></br>
                   <span className="price"> quantite   : </span> <span className="bl">{responseInfop.data.quantite}</span>
                   <br></br>
-                  <span className="price"> type_dirrigation : </span> <span className="bl">{responseInfop.data.type_dirrigation}</span>
+                  <span className="price"> type d'irrigation : </span> <span className="bl">{responseInfop.data.typeIrrigation?.nom}</span>
                   <br></br>
-                  <span className="price"> Typologies_agricoles  : </span> <span className="bl">{responseInfop.typologies_agricoles}</span>
+                  <span className="price"> Typologies agricoles  : </span> <span className="bl">{responseInfop.typologieAgricole?.nom}</span>
                   <br></br>
-                  <span className="price"> Superficies_agricoles  : </span> <span className="bl">{responseInfop.superficies_agricoles}</span>
+                  <span className="price"> Superficies agricoles  : </span> <span className="bl">{responseInfop.superficies_agricoles}</span>
                   <br></br>
-                  <span className="price"> Type_Sol  : </span> <span className="bl">{responseInfop.typesol}</span>
+                  <span className="price"> Type Sol  : </span> <span className="bl">{responseInfop.typeSole?.nom}</span>
                   <br></br>
 
 
 
-                  <span className="price">Publié le :</span> <span className="bl">{responseInfop.data.date_publication.toString().substring(0, 10)}</span>
+                  <span className="price">Publié le :</span> <span className="bl">{moment(responseInfop.data.date_publication).format('DD/MM/yy')}</span>
                   <br></br>
                   <span className="price">wilaya de : </span> <span className="bl">{responseInfop.data.moughataa?.nom}</span>
 
@@ -236,7 +305,7 @@ export default function PublicationsDetail() {
 
 
              </div>
-         </div>
+         </div>*/}
       </div>
     </>
   );

@@ -41,7 +41,7 @@ console.log(nom)
     return <div>erreur :{responseInfo2.error}</div>
   }
   return (
-    <div class="login d-flex flex-column">
+    <div className="login d-flex flex-column">
       <h1>Modifier</h1>
     
      
@@ -79,14 +79,14 @@ console.log(nom)
           required="required"
         /> */}
          
-       <button class="btn btn-primary btn-block btn-large" type="submit">
+       <button className="btn btn-primary btn-block btn-large" type="submit">
         Modifier wilaya</button>
       
-        {/* <button class="btn btn-primary btn-block btn-large" type="submit">
+        {/* <button className="btn btn-primary btn-block btn-large" type="submit">
           Sign up
         </button> */}
         {/* <NavLink to="/login">
-          <button class="btn btn-success btn-block btn-large  mt-3">
+          <button className="btn btn-success btn-block btn-large  mt-3">
             Login
           </button>
         </NavLink> */}

@@ -57,22 +57,22 @@ console.log("userrrr")
  
   return (
     <>
-      <div class="app-content  ">
+      <div className="app-content  ">
         <div className="d-flex flex-row  justify-content-between mb-3">
-          <h1 class="app-content-headerText">les utilisateurs</h1>
-          <div class="action-buttons">
+          <h1 className="app-content-headerText">les utilisateurs</h1>
+          <div className="action-buttons">
             <button
-              class="mode-switch"
+              className="mode-switch"
               title="Switch Theme"
               onClick={() => dispatch(SwitchMode())}
             >
               <svg
-                class="moon"
+                className="moon"
                 fill="none"
                 stroke="currentColor"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
                 width="24"
                 height="24"
                 viewBox="0 0 24 24"
@@ -81,8 +81,8 @@ console.log("userrrr")
                 <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
               </svg>
             </button>
-            <div class="action-buttons">
-              <button class="menu-button" onClick={() => show()}>
+            <div className="action-buttons">
+              <button className="menu-button" onClick={() => show()}>
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   id="menu"
@@ -91,10 +91,10 @@ console.log("userrrr")
                   viewBox="0 0 24 24"
                   fill="none"
                   stroke="currentColor"
-                  stroke-width="2"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  class="feather feather-menu"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  className="feather feather-menu"
                 >
                   <line x1="3" y1="12" x2="21" y2="12" />
                   <line x1="3" y1="6" x2="21" y2="6" />
@@ -104,42 +104,28 @@ console.log("userrrr")
             </div>
           </div>
         </div>
-        <div class="row ">
-        <div class="col  col-6">
-        {/* <NavLink to={"importer"}>
-            {" "}
-            <button class="app-content-headerButton">Importer wilayas</button>
-         
-          </NavLink> */}
+        <div className="row ">
+        <div className="col  col-6">
+
         </div>
         {
-              UserHasAccess(ADMIN) &&           <div class="col col-6  app-content-header justify-content-end  fixed">
-        {/* <NavLink to={"importer"}>
-            {" "}
-            <button class="m-2 app-content-headerButton">Importer wilayas</button>
-         
-          </NavLink> */}
-          
-          {/* <NavLink to={"new"}>
-            {" "}
-            <button class="app-content-headerButton">Ajouter utilisateur</button>
-         
-          </NavLink> */}
+              UserHasAccess(ADMIN) &&           <div className="col col-6  app-content-header justify-content-end  fixed">
+
         </div>}
         </div>
-        <div class="app-content-actions fixed">
-          <input onChange={inputHandler} class="search-bar" placeholder="Search..." type="text" />
+        <div className="app-content-actions fixed">
+          <input onChange={inputHandler} className="search-bar" placeholder="Search..." type="text" />
 
-          <div class="app-content-actions-wrapper">
+          <div className="app-content-actions-wrapper">
             <button
-              class="action-button list active"
+              className="action-button list active"
               title="List View"
               onClick={() => dispatch(ToList())}
             >
               <BsCardList />
             </button>
             <button
-              class="action-button grid"
+              className="action-button grid"
               title="Grid View"
               onClick={() => dispatch(toGrid())}
             >
@@ -148,30 +134,30 @@ console.log("userrrr")
           </div>
         </div>
         <div
-          class="products-area-wrapper tableView  "
+          className="products-area-wrapper tableView  "
           style={{ overflow: "scroll", height: "80vh" }}
         >
-          <div class="products-header">
-            <div class="product-cell image">
+          <div className="products-header">
+            <div className="product-cell image">
               Id
-              <button class="sort-button">
+              <button className="sort-button">
                 <BiSort />
               </button>
             </div>
-            <div class="product-cell category">
+            <div className="product-cell category">
               Nom 
-              <button class="sort-button">
+              <button className="sort-button">
                 <BiSort />
               </button>
             </div>
            
             {
-              UserHasAccess(ADMIN) &&        <div class="product-cell category">
+              UserHasAccess(ADMIN) &&        <div className="product-cell category">
               
              
             </div>}
             {
-              UserHasAccess(ADMIN) &&         <div class="product-cell category" style={{    marginRight:"55px" }}>
+              UserHasAccess(ADMIN) &&         <div className="product-cell category" style={{    marginRight:"55px" }}>
               Actions
               
             </div>}
@@ -181,22 +167,22 @@ console.log("userrrr")
            responseInfos.length==0?
           responseInfo.data.map((wilaya, position) => {
             return (
-              <div class="products-row" key={position}>
-                <button class="cell-more-button">
+              <div className="products-row" key={position}>
+                <button className="cell-more-button">
                   <BiDotsHorizontalRounded />
                 </button>
-                <div class="product-cell category">
-                  <span class="cell-label">Id :</span>
+                <div className="product-cell category">
+                  <span className="cell-label">Id :</span>
                   {wilaya.id}
                 </div>
-                <div class="product-cell category">
-                  <span class="cell-label">Nom  :</span>
+                <div className="product-cell category">
+                  <span className="cell-label">Nom  :</span>
                   {wilaya.username}
                 </div>
                
            
                 {
-               UserHasAccess(ADMIN) &&   <div class="product-cell category">
+               UserHasAccess(ADMIN) &&   <div className="product-cell category">
     
     <MdDelete style={{   fontSize:"22px" , color:"red" , marginLeft:"260px" }}onClick={() => {deleteUser(responseInfos[0].id)}}/>
 
@@ -207,7 +193,7 @@ console.log("userrrr")
   
                 }
   {
-               UserHasAccess(ADMIN) &&  <div class="product-cell category">
+               UserHasAccess(ADMIN) &&  <div className="product-cell category">
     <NavLink to={"update/"+wilaya.id}>
             {" "}
             <MdModeEdit style={{   fontSize:"22px" , color:"green"  }}/>
@@ -217,32 +203,32 @@ console.log("userrrr")
               </div>
             );
           }):
-          <div class="products-row" >
-          <button class="cell-more-button">
+          <div className="products-row" >
+          <button className="cell-more-button">
             <BiDotsHorizontalRounded />
           </button>
-          <div class="product-cell category">
-            <span class="cell-label">Id :</span>
+          <div className="product-cell category">
+            <span className="cell-label">Id :</span>
             {responseInfos[0].id}
           </div>
-          <div class="product-cell category">
-            <span class="cell-label">Nom :</span>
+          <div className="product-cell category">
+            <span className="cell-label">Nom :</span>
             {responseInfos[0].username}
           </div>
          
           {
       UserHasAccess(ADMIN) &&      
-<div class="product-cell category">
+<div className="product-cell category">
 
 <MdDelete style={{   fontSize:"22px" , color:"red" , marginLeft:"200px" }}onClick={() => {deleteUser(responseInfos[0].id)}}/>
 </div>
 }
 {
       UserHasAccess(ADMIN) &&   
-<div class="product-cell category">
+<div className="product-cell category">
 <NavLink to={"update/"+responseInfos[0].id}>
       {" "}
-<button class="bc2" style={{    marginLeft:"50px" }}>Actions</button>
+<button className="bc2" style={{    marginLeft:"50px" }}>Actions</button>
 </NavLink>
 </div>}
 
@@ -261,22 +247,22 @@ console.log("userrrr")
 
 //   return (
 //     <>
-//       <div class="app-content  ">
+//       <div className="app-content  ">
 //         <div className="d-flex flex-row  justify-content-between mb-3">
-//           <h1 class="app-content-headerText">Users</h1>
-//           <div class="action-buttons">
+//           <h1 className="app-content-headerText">Users</h1>
+//           <div className="action-buttons">
 //             <button
-//               class="mode-switch"
+//               className="mode-switch"
 //               title="Switch Theme"
 //               onClick={() => dispatch(SwitchMode())}
 //             >
 //               <svg
-//                 class="moon"
+//                 className="moon"
 //                 fill="none"
 //                 stroke="currentColor"
-//                 stroke-linecap="round"
-//                 stroke-linejoin="round"
-//                 stroke-width="2"
+//                 strokeLinecap="round"
+//                 strokeLinejoin="round"
+//                 strokeWidth="2"
 //                 width="24"
 //                 height="24"
 //                 viewBox="0 0 24 24"
@@ -285,8 +271,8 @@ console.log("userrrr")
 //                 <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
 //               </svg>
 //             </button>
-//             <div class="action-buttons">
-//               <button class="menu-button" onClick={() => show()}>
+//             <div className="action-buttons">
+//               <button className="menu-button" onClick={() => show()}>
 //                 <svg
 //                   xmlns="http://www.w3.org/2000/svg"
 //                   id="menu"
@@ -295,10 +281,10 @@ console.log("userrrr")
 //                   viewBox="0 0 24 24"
 //                   fill="none"
 //                   stroke="currentColor"
-//                   stroke-width="2"
-//                   stroke-linecap="round"
-//                   stroke-linejoin="round"
-//                   class="feather feather-menu"
+//                   strokeWidth="2"
+//                   strokeLinecap="round"
+//                   strokeLinejoin="round"
+//                   className="feather feather-menu"
 //                 >
 //                   <line x1="3" y1="12" x2="21" y2="12" />
 //                   <line x1="3" y1="6" x2="21" y2="6" />
@@ -308,17 +294,17 @@ console.log("userrrr")
 //             </div>
 //           </div>
 //         </div>
-//         <div class="app-content-header justify-content-end  fixed">
+//         <div className="app-content-header justify-content-end  fixed">
 //           <NavLink to={"new"}>
 //             {" "}
-//             <button class="app-content-headerButton">Ajouter user</button>
+//             <button className="app-content-headerButton">Ajouter user</button>
 //           </NavLink>
 //         </div>
-//         <div class="app-content-actions fixed">
-//           <input class="search-bar" placeholder="Search..." type="text" />
-//           <div class="app-content-actions-wrapper">
+//         <div className="app-content-actions fixed">
+//           <input className="search-bar" placeholder="Search..." type="text" />
+//           <div className="app-content-actions-wrapper">
 //             <button
-//               class="action-button list active"
+//               className="action-button list active"
 //               title="List View"
 //               onClick={() => dispatch(ToList())}
 //             >
@@ -327,93 +313,93 @@ console.log("userrrr")
 //           </div>
 //         </div>
 //         <div
-//           class="products-area-wrapper tableView  "
+//           className="products-area-wrapper tableView  "
 //           style={{ overflow: "scroll", height: "80vh" }}
 //         >
-//           <div class="products-header">
-//             <div class="product-cell category">
+//           <div className="products-header">
+//             <div className="product-cell category">
 //               Id
-//               <button class="sort-button">
+//               <button className="sort-button">
 //                 <BiSort />
 //               </button>
 //             </div>
-//             <div class="product-cell image">
+//             <div className="product-cell image">
 //               User nom 
-//               <button class="sort-button">
+//               <button className="sort-button">
 //                 <BiSort />
 //               </button>
 //             </div>
-//             <div class="product-cell category">
+//             <div className="product-cell category">
 //               Supprimer
              
 //             </div>
-//             <div class="product-cell category">
+//             <div className="product-cell category">
 //               Modifier
 //           </div>
 //           </div>
 //           {responseInfo.length==0?
 //           responseInfo.data.map((user, position) => {
 //             return (
-//               <div class="products-row" key={position}>
-//                 <button class="cell-more-button">
+//               <div className="products-row" key={position}>
+//                 <button className="cell-more-button">
 //                   <BiDotsHorizontalRounded />
 //                 </button>
 
-//                 <div class="product-cell category">
-//                   <span class="cell-label">Id :</span>
+//                 <div className="product-cell category">
+//                   <span className="cell-label">Id :</span>
 //                   {user.id}
 //                 </div>
-//                 <div class="product-cell category">
-//                   <span class="cell-label">nom:</span>
+//                 <div className="product-cell category">
+//                   <span className="cell-label">nom:</span>
 //                   {user.username}
 //                 </div>
-//                 {/* <div class="product-cell image   ">
+//                 {/* <div className="product-cell image   ">
 //                   <img src={user.image} />
 //                   <span>
 //                     {" "}
 //                     {user.username} 
 //                   </span>
 //                 </div> */}
-//                 <div class="product-cell category">
+//                 <div className="product-cell category">
     
-//       <button class="bc"onClick={() => {deleteUser(user.id)}}>Suprimer</button>
+//       <button className="bc"onClick={() => {deleteUser(user.id)}}>Suprimer</button>
 //     </div>
   
 
-//     <div class="product-cell category">
+//     <div className="product-cell category">
 //     <NavLink to={"update/"+user.id}>
 //             {" "}
-//       <button class="bc2">Modifier</button>
+//       <button className="bc2">Modifier</button>
 //       </NavLink>
 //     </div>
    
 //               </div>
 //             );
 //             }):
-//           <div class="products-row" >
-//           <button class="cell-more-button">
+//           <div className="products-row" >
+//           <button className="cell-more-button">
 //             <BiDotsHorizontalRounded />
 //           </button>
-//           <div class="product-cell category">
-//             <span class="cell-label">Id :</span>
+//           <div className="product-cell category">
+//             <span className="cell-label">Id :</span>
 //             {/* {responseInfo[0].id} */}
 //           </div>
-//           <div class="product-cell category">
-//             <span class="cell-label">Nom et prenom user :</span>
+//           <div className="product-cell category">
+//             <span className="cell-label">Nom et prenom user :</span>
 //             {/* {responseInfo[0].nom} */}
 //           </div>
          
      
-// {/* <div class="product-cell category">
+// {/* <div className="product-cell category">
 
-// <button class="bc"onClick={() => {deleteUser(responseInfo[0].id)}}>Suprimer</button>
+// <button className="bc"onClick={() => {deleteUser(responseInfo[0].id)}}>Suprimer</button>
 // </div> */}
 
 
-// {/* <div class="product-cell category">
+// {/* <div className="product-cell category">
 // <NavLink to={"update/"+responseInfo[0].id}>
 //       {" "}
-// <button class="bc2">Modifier</button>
+// <button className="bc2">Modifier</button>
 // </NavLink>
 // </div> */}
 

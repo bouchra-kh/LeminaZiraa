@@ -14,6 +14,7 @@ export const useWilayasApi = createApi({
         url: "/list",
         method: "GET",
       }),
+
     }),
     getWilayaById: builder.query({
       query: (id) => {
@@ -84,6 +85,10 @@ export const useWilayasApi = createApi({
      }),
      
   }),
+    refetchOnMountOrArgChange: true,
+    refetchOnReconnect: true,
+    refetchOnFocus: true,
+    refetchOnMount: true,
   
  
 });
@@ -108,9 +113,10 @@ export const wilayaSlice = createSlice({
         state.isLoading = true;
         state.hasError = false;
         console.log("state"+state);
-      }
+      },
     );
   },
+
 });
 
 

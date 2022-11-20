@@ -7,7 +7,7 @@ import WilayasImporter from "./importer";
 const WilayasRoutes = () => {
   return (
     <Routes>
-      <Route path="/" element={<Wilayas />} />
+      <Route path="/" element={<Wilayas />}  />
       <Route path="/new" element={<WilayasNew />} />
       <Route path="/update/:id"  element={<WilayasUpdate/>} />
       <Route path="/importer"  element={<WilayasImporter/>} />

@@ -1,239 +1,189 @@
-import { getUser } from "../extends/GlobalFunctions"
+import {getUser} from "../extends/GlobalFunctions"
+import axios from "axios";
+import {useEffect, useState} from "react";
+
 const show = () => {
-  document.getElementById("slide").classList.remove("d-none");
+    document.getElementById("slide").classList.remove("d-none");
 };
 const Statistiques = () => {
-    const user = getUser()
+    const [loading, setLoading] = useState(true);
+    const [moughataas, setMoughataa] = useState([]);
+    const [statistiques, setStatistiques] = useState({
+        'publications': {}
+    });
+    useEffect(() => {
+        setLoading(true);
+        axios.get("stat/publications").then((res) => {
+            setStatistiques((prev) => {
+                return {
+                    ...prev,
+                    publications: res.data
+                }
+            });
+
+        });
+        axios.get("moughataaa/list").then((res) => {
+            setMoughataa(res.data);
+            setLoading(false);
+        }).finally(() => {
+            setLoading(false);
+        });
+    }, []);
+
+
+    const user = getUser();
+    if (loading) {
+        return (
+            <div className="d-flex justify-content-center">
+                <div className="spinner-border text-primary" role="status">
+                    <span className="visually-hidden">Loading...</span>
+                </div>
+            </div>
+        )
+    }
     return (
         <>
-         <div class="app-main    p-3">
-          <div class="main-header-line">
-          <h1>Dashboard</h1>
-            <button
-              class="mode-switch"
-              title="Switch Theme"
-              
-            >
-    
-              <svg
-                class="moon"
-                fill="none"
-                stroke="currentColor"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-              >
-                <defs></defs>
-                <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
-              </svg>
-            </button>
-            <div class="action-buttons">
-              <button class="menu-button" onClick={() => show()}>
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  id="menu"
-                  width="24"
-                  height="24"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="2"
+            <div className="app-main    p-3">
+                <div className="main-header-line">
+                    <h1>Dashboard</h1>
+                    <button
+                        className="mode-switch"
+                        title="Switch Theme"
+
+                    >
+
+                        <svg
+                            className="moon"
+                            fill="none"
+                            stroke="currentColor"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth="2"
+                            width="24"
+                            height="24"
+                            viewBox="0 0 24 24"
+                        >
+                            <defs></defs>
+                            <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+                        </svg>
+                    </button>
+                    <div className="action-buttons">
+                        <button className="menu-button" onClick={() => show()}>
+                            <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                id="menu"
+                                width="24"
+                                height="24"
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="currentColor"
+                                strokeWidth="2"
 
 
-                  
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  class="feather feather-menu"
-                >
-                  <line x1="3" y1="12" x2="21" y2="12" />
-                  <line x1="3" y1="6" x2="21" y2="6" />
-                  <line x1="3" y1="18" x2="21" y2="18" />
-                </svg>
-              </button>
-            </div>
-          </div>
-          <div class="chart-row three">
-            <div class="chart-container-wrapper">
-              <div class="chart-container  ">
-                <div class="chart-info-wrapper">
-                  <h2></h2>
-                  <span>19</span>
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                                className="feather feather-menu"
+                            >
+                                <line x1="3" y1="12" x2="21" y2="12"/>
+                                <line x1="3" y1="6" x2="21" y2="6"/>
+                                <line x1="3" y1="18" x2="21" y2="18"/>
+                            </svg>
+                        </button>
+                    </div>
                 </div>
-                <div class="chart-svg">
-                  <svg viewBox="0 0 36 36" class="circular-chart pink">
-                    <path
-                      class="circle-bg"
-                      d="M18 2.0845
+                <div className="chart-row three">
+                    <div className="chart-container-wrapper">
+                        <div className="chart-container  ">
+                            <div className="chart-info-wrapper">
+                                <h2>Nbr Publications</h2>
+                                <span>{statistiques.publications?.count}</span>
+                            </div>
+                            <div className="chart-svg">
+                                <svg viewBox="0 0 36 36" className="circular-chart pink">
+                                    <path
+                                        className="circle-bg"
+                                        d="M18 2.0845
           a 15.9155 15.9155 0 0 1 0 31.831
           a 15.9155 15.9155 0 0 1 0 -31.831"
-                    ></path>
-                    <path
-                      class="circle"
-                      stroke-dasharray="30, 100"
-                      d="M18 2.0845
+                                    ></path>
+                                    <path
+                                        className="circle"
+                                        strokeDasharray="30, 100"
+                                        d="M18 2.0845
           a 15.9155 15.9155 0 0 1 0 31.831
           a 15.9155 15.9155 0 0 1 0 -31.831"
-                    ></path>
-                    <text x="18" y="20.35" class="percentage">
-                      30%
-                    </text>
-                  </svg>
+                                    ></path>
+
+                                    <text x="18" y="20.35" className="percentage">
+                                        {statistiques.publications?.prc_valider} %
+                                    </text>
+                                </svg>
+                                <span className={"text-success"}>Valider</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div className="chart-container-wrapper">
+                        <div className="chart-container">
+                            <div className="chart-info-wrapper">
+                                <h2>Total superficie</h2>
+                                <span>{statistiques.publications?.total_superficie}</span>
+                            </div>
+
+                        </div>
+                    </div>
                 </div>
-              </div>
+                <div className="chart-row  two d-flex justify-content-center">
+                    <div className="chart-container-wrapper small">
+                        <div className="chart-container">
+                            <div className="chart-container-header">
+                                <h2>Publications par Moughataa</h2>
+                            </div>
+                            <hr style={{borderBottomWidth:1,borderBottomColor:"red",width:"100%"}}></hr>
+                            {moughataas.map((moughataa,i) => (
+                                moughataa.publicationList.length > 0 && (
+                                <div key={i} className="progress-bar-info">
+                                    <span className="progress-color applications"></span>
+                                    <span className="progress-type">{moughataa.nom}</span>
+                                    <span className="progress-amount">{moughataa.publicationList.length}</span>
+                                </div>
+                                )
+                            ))}
+
+
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class="chart-container-wrapper">
-              <div class="chart-container">
-                <div class="chart-info-wrapper">
-                  <h2>Publication par Moughataa</h2>
-                  <span>42</span>
+            <div className="app-right   ">
+                <button className="close-right">
+                    <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="24"
+                        height="24"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        strokeWidth="2"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        className="feather feather-x"
+                    >
+                        <line x1="18" y1="6" x2="6" y2="18"/>
+                        <line x1="6" y1="6" x2="18" y2="18"/>
+                    </svg>
+                </button>
+                <div className="profile-box">
+                    <div className="profile-photo-wrapper">
+                        <img
+                            src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6e/Breezeicons-actions-22-im-user.svg/1200px-Breezeicons-actions-22-im-user.svg.png"
+                            alt="profile"
+                        />
+                    </div>
+                    <p className="profile-text">{user?.username} </p>
+                    <p className="profile-subtext">{user?.roles[0]?.roleName} </p>
                 </div>
-                <div class="chart-svg">
-                  <svg viewBox="0 0 36 36" class="circular-chart blue">
-                    <path
-                      class="circle-bg"
-                      d="M18 2.0845
-          a 15.9155 15.9155 0 0 1 0 31.831
-          a 15.9155 15.9155 0 0 1 0 -31.831"
-                    ></path>
-                    <path
-                      class="circle"
-                      stroke-dasharray="60, 100"
-                      d="M18 2.0845
-          a 15.9155 15.9155 0 0 1 0 31.831
-          a 15.9155 15.9155 0 0 1 0 -31.831"
-                    ></path>
-                    <text x="18" y="20.35" class="percentage">
-                      60%
-                    </text>
-                  </svg>
-                </div>
-              </div>
             </div>
-            <div class="chart-container-wrapper">
-              <div class="chart-container">
-                <div class="chart-info-wrapper">
-                  <h2>Nombre de Publications</h2>
-                  <span>78</span>
-                </div>
-                <div class="chart-svg">
-                  <svg viewBox="0 0 36 36" class="circular-chart orange">
-                    <path
-                      class="circle-bg"
-                      d="M18 2.0845
-          a 15.9155 15.9155 0 0 1 0 31.831
-          a 15.9155 15.9155 0 0 1 0 -31.831"
-                    ></path>
-                    <path
-                      class="circle"
-                      stroke-dasharray="90, 100"
-                      d="M18 2.0845
-          a 15.9155 15.9155 0 0 1 0 31.831
-          a 15.9155 15.9155 0 0 1 0 -31.831"
-                    ></path>
-                    <text x="18" y="20.35" class="percentage">
-                      90%
-                    </text>
-                  </svg>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="chart-row two">
-            <div class="chart-container-wrapper big">
-              <div class="chart-container">
-                <div class="chart-container-header">
-                  <h2>Principaux Activités</h2>
-                  <span>Les 30 derniers jours</span>
-                </div>
-                <div class="line-chart">
-                  <canvas id="chart"></canvas>
-                </div>
-                <div class="chart-data-details">
-                  <div class="chart-details-header"></div>
-                </div>
-              </div>
-            </div>
-            <div class="chart-container-wrapper small">
-              <div class="chart-container">
-                <div class="chart-container-header">
-                  <h2>Taux de Publications</h2>
-                  <span href="#">Ce mois-ci</span>
-                </div>
-                <div class="acquisitions-bar">
-                  <span
-                    class="bar-progress rejected"
-                    style={{ width: "8%" }}
-                  ></span>
-                  <span
-                    class="bar-progress on-hold"
-                    style={{ width: "10%" }}
-                  ></span>
-                  <span
-                    class="bar-progress shortlisted"
-                    style={{ width: "18%" }}
-                  ></span>
-                  <span
-                    class="bar-progress applications"
-                    style={{ width: "64%" }}
-                  ></span>
-                </div>
-                <div class="progress-bar-info">
-                  <span class="progress-color applications"></span>
-                  <span class="progress-type">Moughataas</span>
-                  <span class="progress-amount">64%</span>
-                </div>
-                <div class="progress-bar-info">
-                  <span class="progress-color shortlisted"></span>
-                  <span class="progress-type">Wilayaas</span>
-                  <span class="progress-amount">18%</span>
-                </div>
-                <div class="progress-bar-info">
-                  <span class="progress-color on-hold"></span>
-                  <span class="progress-type">Users</span>
-                  <span class="progress-amount">10%</span>
-                </div>
-                <div class="progress-bar-info">
-                  <span class="progress-color rejected"></span>
-                  <span class="progress-type">publication</span>
-                  <span class="progress-amount">8%</span>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="app-right   ">
-          <button class="close-right">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              class="feather feather-x"
-            >
-              <line x1="18" y1="6" x2="6" y2="18" />
-              <line x1="6" y1="6" x2="18" y2="18" />
-            </svg>
-          </button>
-          <div class="profile-box">
-            <div class="profile-photo-wrapper">
-              <img
-                src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6e/Breezeicons-actions-22-im-user.svg/1200px-Breezeicons-actions-22-im-user.svg.png"
-                alt="profile"
-              />
-            </div>
-            <p class="profile-text">{user?.username } </p>
-            <p class="profile-subtext">{user?.roles[0]?.roleName} </p>
-          </div>
-        </div>
-        
+
         </>
     );
 };

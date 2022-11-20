@@ -32,11 +32,11 @@ const Main = (props) => {
   return (
     <>
       <div
-        class="   sidebar   fixed   app-left "
+        className="sidebar fixed app-left"
         id="slide"
         style={{ height: "100vh", positionL: "fixed" }}
       >
-        <ul class="sidebar-list  nav-list  ">
+        <ul className="sidebar-list  nav-list  ">
           {routes.map((route, i) => {
             const userroles= UserRoles();
             if(Array.isArray(userroles)){
@@ -45,6 +45,7 @@ const Main = (props) => {
 
 
                   <Link
+                      key={i}
                     icon={route.icon}
                     clicked={props.clicked}
                     setClicked={props.setClicked}
@@ -74,31 +75,23 @@ const Link = (props) => {
 
     <NavLink
       to={props.path}
-      class={`sidebar-list-item ${props.clicked == props.number && "active"}`}
+      className={`sidebar-list-item ${props.clicked == props.number && "active"}`}
     >
-
-
-
-
       <li
         onClick={() => props.setClicked(props.number)}
         style={{ display: "flex", flexDirection: "row", marginLeft: "1rem"  }}
       >
-
-
-
-
          <span style={{  marginRight: "1rem" , marginTop:"14px" }}> {props.icon}</span>
         <span  style={{  color: "green",marginTop:"14px"  }}> {props.name}</span>
       </li>
     </NavLink>
   );
 };
-//     <div class="row ">
-//     <div class="col  col-6">
+//     <div className="row ">
+//     <div className="col  col-6">
 //     <p>dfghjklm</p>
-//     <div class="col  col-6">
-//       <i class="bi bi-graph-up-arrow iconc"></i>
+//     <div className="col  col-6">
+//       <i className="bi bi-graph-up-arrow iconc"></i>
 //     </div>
 // </div>
 // </div>

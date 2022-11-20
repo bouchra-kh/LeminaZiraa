@@ -1,6 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500&display=swap');
 
- 
+
 
 :root {
   --app-bg-dark: #01081f;
@@ -22,36 +22,36 @@
   --close-icon: #fdbc64;
   --draft-bg:  #fed8b3;
   --draft-icon:  #e9780e;
-  
+
 }
 
- 
+
 
 .app-container{
   width: 100%;
   height: 100vh;
   display: flex;
   position: relative;
-  
- 
+
+
 }
 
- 
+
 
 .app-main {
   flex: 1;
- 
+
   height: 100%;
   overflow-y: auto;
   overflow-x: hidden;
-  
-  
-   }
+
+
+}
 
 .app-right {
   flex-basis: 320px;
   width: 60%;
-   background-color: var(--app-bg-dark);
+  background-color: var(--app-bg-dark);
   height: 100vh;
   overflow: scroll;
   padding: 64px 0 0 0;
@@ -59,7 +59,7 @@
   flex-direction: column;
   position: relative;
   transition: all .4s ease-in;
-  
+
   &:before {
     content: '';
     position: absolute;
@@ -69,12 +69,12 @@
     background-image: var(--app-bg-before);
     z-index: 1;
   }
-  
+
   &.show {
     right: 0;
     opacity: 1;
   }
-  
+
   .close-right { display: none; }
 }
 
@@ -91,7 +91,7 @@
   color: var(--app-logo);
   margin-right: 16px;
   padding: 0 24px;
-  
+
   span {
     color: #fff;
     display: inline-block;
@@ -119,21 +119,21 @@ button { cursor: pointer; }
 
 .nav-list-item {
   margin-bottom: 12px;
-  
+
   &:not(.active):hover {
     background-color: var(--list-item-hover);
   }
-  
+
   &.active {
     .nav-list-link {
       color: var(--nav-link-active);
-      
+
       &:after {
         height: 100%;
         opacity: 1;
       }
     }
-    
+
     svg {
       stroke: var(--app-logo);
     }
@@ -149,11 +149,11 @@ button { cursor: pointer; }
   display: flex;
   align-items: center;
   position: relative;
-  
+
   svg {
     margin-right: 12px;
   }
-  
+
   &:after {
     content: '';
     height: 100%;
@@ -185,14 +185,14 @@ button { cursor: pointer; }
   justify-content: space-between;
   align-items: center;
   margin-bottom: 16px;
-  
+
   h1 {
     color: var(--main-color);
     margin: 0;
     font-size: 24px;
     line-height: 32px;
   }
-  
+
   input {
     border-radius: 4px;
     background-color: var(--color-light);
@@ -211,12 +211,12 @@ button { cursor: pointer; }
     width: 100%;
     max-width: 400px;
     margin-left: 16px;
-    
+
     &:placeholder {
       font-size: 14px;
       color: rgba(255,255,255, 0.6);
     }
-    
+
     &:hover, &:focus {
       border: 1px solid #3481d2;
       box-shadow: 0 0 0 3px var(--color-light);
@@ -228,26 +228,26 @@ button { cursor: pointer; }
   display: flex;
   justify-content: space-between;
   margin: 0 -8px;
-  
+
   &.three .chart-container-wrapper {
     width: 33.3%;
-    
+
     .chart-container { justify-content: space-between; }
   }
-  
+
   &.two {
     .big {
       flex: 1;
       max-width: 77.7%;
-      
+
       .chart-container {
         flex-direction: column;
       }
     }
-    
+
     .small {
       width: 33.3%;
-      
+
       .chart-container {
         flex-direction: column;
         + .chart-container { margin-top: 16px; }
@@ -268,7 +268,7 @@ button { cursor: pointer; }
   padding: 16px;
   display: flex;
   align-items: center;
-  
+
   &.applicants {
     max-height: 336px;
     overflow-y: auto;
@@ -282,7 +282,7 @@ button { cursor: pointer; }
 .chart-info-wrapper {
   flex-shrink: 0;
   flex-basis: 120px;
-  
+
   h2 {
     color: var(--secondary-color);
     font-size: 12px;
@@ -291,7 +291,7 @@ button { cursor: pointer; }
     text-transform: uppercase;
     margin: 0 0 8px 0;
   }
-  
+
   span {
     color: var(--main-color);
     font-size: 24px;
@@ -325,12 +325,12 @@ button { cursor: pointer; }
     .circle { stroke: #ff9f00; }
     .circle-bg {stroke: #776547; }
   }
-  
+
   &.blue {
     .circle { stroke: #00cfde; }
     .circle-bg { stroke: #557b88; }
   }
-  
+
   &.pink {
     .circle { stroke: #ff7dcb; }
     .circle-bg { stroke: #6f5684; }
@@ -356,7 +356,7 @@ button { cursor: pointer; }
   align-items: center;
   width: 100%;
   margin-bottom: 12px;
-  
+
   h2 {
     margin: 0;
     color: var(--main-color);
@@ -364,7 +364,7 @@ button { cursor: pointer; }
     line-height: 16px;
     opacity: .8;
   }
-  
+
   span {
     color: var(--app-logo);
     font-size: 12px;
@@ -384,7 +384,7 @@ button { cursor: pointer; }
 .bar-progress {
   height: 4px;
   display: inline-block;
-  
+
   &.applications {
     background-color: rgba(255,125,203,1);
   }
@@ -411,19 +411,19 @@ button { cursor: pointer; }
   height: 10px;
   border-radius: 50%;
   margin-right: 8px;
-  
+
   &.applications {
     background-color: rgba(255,125,203,1);
   }
-  
+
   &.shortlisted {
     background-color: rgba(0,207,222,1);
   }
-  
+
   &.on-hold {
     background-color: rgba(253,172,66,1);
   }
-  
+
   &.rejected {
     background-color: rgba(255,92,92,1);
   }
@@ -447,7 +447,7 @@ button { cursor: pointer; }
   align-items: center;
   width: 100%;
   margin-top: 12px;
-  
+
   img {
     width: 32px;
     height: 32px;
@@ -464,7 +464,7 @@ button { cursor: pointer; }
     font-size: 14px;
     line-height: 16px;
   }
-  
+
   p {
     margin : 4px 0;
     font-size: 12px;
@@ -478,7 +478,7 @@ button { cursor: pointer; }
   flex-direction: column;
   align-items: center;
   position: relative;
-  
+
   &:before {
     content: '';
     position: absolute;
@@ -491,17 +491,17 @@ button { cursor: pointer; }
 }
 
 .profile-photo-wrapper {
- 
+
   height: 80px;
   overflow: hidden;
   border-radius: 50%;
   margin-bottom: 16px;
-  
+
   img {
     width: 40%;
     height: 100%;
     object-fit: cover;
- 
+
     margin-left: 120px;
   }
 }
@@ -509,7 +509,7 @@ button { cursor: pointer; }
   width: 100%;
   height: 100%;
   color:#add8e6
-  
+
 }
 
 .profile-text, .profile-subtext {
@@ -528,18 +528,18 @@ button { cursor: pointer; }
   align-items: center;
   padding: 0 16px;
   margin-top: 16px;
-  
+
   h2 {
     font-size: 14px;
     line-height: 24px;
     color: var(--secondary-color);
   }
-  
+
   span {
     display: inline-block;
     color: var(--secondary-color);
     position: relative;
-    
+
     &.notification-active:before {
       content: '';
       position: absolute;
@@ -559,11 +559,11 @@ button { cursor: pointer; }
   align-items: center;
   padding: 8px 16px;
   margin-bottom: 8px;
-  
+
   &:hover {
     background-color: var(--list-item-hover);
   }
-  
+
   img {
     width: 10px;
     height: 32px;
@@ -617,7 +617,7 @@ button { cursor: pointer; }
   color: var(--secondary-color);
   width: 100%;
   margin: 0; overflow: scroll;
-  
+
   strong {
     color: #fff;
     opacity: .4;
@@ -634,22 +634,22 @@ button { cursor: pointer; }
   align-items: center;
   flex-shrink: 0;
   margin-right: 8px;
-  
+
   &.warning {
     background-color: var(--warning-bg);
     color: var(--warning-icon);
   }
-  
+
   &.applicant {
     background-color: var(--applicant-bg);
     color: var(--applicant-icon);
   }
-  
+
   &.close {
     background-color: var(--close-bg);
     color: var(--close-icon);
   }
-  
+
   &.draft {
     background-color: var(--draft-bg);
     color: var(--draft-icon);
@@ -694,7 +694,7 @@ button { cursor: pointer; }
     flex-basis: 100px;
     width:  20px;
   }
-  
+
   .app-left {
     flex-basis: 200px;
   }
@@ -708,9 +708,9 @@ button { cursor: pointer; }
     z-index: 2;
     height: 100%;
     width: 50px;
-   
+
     box-shadow: 0 0 10px 5px rgba(1, 8, 31, .4);
-    
+
     .close-right {
       position: absolute;
       top: 5px;
@@ -725,7 +725,7 @@ button { cursor: pointer; }
       cursor: pointer;
     }
   }
-  
+
   .app-main .open-right-area {
     display: flex;
     color: var(--main-color);
@@ -736,7 +736,7 @@ button { cursor: pointer; }
   .chart-row.two {
     flex-direction: column;
   }
-  
+
   .chart-row.two .big {
     max-width: 100%;
   }
@@ -744,10 +744,10 @@ button { cursor: pointer; }
     display: flex;
     justify-content: space-between;
     width: 100%;
-    
+
     .chart-container {
       width: calc(50% - 8px);
-      
+
       &.applicants {
         margin-top: 0;
       }
@@ -759,9 +759,9 @@ button { cursor: pointer; }
   .menu-button {
     display: flex;
   }
-  
+
   .app-left {
-    
+
     position: absolute;
     opacity: 8;
     top: 0;
@@ -771,7 +771,7 @@ button { cursor: pointer; }
     right: 0%;
     box-shadow: 0 0 10px 5px rgba(1, 8, 31, .4);
   }
-  
+
   .close-menu { display: flex;}
 }
 
@@ -779,11 +779,11 @@ button { cursor: pointer; }
   .chart-row.three {
     flex-direction: column;
   }
-  
+
   .chart-row.three .chart-container-wrapper {
     width: 100%;
   }
-  
+
   .chart-svg {
     min-height: 60px;
     min-width: 40px;
@@ -794,15 +794,15 @@ button { cursor: pointer; }
   .chart-row.two .small {
     flex-direction: column;
   }
-  
+
   .chart-row.two .small .chart-container {
     width: 100%;
-    
+
     &.applicants {
       margin-top: 16px;
     }
   }
-  
+
   .main-header-line h1 {
     font-size: 14px;
   }
@@ -819,7 +819,7 @@ button { cursor: pointer; }
 }
 
 .blog-post {
-   width: 90%;
+  width: 90%;
   background-color: #f2f2f2;
   color: black;
   padding-bottom: 20px;
@@ -868,7 +868,7 @@ button { cursor: pointer; }
 
 .text,
 .description-text {
- 
+
   text-align:left;
   padding: 0 10px;
   color:black
@@ -882,4 +882,8 @@ button { cursor: pointer; }
 
 .description-image {
   width: 100%;
+}
+
+.my-leaflet-map-container img {
+  max-height: none;
 }

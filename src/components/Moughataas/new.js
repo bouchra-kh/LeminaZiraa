@@ -1,96 +1,100 @@
 
-import {Link, Routes, Route, useNavigate} from 'react-router-dom';
+import {useNavigate} from 'react-router-dom';
 
 
 import React, { useState } from "react";
-import { NavLink } from "react-router-dom";
 import {useCreateMoughataaMutation} from "./moughataas-services";
 import { useGetWilayasQuery } from '../Wilayas/wilayas-services';
+import Dialog from "@mui/material/Dialog";
+import DialogTitle from "@mui/material/DialogTitle";
+import DialogContent from "@mui/material/DialogContent";
+import DialogContentText from "@mui/material/DialogContentText";
+import DialogActions from "@mui/material/DialogActions";
+import Button from "@mui/material/Button";
+import axios from "axios";
 export default function MoughataasNew() {
   const navigate = useNavigate();
   const [username, setUsername] = useState("");
-  const [zone_agricoles, setzone_agricoles] = useState("");
- 
+  const [showMsg, setShowMsg] = useState(false);
+
   const [wilaya, setWilaya] = useState("");
   const [newMoughataa] = useCreateMoughataaMutation();
   const responseInfo =useGetWilayasQuery();
-  console.log("wilaya",responseInfo.data)
+
   if (responseInfo.isLoading) {
     return <div>recherch....</div>
   }
   return (
     
-    <div class="login d-flex flex-column">
+    <div className="login d-flex flex-column">
       <h1>Ajout</h1>
       <form
         className=""
         onSubmit={(e) => {
-          navigate('../../Moughataas/');
-         if (wilaya==null) {
-          
-         }
           e.preventDefault();
-          newMoughataa({
-            nom: username,
-            wilaya:{"id":wilaya}
-         
-          });
+           axios.post("moughataaa/save", {
+               nom: username,
+               wilaya:{"id":wilaya}
+           })
+            .then(() => {
+                setShowMsg(true);
+                setUsername('');
+            })
+
         }}
       >
         <input
           type="text"
+          className="form-control mb-2"
           value={username}
           onChange={(e) => setUsername(e.target.value)}
-          placeholder="Username"
-          required="required"
+          placeholder="Nom"
+          required
         />
        
-        
-              <select value={wilaya} name={wilaya} onChange={(e) => setWilaya(e.target.value)} component="select" class="sel">
-             <option></option>
-             {responseInfo.data.map((wilaya, position) => {
+
+              <select placeholder="wilaya" required value={wilaya} name="wilaya" onChange={(e) => setWilaya(e.target.value)}  className="form-control mb-2">
+                  {responseInfo.data.map((wilaya, position) => {
             return (
-              
-              
-                <>
-               
-                <option  key={position} value={wilaya.id}  required="required" >{wilaya.nom}</option>
-                
-                  </>
-               
-              
-              
+                <option  key={position} value={wilaya.id}>{wilaya.nom}</option>
 
             );
           })}
 </select>
-        {/* <input
-          type="password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          placeholder="Password"
-          required="required"
-        /> */}
-        {/* <input
-          type="confirm password"
-          value={confirmPassword}
-          onChange={(e) => setConfirmPassword(e.target.value)}
-          placeholder="Confirm Password"
-          required="required"
-        /> */}
-         {/* <NavLink to={"../../wilayas/"}> */}
-       <button class="btn btn-primary btn-block btn-large" type="submit">
+
+       <button className="btn btn-primary btn-block btn-large" type="submit">
         Ajouter moughataa</button>
-        {/* </NavLink> */}
-        {/* <button class="btn btn-primary btn-block btn-large" type="submit">
-          Sign up
-        </button> */}
-        {/* <NavLink to="/login">
-          <button class="btn btn-success btn-block btn-large  mt-3">
-            Login
-          </button>
-        </NavLink> */}
+
       </form>
+        <div>
+            <Dialog
+                open={showMsg}
+                onClose={function (){
+                    setShowMsg(false);
+                }}
+                aria-labelledby="alert-dialog-title"
+                aria-describedby="alert-dialog-description"
+            >
+                <DialogTitle id="alert-dialog-title" className="centerdiv">
+                    Alert
+                </DialogTitle>
+                <DialogContent>
+                    <DialogContentText id="alert-dialog-description">
+                        Moughataa a été ajoutée avec succès
+                    </DialogContentText>
+                </DialogContent>
+                <DialogActions>
+                    <Button
+                        onClick={function (){
+                            setShowMsg(false);
+                            navigate("/moughataas");
+                        }}
+                        autoFocus>
+                        OK
+                    </Button>
+                </DialogActions>
+            </Dialog>
+        </div>
     </div>
   );
 }
