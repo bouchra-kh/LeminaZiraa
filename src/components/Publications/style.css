@@ -45,8 +45,8 @@
 }
 
 .sti{
-    height: 10px;
-    width: 5px;
+    height: 10;
+    width: 5;
 }
 
 .side-by-side {
@@ -143,20 +143,19 @@ h3 {
 	color:  #a6a6a6;
 }
 
-/*img {*/
-/*			max-width: 100%;*/
-/*			filter: drop-shadow(1px 1px 3px  #a6a6a6);*/
-/*		}*/
+/* img {
+			max-width: 100%;
+			filter: drop-shadow(1px 1px 3px  #a6a6a6);
+		} */
 
 /* ----- Product Section ----- */
 .product {
 	display: grid;
 	
 	margin: auto;
-	padding: 2.5em 0;
+
 	min-width: 200px;
-	background-color: white;
-	border-radius: 5px;
+	
 }
 .prod{
 	margin-left: 400px;
@@ -177,20 +176,28 @@ h3 {
 	/* /* position: relative;
 	 */
 	 position: relative;
-	 margin: 5%;
+	 /* margin: 5%; */
+	
 	 
 }
 
 .photo-container {
-	
 	position: absolute;
+	
+	display: grid;
+	grid-template-rows: 1fr;
+	width: 98%;
+	height: 52%;
+	border-radius: 6px;
+
+	/* position: absolute;
 	left: -2.5em;
 	display: grid;
 	grid-template-rows: 1fr;
 	width: 100%;
-	height: 100%;
+	height: 70%;
 	border-radius: 6px;
-	box-shadow: 4px 4px 25px -2px rgba(0, 0, 0, 0.3);
+	box-shadow: 4px 4px 25px -2px rgba(0, 0, 0, 0.3); */
 }
 
 .photo-main {
@@ -211,14 +218,27 @@ h3 {
 
 
 }
-/*img {*/
-/*	position: absolute;*/
-/*	left: -3.5em;*/
-
-/*	max-width: 110%;*/
-/*	filter: saturate(150%) contrast(120%) hue-rotate(10deg)*/
-/*		drop-shadow(1px 20px 10px rgba(0, 0, 0, 0.3));*/
-/*}*/
+.imindex{
+	position: absolute;
+	left:1.5em ;
+}
+.imdetail{
+	position: absolute;
+	left:-4.5em ;
+    max-width: 50%;
+}
+/* img{
+	position: absolute;
+	left:1.5em ;
+} */
+/* img {
+	position: absolute;
+	left: -3.5em; 
+	
+	max-width: 110%;
+	filter: saturate(150%) contrast(120%) hue-rotate(10deg)
+		drop-shadow(1px 20px 10px rgba(0, 0, 0, 0.3));
+} */
 .photo-album {
 	padding: 0.7em 1em;
 	border-radius: 0 0 6px 6px;
@@ -373,7 +393,7 @@ footer {
 
 
 
-
+.button4 {padding: 18px 16px;background-color: green;color: white;border-radius: 12px;}
 
 
 

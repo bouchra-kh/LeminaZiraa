@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "./style.css";
+//import "./style.css";
 //import Publications from "../data/data-publication";
 import { BsCardList, BsFillGrid1X2Fill } from "react-icons/bs";
 import { BiSort, BiDotsHorizontalRounded } from "react-icons/bi";
@@ -12,7 +12,7 @@ import {
     useParams
   } from 'react-router-dom'
 import { publicationSlice,useGetPublicationsQuery,useGetPublicationByIdQuery,useDeletepublicationMutation } from "../Publications/publication-services";
-export default function PublicationsDetail() {
+export default function PublicationsDetailMoughataa() {
     const { id } = useParams();
   const dispatch = useDispatch();
   const show = () => {
@@ -170,7 +170,8 @@ export default function PublicationsDetail() {
         
                
                 <div class=" divb2">
-              <section class="product2">
+            
+                <section class="product2">
                 <div class="product__photo">
                   <div class="photo-container">
                     <div class="photo-main">
@@ -180,44 +181,57 @@ export default function PublicationsDetail() {
                       </div> */}
                       {/* src="https://res.cloudinary.com/john-mantas/image/upload/v1537291846/codepen/delicious-apples/green-apple-with-slice.png
                        */}
-                      <img
-                      src={`http://localhost:8080/publication/sid/${responseInfop.data.image}`} alt="green apple slice"/>
+                      <img class="imdetail"
+                      src={`http://localhost:8080/publication/sid/${responseInfop.data.image}`} height={300}
+                      width={500}
+                      style={{ alignSelf: 'center', marginLeft:"60px" }} alt="green apple slice"
+
+                      />
                     </div>
-                 
+
                   </div>
                 </div>
                 <div class="product__info">
-                  <div class="price">
-                    <p className="description2">{ responseInfop.data.description}</p>
-                
+
+
                   </div>
-                  
-                  </div>
-            
+
               </section>
-            
-              <section class="product">
-                <div class="product__photo">
-                  
-                </div>
+
+              <section class="prod">
+
                 <div class="product__info">
-                  <div class="price">
-                    {/* <p className="description2">{ responseInfop.data.description}</p>
-                 */}
-                  </div>
+                <span className="des">{responseInfop.data.description}</span>
+                <br></br><br></br>
+
+
                   <span className="price">Semences    : </span> <span className="bl">{responseInfop.data.semences}</span>
                   <br></br>
-                  
+
+                  <span className="price">anneerecolte   : </span> <span className="bl">{responseInfop.data.anneerecolte}</span>
+                  <br></br>
+                  <span className="price"> quantite   : </span> <span className="bl">{responseInfop.data.quantite}</span>
+                  <br></br>
+                  <span className="price"> type_dirrigation : </span> <span className="bl">{responseInfop.data.type_dirrigation}</span>
+                  <br></br>
+                  <span className="price"> Typologies_agricoles  : </span> <span className="bl">{responseInfop.typologies_agricoles}</span>
+                  <br></br>
+                  <span className="price"> Superficies_agricoles  : </span> <span className="bl">{responseInfop.superficies_agricoles}</span>
+                  <br></br>
+                  <span className="price"> Type_Sol  : </span> <span className="bl">{responseInfop.typesol}</span>
+                  <br></br>
+
+
+
                   <span className="price">Publié le :</span> <span className="bl">{responseInfop.data.date_publication.toString().substring(0, 10)}</span>
                   <br></br>
                   <span className="price">wilaya de : </span> <span className="bl">{responseInfop.data.moughataa?.nom}</span>
-                  
+
                   </div>
-            
+
               </section>
-           
-            
-              
+
+
                
             
             

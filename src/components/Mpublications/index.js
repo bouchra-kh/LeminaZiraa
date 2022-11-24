@@ -124,7 +124,7 @@ console.log("publiiiiiiiicmmmmough")
                     <div class="photo-main">
 
 
-                      <img
+                      <img class="imindex"
                       src={`http://localhost:8080/publication/sid/${publication.image}`} />
                     </div>
 
@@ -140,7 +140,7 @@ console.log("publiiiiiiiicmmmmough")
                   <span className="price">pour le wilaya de : </span> <span className="bl">{publication.moughataa?.nom}</span><br></br><br></br>
                   </div>
                   <br></br>
-                  <NavLink to={"detail2/"+publication.id_publication}>
+                  <NavLink to={"detailMoughataapublications/"+publication.id_publication}>
                   <button class="buy--btn  btn-success"
                   >Lire la suite</button>
                   </NavLink>

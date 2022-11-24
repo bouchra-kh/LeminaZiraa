@@ -1,26 +1,24 @@
 import React, { useState } from "react";
 import "./style.css";
+import { jsPDF } from 'jspdf';
+import { useRef } from 'react';
+import domtoimage from 'dom-to-image';
 //import Publications from "../data/data-publication";
 import { BsCardList, BsFillGrid1X2Fill } from "react-icons/bs";
 import { BiSort, BiDotsHorizontalRounded } from "react-icons/bi";
 import { useSelector, useDispatch } from "react-redux";
 import { SwitchMode, toGrid, ToList } from "../../app/features/local-config";
 import { NavLink } from "react-router-dom";
+import axios from "axios";
 import {
     BrowserRouter as Router,
 
     useParams
   } from 'react-router-dom'
 import { publicationSlice,useGetPublicationsQuery,useGetPublicationByIdQuery,useDeletepublicationMutation } from "./publication-services";
-import moment from "moment";
-import {Card, CardActionArea, Divider} from "@mui/material";
-import CardMedia from "@mui/material/CardMedia";
-import CardContent from "@mui/material/CardContent";
-import Typography from "@mui/material/Typography";
-import {Co2} from "@mui/icons-material";
-import {Col} from "react-bootstrap";
 export default function PublicationsDetail() {
     const { id } = useParams();
+    const pdfRef = useRef(null);
   const dispatch = useDispatch();
   const show = () => {
     document.getElementById("slide").classList.remove("d-none");
@@ -30,30 +28,113 @@ export default function PublicationsDetail() {
     setInputText( e.target.value);
 
   };
+  
+  // const handleDownload = () => {
+  //   const content = document.getElementById('download-content');
+  //   const doc = new jsPDF();
+  //   doc.html(content);
+  //   doc.save("a4.pdf");
+  // }
+  // const handleDownload = () => {
+  //   const content = pdfRef.current;
+
+  //   const doc = new jsPDF();
+  //   doc.html(content, {
+  //       callback: function (doc) {
+  //           doc.save('sample.pdf');
+  //       }, width: 300, // <- here
+  //       windowWidth: 300 // <- here
+  //   });
+    
+  // }
+  //@ViewChild('content')
+  //content!: ElementRef;
+  const onItemClick = (id) => {
+    alert(id);
+    axios.put('publication/validate/'+id).then((response) => {
+        console.log(response);
+    });
+}
+  const content = pdfRef.current;
+ 
+  const downloadAsPDF= () => {
+  //  const content = document.getElementById('download-content');
+    let div = content;
+
+    var img;
+    var filename;
+    var newImage;
+
+console.log("vhhhhhhhhhhhhh")
+    domtoimage.toPng(div, { bgcolor: '#fff' })
+      .then(function(dataUrl) {
+        console.log("dotu")
+        img = new Image();
+        img.src = dataUrl;
+        newImage = img.src;
+
+        img.onload = function(){
+          console.log("loading")
+          
+          var pdfWidth = img.width;
+          var pdfHeight = img.height;
+
+          // FileSaver.saveAs(dataUrl, 'my-pdfimage.png'); // Save as Image
+
+          var doc;
+
+          if(pdfWidth > pdfHeight)
+          {
+            doc = new jsPDF('l', 'px', [pdfWidth , pdfHeight]);
+          }
+          else
+          {
+            doc = new jsPDF('p', 'px', [pdfWidth , pdfHeight]);
+          }
 
 
+          var width = doc.internal.pageSize.getWidth();
+          var height = doc.internal.pageSize.getHeight();
+
+
+          doc.addImage(newImage, 'PNG',  10, 10, width, height);
+          filename = 'Publication' + '.pdf';
+          console.log("kkkkkk")
+          doc.save(filename);
+
+        };
+
+
+      })
+      .catch(function(error) {
+
+        // Error Handling
+
+      });
+
+  }
   const responseInfop = useGetPublicationByIdQuery(id);
-  console.log(responseInfop.data)
+  console.log("data publi",responseInfop.data)
   const  [deletepublication]  =useDeletepublicationMutation();
 
   if (responseInfop.isLoading) {
     return (
-    <div className="app-content">
+    <div class="app-content  ">
     <div className="d-flex flex-row  justify-content-between mb-3">
-      <h1 className="app-content-headerText">Publications</h1>
-      <div className="action-buttons">
+      <h1 class="app-content-headerText">Publications</h1>
+      <div class="action-buttons">
         <button
-          className="mode-switch"
+          class="mode-switch"
           title="Switch Theme"
           onClick={() => dispatch(SwitchMode())}
         >
           <svg
-            className="moon"
+            class="moon"
             fill="none"
             stroke="currentColor"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
             width="24"
             height="24"
             viewBox="0 0 24 24"
@@ -62,8 +143,8 @@ export default function PublicationsDetail() {
             <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
           </svg>
         </button>
-        <div className="action-buttons">
-          <button className="menu-button" onClick={() => show()}>
+        <div class="action-buttons">
+          <button class="menu-button" onClick={() => show()}>
             <svg
               xmlns="http://www.w3.org/2000/svg"
               id="menu"
@@ -72,10 +153,10 @@ export default function PublicationsDetail() {
               viewBox="0 0 24 24"
               fill="none"
               stroke="currentColor"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              className="feather feather-menu"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              class="feather feather-menu"
             >
               <line x1="3" y1="12" x2="21" y2="12" />
               <line x1="3" y1="6" x2="21" y2="6" />
@@ -85,10 +166,10 @@ export default function PublicationsDetail() {
         </div>
       </div>
     </div>
-    <div className="app-content-header justify-content-end  fixed">
+    <div class="app-content-header justify-content-end  fixed">
       <NavLink to={"new"}>
         {" "}
-        <button className="app-content-headerButton">
+        <button class="app-content-headerButton">
           Ajouter publication
         </button>
       </NavLink>
@@ -103,10 +184,12 @@ export default function PublicationsDetail() {
   if (responseInfop.isError) {
     return <div>erreur :{responseInfop.error.data}</div>
   }
-  if(inputText!==''){
-    // eslint-disable-next-line array-callback-return
-    responseInfop.data.map((moughataa) => {
-      if (inputText===moughataa.nom) {
+  if(inputText!=''){
+    responseInfop.data.map((moughataa, position) => {
+      if (inputText==moughataa.nom) {
+        console.log("hhhhhhhhhh")
+
+         ;
          responseInfop.push(moughataa);
          //const wilaya=responseInfos[0];
 
@@ -121,22 +204,22 @@ export default function PublicationsDetail() {
 
   return (
     <>
-      <div className="app-content  mb-0">
+      <div   class="app-content  mb-0"    >
         <div className="d-flex flex-row  justify-content-between mb-0">
-          <h1 className="app-content-headerText">Détail de la Publication</h1>
-          <div className="action-buttons">
+          <h1 class="app-content-headerText">Détail de la Publication</h1>
+          <div class="action-buttons">
             <button
-              className="mode-switch"
+              class="mode-switch"
               title="Switch Theme"
               onClick={() => dispatch(SwitchMode())}
             >
               <svg
-                className="moon"
+                class="moon"
                 fill="none"
                 stroke="currentColor"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
                 width="24"
                 height="24"
                 viewBox="0 0 24 24"
@@ -145,8 +228,8 @@ export default function PublicationsDetail() {
                 <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
               </svg>
             </button>
-            <div className="action-buttons">
-              <button className="menu-button" onClick={() => show()}>
+            <div class="action-buttons">
+              <button class="menu-button" onClick={() => show()}>
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   id="menu"
@@ -155,10 +238,10 @@ export default function PublicationsDetail() {
                   viewBox="0 0 24 24"
                   fill="none"
                   stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  className="feather feather-menu"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  class="feather feather-menu"
                 >
                   <line x1="3" y1="12" x2="21" y2="12" />
                   <line x1="3" y1="6" x2="21" y2="6" />
@@ -168,90 +251,28 @@ export default function PublicationsDetail() {
             </div>
           </div>
         </div>
-        <Card className="mx-4 px-4 my-4">
-          <CardActionArea>
-            <CardMedia
-                component="img"
-                style={{width:'100%',height:'150px',objectFit: 'contain'}}
-                image={`http://localhost:8080/publication/sid/${responseInfop.data?.id_publication}`}
-                alt="green iguana"
-            />
-            <CardContent>
-              <Typography gutterBottom variant="h5" component="div">
-                {responseInfop.data?.titre?responseInfop.data?.titre:responseInfop.data?.description}
-              </Typography>
-              <Typography variant="body2" color="text.secondary">
-                {responseInfop.data?.description}
-              </Typography>
-               <Col>
-                 <span>Date Publication : <strong>{moment(responseInfop.data.date_publication).format("DD/MM/YY")}</strong></span>
-               </Col>
-              <Divider color="#BFBFBF" />
-              <Col>
-                 <span>Annee recolte : <strong>{moment(responseInfop.data.anneerecolte).format("DD/MM/YY")}</strong></span>
-               </Col>
-              <Divider color="#BFBFBF"/>
-              <Col>
-                 <span>Semences : <strong>{responseInfop.data.semences}</strong></span>
-               </Col>
-              <Divider color="#BFBFBF"/>
-              <Col>
-                 <span>Quantite : <strong>{responseInfop.data.quantite}</strong></span>
-               </Col>
-              <Divider color="#BFBFBF"/>
-              <Col>
-                 <span>Superficies agricoles : <strong>{responseInfop.data.Superficies_agricoles}</strong></span>
-               </Col>
 
-              <Divider color="#BFBFBF"/>
-              <Col>
-                 <span>Decrues : <strong>{responseInfop.data.decrues}</strong></span>
-               </Col>
-              <Divider color="#BFBFBF"/>
-              <Col>
-                 <span>Prix semance : <strong>{responseInfop.data.prix_semance}</strong></span>
-               </Col>
+        <div class="scr"  >
 
-              <Divider color="#BFBFBF"/>
-              <Col>
-                 <span>main ouvre : <strong>{responseInfop.data.main_ouvre}</strong></span>
-               </Col>
 
-              <Divider color="#BFBFBF"/>
-              <Col>
-                 <span>prix outils : <strong>{responseInfop.data.prix_outils}</strong></span>
-               </Col>
-              <Divider color="#BFBFBF"/>
-              <Col>
-                 <span>moughataa : <strong>{responseInfop.data.moughataa?.nom}</strong></span>
-               </Col>
-              <Divider color="#BFBFBF"/>
-              <Col>
-                 <span>type Sole : <strong>{responseInfop.data.typeSole?.nom}</strong></span>
-               </Col>
 
-              <Divider color="#BFBFBF"/>
-              <Col>
-                 <span>type Irrigation : <strong>{responseInfop.data.typeIrrigation?.nom}</strong></span>
-               </Col>
-              <Divider color="#BFBFBF"/>
-              <Col>
-                 <span>typologie Agricole : <strong>{responseInfop.data.typologieAgricole?.nom}</strong></span>
-               </Col>
 
-            </CardContent>
-          </CardActionArea>
-        </Card>
-        {/*<div className="scr">
+                <div class=" divb2">
 
-                <div className=" divb2">
-              <section className="product2">
-                <div className="product__photo">
-                  <div className="photo-container">
-                    <div className="photo-main">
-                      <img
-                      src={`http://localhost:8080/publication/sid/${responseInfop.data?.id_publication}`} height={300}
-                      width={150}
+                  <div ref={pdfRef}>
+              <section class="product2">
+                <div class="product__photo">
+                  <div class="photo-container">
+                    <div class="photo-main">
+                      {/* <div class="controls">
+                        <i class="material-icons">share</i>
+                        <i class="material-icons">favorite_border</i>
+                      </div> */}
+                      {/* src="https://res.cloudinary.com/john-mantas/image/upload/v1537291846/codepen/delicious-apples/green-apple-with-slice.png
+                       */}
+                      <img class="imdetail"
+                      src={`http://localhost:8080/publication/sid/${responseInfop.data.image}`} height={300}
+                      width={500}
                       style={{ alignSelf: 'center', marginLeft:"60px" }} alt="green apple slice"
 
                       />
@@ -259,16 +280,16 @@ export default function PublicationsDetail() {
 
                   </div>
                 </div>
-                <div className="product__info">
+                <div class="product__info">
 
 
                   </div>
 
               </section>
 
-              <section className="prod">
+              <section class="prod" >
 
-                <div className="product__info">
+                <div class="product__info">
                 <span className="des">{responseInfop.data.description}</span>
                 <br></br><br></br>
 
@@ -276,36 +297,39 @@ export default function PublicationsDetail() {
                   <span className="price">Semences    : </span> <span className="bl">{responseInfop.data.semences}</span>
                   <br></br>
 
-                  <span className="price">annee recolte   : </span> <span className="bl">{moment(responseInfop.data.anneerecolte).format('DD/MM/yy')}</span>
+                  <span className="price">anneerecolte   : </span> <span className="bl">{responseInfop.data.anneerecolte.toString().substring(0, 10)}</span>
                   <br></br>
                   <span className="price"> quantite   : </span> <span className="bl">{responseInfop.data.quantite}</span>
                   <br></br>
-                  <span className="price"> type d'irrigation : </span> <span className="bl">{responseInfop.data.typeIrrigation?.nom}</span>
+                  <span className="price"> type_dirrigation : </span> <span className="bl">{responseInfop.data.type_dirrigation}</span>
                   <br></br>
-                  <span className="price"> Typologies agricoles  : </span> <span className="bl">{responseInfop.typologieAgricole?.nom}</span>
+                  <span className="price"> Typologies_agricoles  : </span> <span className="bl">{responseInfop.typologies_agricoles}</span>
                   <br></br>
-                  <span className="price"> Superficies agricoles  : </span> <span className="bl">{responseInfop.superficies_agricoles}</span>
+                  <span className="price"> Superficies_agricoles  : </span> <span className="bl">{responseInfop.superficies_agricoles}</span>
                   <br></br>
-                  <span className="price"> Type Sol  : </span> <span className="bl">{responseInfop.typeSole?.nom}</span>
+                  <span className="price"> Type_Sol  : </span> <span className="bl">{responseInfop.typesol}</span>
                   <br></br>
 
 
 
-                  <span className="price">Publié le :</span> <span className="bl">{moment(responseInfop.data.date_publication).format('DD/MM/yy')}</span>
+                  <span className="price">Publié le :</span> <span className="bl">{responseInfop.data.date_publication.toString().substring(0, 10)}</span>
                   <br></br>
-                  <span className="price">wilaya de : </span> <span className="bl">{responseInfop.data.moughataa?.nom}</span>
+                  <span className="price">moughataa de : </span> <span className="bl">{responseInfop.data.moughataa?.nom}</span>
 
                   </div>
 
               </section>
-
-
+              </div>
+<br></br>
+              <button onClick={ 
+ downloadAsPDF
+  } class=" button4 " >Télécharger La Publication</button>
 
 
 
 
              </div>
-         </div>*/}
+         </div>
       </div>
     </>
   );

@@ -10,7 +10,8 @@ const PublicationRoutes = () => {
     <Routes>
       <Route path="/" element={<Publications />} />
       <Route path="/new" element={<PublicationsNew />} />
-      <Route path="/detail/:id" element={<PublicationsDetail />} />
+     
+      <Route path="/detailAllpublications/:id" element={<PublicationsDetail />} />
     </Routes>
   );
 };

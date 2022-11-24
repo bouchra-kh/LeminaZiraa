@@ -22,7 +22,8 @@ import { useSelector, useDispatch } from "react-redux";
 import AuthService from "./components/Users/authservice";
 import Login from "./components/Login";
 import Home from "./components/home";
-
+import PublicationsDetailMoughataa from "./components/Mpublications/pdetail";
+import DashboardRoutes from "./components/Dashboard/routes";
 import Statistiques from "./components/statistiques";
 import { ADMIN, UserHasAccess } from "./components/extends/GlobalFunctions";
 import "../node_modules/leaflet/dist/leaflet.css";
@@ -187,8 +188,14 @@ function App() {
                     <Route path="/home" element={<Home />} />
                     <Route path="/" element={<Dashboards />} />
                     <Route path="/moughp/:id"  element={<MPublicationRoutes />} />
+         <Route path="/moughataas/moughp/:id/detailMoughataapublications/:id" element={<PublicationsDetailMoughataa />} />
+         <Route path="/publicationsmap/:id" element={<DashboardRoutes />} />
+          <Route path="/publicationsmap/:id/detailMoughataapublications/:id" element={<PublicationsDetailMoughataa />} />
+         
+                    {/* <Route path="/moughp/:id"  element={<MPublicationRoutes />} />
                     <Route path="/moughp/:id/detail/:id" element={<PublicationsDetail />} />
                     <Route path="/moughataas/moughp/:id/detail2/:id" element={<PublicationsDetail2 />} />
+                     */}
                     <Route path="/login" element={<Login/>} />
                     <Route path="/signup" element={<SignUp />} />
                     <Route path="/produits/*" element={<ProduitRoutes />} />

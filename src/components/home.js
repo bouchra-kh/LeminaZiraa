@@ -28,12 +28,14 @@ const Home = () => {
     }
 
     return (
-        <div className="my-5 mx-3">
-            <div className="row">
-                {
+        <div className="my-5 mx-3 ">
+     
+            <div className="row" >
+            {
 
-                    publications.map((publication, key) => (
-                        <div className="chart-row  two" key={key}>
+publications.map((publication, key) => (
+  
+                       <div className="chart-row  two " key={key}>
                             <div className="chart-container-wrapper small">
                                 <div className="chart-container">
                                     <div className="chart-container-header">
@@ -64,10 +66,11 @@ const Home = () => {
                             </div>
                         </div>
 
-
-                    ))
-                }
+))
+}
+                 
             </div>
+        
         </div>
 
 
