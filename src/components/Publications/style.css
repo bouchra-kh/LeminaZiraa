@@ -391,12 +391,21 @@ footer {
 	} */
 }
 
+.valide{
+	color: blue;
+}
+.nvalide{
+	color: red;
+}
+.selectv{
+	color: white;
+}
+.button4 {padding: 13px 12px;background-color: green;color: white;border-radius: 12px;width: 70px;}
 
+.button5 {padding: 13px 12px;background-color: blue;color: white;border-radius: 12px;width: 70px;}
+.buttond {padding: 13px 12px;background-color: red;color: white;border-radius: 12px;width: 70px;}
 
-.button4 {padding: 18px 16px;background-color: green;color: white;border-radius: 12px;}
-
-
-
+.option{color: white;}
 
 
 

@@ -12,6 +12,7 @@ import {
 
   useParams
 } from 'react-router-dom'
+import {useGetPvalideQuery} from "./dashboard-services"
 import { publicationSlice,useGetPublicationsQuery,useDeletepublicationMutation } from "../Mpublications/publication-services";
 export default function Publicationsmap() {
   const { id } = useParams();
@@ -27,7 +28,7 @@ export default function Publicationsmap() {
   };
 
 
-  const responseInfop = useGetPublicationsQuery(id);
+  const responseInfop = useGetPvalideQuery(id);
   const  [deletepublication]  =useDeletepublicationMutation();
 console.log("publiiiiiiiicmmmmough")
   console.log("ReponsePublicat: ", responseInfop)
@@ -126,6 +127,7 @@ console.log("publiiiiiiiicmmmmough")
 
                       <img class="imindex"
                       src={`http://localhost:8080/publication/sid/${publication.image}`} />
+                   
                     </div>
 
                   </div>

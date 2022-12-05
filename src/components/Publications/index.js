@@ -6,7 +6,9 @@ import { BiSort, BiDotsHorizontalRounded } from "react-icons/bi";
 import { useSelector, useDispatch } from "react-redux";
 import { SwitchMode, toGrid, ToList } from "../../app/features/local-config";
 import { NavLink } from "react-router-dom";
-import { publicationSlice,useGetPublicationsQuery,useDeletepublicationMutation } from "./publication-services";
+import { publicationSlice,useGetPublicationsQuery,useDeletepublicationMutation ,useGetPublicationsByUserQuery} from "./publication-services";
+import { ADMIN,CONSEILLER_AGRICOLE, UserHasAccess ,getUser} from "../extends/GlobalFunctions";
+
 export default function Publications() {
   const dispatch = useDispatch();
   const show = () => {
@@ -18,8 +20,16 @@ export default function Publications() {
     
   };
 
+ // UserHasAccess(CONSEILLER_AGRICOLE) &&
+ //  const responseInfop = useGetPublicationsQuery();
 
-  const responseInfop = useGetPublicationsQuery();
+
+   //const responseInfop=UserHasAccess(CONSEILLER_AGRICOLE) ? useGetPublicationsByUserQuery(idu):useGetPublicationsQuery()
+   const responseInfop=useGetPublicationsQuery()
+  
+
+  
+  
   const  [deletepublication]  =useDeletepublicationMutation();
 
   if (responseInfop.isLoading) {
@@ -165,6 +175,7 @@ export default function Publications() {
           </NavLink>
         </div>
         <div >
+          
         <div class="row">
             {responseInfop.data.map((publication,key) => {
               console.log("dddddddd",publication.moughataa?.nom)

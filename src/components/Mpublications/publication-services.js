@@ -18,6 +18,7 @@ export const usepublicationsApi = createApi({
        }
       }
      }),
+    
     getpublicationById: builder.query({
       query: (id) => {
        console.log("ID:", id)
@@ -86,6 +87,7 @@ export const publicationSlice = createSlice({
   extraReducers: (builder) => {
     builder.addMatcher(
       usepublicationsApi.endpoints.getPublications.matchFulfilled,
+    //  usepublicationsApi.endpoints.getPublicationsValide.matchFulfilled,
       (state, { payload }) => {}
     );
   },

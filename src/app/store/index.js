@@ -49,7 +49,17 @@ import {
   reducer as DashboardReducer,
   
 } from "../../components/Dashboard/dashboard-services";
-
+import {
+  useTypologiesApi,
+  reducer as TypologieReducer,
+  
+} from "../../components/Typologie/typologie-service";
+import {
+  TypeirrigationsApi,
+  reducer as TypeirrigationReducer,
+  useTypeirrigationsApi,
+  
+} from "../../components/Typeirrigation/typeirrigations-service";
 export const store = configureStore({
   reducer: 
   {
@@ -78,7 +88,10 @@ export const store = configureStore({
     wilayas: WilayaReducer,
     [useDashboardApi.reducerPath]: useDashboardApi.reducer,
     dashboard: DashboardReducer,
-    
+    [useTypologiesApi.reducerPath]: useTypologiesApi.reducer,
+    Typologie: TypologieReducer,
+    [useTypeirrigationsApi.reducerPath]: useTypeirrigationsApi.reducer,
+    Typeirrigation: TypeirrigationReducer,
   },
   middleware: getDefaultMiddleware => getDefaultMiddleware({
     serializableCheck: {

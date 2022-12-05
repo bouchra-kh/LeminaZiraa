@@ -6,7 +6,7 @@ import { axiosBaseQuery } from "../../app/config/rtk_query.ts";
 export const useRolesApi = createApi({
   reducerPath: "RolesApi",
   baseQuery: axiosBaseQuery({
-    baseUrl: "/role",
+    baseUrl: "http://localhost:8080/role",
   }),
   endpoints: (builder) => ({
     getRoles: builder.query({
@@ -15,10 +15,25 @@ export const useRolesApi = createApi({
         method: "GET",
       }),
     }),
+    createrole: builder.mutation({
+      query: (newPost) => {
+       console.log("Create Post: ", newPost)
+       return {
+        url: `/save`,
+        method: 'POST',
+       // body: newPost,
+       data: newPost,
+        headers: {
+         'Content-type': 'application/json',
+         'No-Auth':'True'
+        }
+       }
+      }
+     }),
   }),
 });
 
-export const { useGetRolesQuery } = useRolesApi;
+export const { useGetRolesQuery ,useCreateroleMutation} = useRolesApi;
 const initialState = {};
 
 export const roleSlice = createSlice({

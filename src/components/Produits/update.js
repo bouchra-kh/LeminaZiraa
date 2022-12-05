@@ -14,8 +14,7 @@ import DialogActions from "@mui/material/DialogActions";
 import Button from "@mui/material/Button";
 import {usePhotopublicationMutation } from "../Publications/publication-services";
 import {useCreateproduitMutation} from "./produits-services"
-import { useGetMoughataasQuery} from '../Moughataas/moughataas-services';
-export default function ProduitNew() {
+export default function ProduitUpdate() {
   const navigate = useNavigate();
   const [nom, setNom] = useState('');
   const [quantite, setQuantite] = useState('');
@@ -29,16 +28,11 @@ export default function ProduitNew() {
   // const [newWilaya] = useCreateWilayaMutation();
   const [image, setImage] = useState("");
   const [imagename, setImagename] = useState("");
-  
-  const responseInfo =useGetMoughataasQuery();
-  if (responseInfo.isLoading) {
-    return <div>recherch....</div>}
-  console.log("user",getUser().telephone);
-  
+  console.log("user",getUser().telephone)
   return (
       <>
     <div className="login d-flex flex-column">
-      <h1 class="mt-3">Ajout</h1>
+      <h1>Modifier</h1>
       <form
         className=""
         onSubmit={(e) => {
@@ -86,29 +80,27 @@ newproduit({
           placeholder="type du produit"
           required="required"
         /><br></br>
-    
-           <div class="libele">localisation</div>
-         <select  value={localisation} name={setLocalisation} onChange={(e) => setLocalisation(e.target.value)} component="select option" class="sel">
-             <option></option>
-             {responseInfo.data.map((moughataa, position) => {
-            return (
-              
-              
-                <>
-               
-                <option class="option" key={position} value={moughataa.nom}  required="required" >{moughataa.nom}</option>
-                
-                  </>
-                    );
-                  })}
-        </select>
+        <input
+          type="text"
+          value={localisation}
+          onChange={(e) => setLocalisation(e.target.value)}
+          placeholder="location de vente du produit"
+          required="required"
+        /><br></br>
+         {/* <input
+          type="number"
+          value={numero}
+          onChange={(e) => setNumero(e.target.value)}
+          placeholder="location de vente du produit"
+          required="required"
+        /> */}
         <input type="file" onChange={(e) => {
               console.log("nammmmmmmmm",e.target.files[0].name)
               setImage(e.target.files[0]);setImagename(image.name);
               
               } }/>
        <button className="btn btn-primary btn-block btn-large" type="submit">
-        Ajouter Produit</button>
+        Modifier Produit</button>
 
       </form>
         <div>

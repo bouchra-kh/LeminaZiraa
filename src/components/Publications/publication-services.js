@@ -2,17 +2,28 @@ import { createSlice } from "@reduxjs/toolkit";
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
 import { axiosBaseQuery } from "../../app/config/rtk_query.ts";
+import { ADMIN,CONSEILLER_AGRICOLE, UserHasAccess ,getUser} from "../extends/GlobalFunctions";
 
 export const usepublicationsApi = createApi({
+  
   reducerPath: "PublicationsApi",
   baseQuery: axiosBaseQuery({
     baseUrl: "http://localhost:8080/publication",
   }),
-  
+ // y:getUser().id,
   endpoints: (builder) => ({
     getPublications: builder.query({
-      query: (obj) => ({
+      query:UserHasAccess(ADMIN)? (obj) => ({
         url: "/list",
+        method: "GET",
+      }): (id) => ({
+        url: `/findbbu/${getUser().id}`,
+        method: "GET",
+      }),
+    }),
+    getPublicationsByUser: builder.query({
+      query: (id) => ({
+        url: `/findbbu/${id}`,
         method: "GET",
       }),
     }),
@@ -89,7 +100,7 @@ export const usepublicationsApi = createApi({
 });
 
 
-export const { useGetPublicationsQuery,useGetPublicationByIdQuery,useDeletepublicationMutation,useCreatepublicationMutation,usePhotopublicationMutation,useUpdatepublicationMutation}  = usepublicationsApi;
+export const { useGetPublicationsQuery,useGetPublicationByIdQuery,useGetPublicationsByUserQuery,useDeletepublicationMutation,useCreatepublicationMutation,usePhotopublicationMutation,useUpdatepublicationMutation}  = usepublicationsApi;
 
 
 const initialState = {};

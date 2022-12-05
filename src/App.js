@@ -21,11 +21,14 @@ import Dashboards from "./components/Dashboard";
 import { useSelector, useDispatch } from "react-redux";
 import AuthService from "./components/Users/authservice";
 import Login from "./components/Login";
+import TypologiesRoutes from "./components/Typologie/typologie-routes"
+import TypeirrigationsRoutes from "./components/Typeirrigation/typeirrigation-routes"
 import Home from "./components/home";
 import PublicationsDetailMoughataa from "./components/Mpublications/pdetail";
 import DashboardRoutes from "./components/Dashboard/routes";
 import Statistiques from "./components/statistiques";
-import { ADMIN, UserHasAccess } from "./components/extends/GlobalFunctions";
+import { ADMIN,CONSEILLER_AGRICOLE, UserHasAccess } from "./components/extends/GlobalFunctions";
+
 import "../node_modules/leaflet/dist/leaflet.css";
 import "../node_modules/leaflet/dist/images/marker-icon.png";
 import { MdLogout } from 'react-icons/md';
@@ -142,14 +145,15 @@ function App() {
 
                     <li className="nav-item">
                         <Link to={"/home"} className="nav-link">
-                            Accueil
+                        Dashboard
                         </Link>
                     </li>
 
                     {currentUser &&(
                         <li className="nav-item">
                             <Link to={"/"} className="nav-link">
-                                Dashboard
+                               
+                                Accueil
                             </Link>
                         </li>
                     )}
@@ -165,6 +169,11 @@ function App() {
                     </div>
                 ) : (
                     <div className="navbar-nav ms-auto">
+                        <li className="nav-item">
+                            <Link to={"/produits"} className="nav-link">
+                                Produits
+                            </Link>
+                        </li>
                         <li className="nav-item">
                             <Link to={"/login"} className="nav-link">
                                 Se Connecter
@@ -197,6 +206,8 @@ function App() {
                     <Route path="/moughataas/moughp/:id/detail2/:id" element={<PublicationsDetail2 />} />
                      */}
                     <Route path="/login" element={<Login/>} />
+                    <Route path="/typologi/*" element={<TypologiesRoutes/>} />
+                    <Route path="/typeirrigation/*" element={<TypeirrigationsRoutes/>} />
                     <Route path="/signup" element={<SignUp />} />
                     <Route path="/produits/*" element={<ProduitRoutes />} />
                     <Route
@@ -208,11 +219,15 @@ function App() {
                     <Route path="/payments/*" element={<PaymentRoutes />} />
                     <Route path="/wilayas/*" element={<WilayasRoutes />} />
                     <Route path="/moughataas/*" element={<MoughataaRoutes />} />
-                    <Route path="/publications/*" element={<PublicationRoutes />} />
+                {    (UserHasAccess(ADMIN)) &&  (UserHasAccess(CONSEILLER_AGRICOLE)) ||     <Route path="/publications/*" element={<PublicationRoutes />} />
+}            { (UserHasAccess(CONSEILLER_AGRICOLE)) &&   <Route path="/publications/*" element={<PublicationRoutes />} />
+}
                     {
                         UserHasAccess(ADMIN) && <Route path="/users/*" element={<UsersRoutes />} />
                     }
-                    <Route path="/roles/*" element={<RolesRoutes />} />
+                    {
+               (UserHasAccess(ADMIN)) &&     <Route path="/roles/*" element={<RolesRoutes />} />
+}
                     {
                         (UserHasAccess(ADMIN)) && <Route path="/statistiques" element={<Statistiques />}/>
                     }

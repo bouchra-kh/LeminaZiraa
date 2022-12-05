@@ -5,7 +5,11 @@ import "./style.css";
 import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
 import {useCreatepublicationMutation,usePhotopublicationMutation ,useGetPublicationsQuery} from "./publication-services";
+
 import { useGetMoughataasQuery} from '../Moughataas/moughataas-services';
+import { useGetTypologiesQuery } from '../Typologie/typologie-service';
+import { useGetTypeirrigationsQuery } from '../Typeirrigation/typeirrigations-service';
+import { ADMIN,CONSEILLER_AGRICOLE, UserHasAccess ,getUser} from "../extends/GlobalFunctions";
 
 
 export default function PublicationsNew() {
@@ -15,14 +19,14 @@ export default function PublicationsNew() {
  
   const navigate = useNavigate();
   const [username, setUsername] = useState("");
-  const [ts, setTs] = useState("");
+  const [main_ouvre, setMain_ouvre] = useState("");
   const [quantite, setQuantite] = useState("");
   const [semences, setSemences] = useState("");
-  const [Superficies_agricoles, setSuperficie] = useState("");
+  const [superficies_agricoles, setSuperficie_agricoles] = useState("");
   const [type_dirrigation, setType] = useState("");
   const [Typologies_agricoles ,setTypologie] = useState("");
- 
-
+ const [prix_outils,setPrix_outils]=useState("");
+const [prix_semance,setPrix_semance]=useState("")
 
 
 
@@ -50,7 +54,13 @@ console.log("date",formattedDate.toString().substring(0, 10));
 //alert(formattedDate); 
   const [newpublication] = useCreatepublicationMutation();
   const [moughataa, setMoughataa] = useState("");
+  const [typeIrrigation,setTypeIrrigation]=useState("");
+  const [typologieAgricole,setTypologieAgricole]=useState("");
   const responseInfo =useGetMoughataasQuery();
+  const responseInfoI =useGetTypeirrigationsQuery();
+  const responseInfoT =useGetTypologiesQuery();
+  console.log("irrri",responseInfoI.data);
+  console.log("typoo:",responseInfoT.data)
   //usePhotopublicationMutation(image);
   const [responseInfo4] =usePhotopublicationMutation();
   const getpulication = useGetPublicationsQuery();
@@ -67,11 +77,16 @@ console.log("date",formattedDate.toString().substring(0, 10));
   console.log("moughataa",responseInfo.data)
   if (responseInfo.isLoading) {
     return <div>recherch....</div>
+  } if (responseInfoI.isLoading) {
+    return <div>recherch....</div>
+  } if (responseInfoT.isLoading) {
+    return <div>recherch....</div>
   }
   return (
-    <div class="login d-flex flex-column formulairep">
-        <br></br>
-      <h2>Ajout</h2>
+  
+    <div class="login d-flex flex-column formulairep ">
+        
+      <h2 class="mt-3">Ajout</h2>
       <form
         className=""
         onSubmit={(e) => {
@@ -82,28 +97,31 @@ console.log("date",formattedDate.toString().substring(0, 10));
           newpublication({
             description: username,
             date_publication:formattedDate,
-            typesol:ts,
+            main_ouvre:main_ouvre,
+            prix_outils:prix_outils,
             semences:semences,
             quantite:quantite,
-            Suagr:Superficies_agricoles,
+            superficies_agricoles:superficies_agricoles,
             anneerecolte:date,
-            est_affiche:aff,
             image:image.name,
-            type:type_dirrigation,
-            Typologies:Typologies_agricoles,
-
-           moughataa:{"id":moughataa}
+            prix_semance:prix_semance,
+            typeIrrigation:{"id":typeIrrigation},
+            typologieAgricole:{"id":typologieAgricole},
+            utilisateur:UserHasAccess(ADMIN)?null:{"id":getUser().id},
+          
+            moughataa:{"id":moughataa}
          
           });
           
           responseInfo4(image);
          // getpulication.data.map((publication,key) => {});
+         
           navigate('../../Publications/');
-          
+         window.location.reload(false);
          // responseInfo;
         }}
       >
-       <input
+       <input class=""
           type="text"
           value={username}
           onChange={(e) => setUsername(e.target.value)}
@@ -115,10 +133,10 @@ console.log("date",formattedDate.toString().substring(0, 10));
            
   <div className="side-by-side">
   <input class="inputp"
-          type="text"
-          value={ts}
-          onChange={(e) => setTs(e.target.value)}
-          placeholder="Type_Sol"
+          type="number"
+          value={main_ouvre}
+          onChange={(e) => setMain_ouvre(e.target.value)}
+          placeholder="main-d'œuvre"
           required="required"
         />
           
@@ -143,8 +161,8 @@ console.log("date",formattedDate.toString().substring(0, 10));
         />
          <input
           type="text"
-          value={Superficies_agricoles}
-          onChange={(e) => setSuperficie(e.target.value)}
+          value={superficies_agricoles}
+          onChange={(e) => setSuperficie_agricoles(e.target.value)}
           placeholder="Superficies_agricoles"
           required="required"
         />
@@ -152,18 +170,18 @@ console.log("date",formattedDate.toString().substring(0, 10));
         </div>
         <div className="side-by-side">
         <input
-          type="text"
-          value={type_dirrigation}
-          onChange={(e) => setType(e.target.value)}
-          placeholder="Types_d'irrigation"
+          type="number"
+          value={prix_outils}
+          onChange={(e) => setPrix_outils(e.target.value)}
+          placeholder="prix_outils"
           required="required"
           />
         
           <input
-          type="text"
-          value={Typologies_agricoles}
-          onChange={(e) => setTypologie(e.target.value)}
-          placeholder="Typologies_agricoles"
+          type="number"
+          value={prix_semance}
+          onChange={(e) => setPrix_semance(e.target.value)}
+          placeholder="Prix de Semances"
           required="required"
           />
 
@@ -175,7 +193,7 @@ console.log("date",formattedDate.toString().substring(0, 10));
           placeholder="Annee_Recolte"
           required="required"
         /> </div>
-        <div class="libele">estAffiche</div>
+        {/* <div class="libele">estAffiche</div>
          <select value={aff} name={aff} onChange={(e) => setAff(e.target.value)} component="select" class="sel">
              <option></option>
              
@@ -190,9 +208,9 @@ console.log("date",formattedDate.toString().substring(0, 10));
                 </>
                   );
                 })}
-      </select>
+      </select> */}
         <div class="libele">Moughataa</div>
-         <select value={moughataa} name={moughataa} onChange={(e) => setMoughataa(e.target.value)} component="select" class="sel">
+         <select  value={moughataa} name={moughataa} onChange={(e) => setMoughataa(e.target.value)} component="select option" class="sel">
              <option></option>
              {responseInfo.data.map((moughataa, position) => {
             return (
@@ -200,33 +218,49 @@ console.log("date",formattedDate.toString().substring(0, 10));
               
                 <>
                
-                <option  key={position} value={moughataa.id}  required="required" >{moughataa.nom}</option>
+                <option class="option" key={position} value={moughataa.id}  required="required" >{moughataa.nom}</option>
                 
                   </>
                     );
                   })}
         </select>
+        
+        <div class="libele">type Irrigation</div>
+         <select  value={typeIrrigation} name={typeIrrigation} onChange={(e) => setTypeIrrigation(e.target.value)} component="select option" class="sel">
+             <option></option>
+             {responseInfoI.data.map((ti, posti) => {
+            return (
+              
+              
+                <>
                
+                <option class="option" key={posti} value={ti.id}  required="required" >{ti.nom}</option>
+                
+                  </>
+                    );
+                  })}
+        </select>  
+        <div class="libele">typologie Agricole</div>
+         <select  value={typologieAgricole} name={typologieAgricole} onChange={(e) => setTypologieAgricole(e.target.value)} component="select option" class="sel">
+             <option></option>
+             {responseInfoT.data.map((typo, postypo) => {
+            return (
+              
+              
+                <>
+               
+                <option class="option" key={postypo} value={typo.id}  required="required" >{typo.nom}</option>
+                
+                  </>
+                    );
+                  })}
+        </select> 
         <input type="file" onChange={(e) => {
               console.log("nammmmmmmmm",e.target.files[0].name)
               setImage(e.target.files[0]);setImagename(image.name);
               
               } }/>
-        {/* <input
-          type="password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          placeholder="Password"
-          required="required"
-        /> */}
-        {/* <input
-          type="confirm password"
-          value={confirmPassword}
-          onChange={(e) => setConfirmPassword(e.target.value)}
-          placeholder="Confirm Password"
-          required="required"
-        /> */}
-         {/* <NavLink to={"../../wilayas/"}> */}
+  
        <button class="btn btn-primary btn-block btn-large" type="submit">
         Ajouter publication</button>
         {/* </NavLink> */}

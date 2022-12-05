@@ -9,12 +9,12 @@ export const useDashboardApi = createApi({
     baseUrl: "http://localhost:8080/publication",
   }),
   endpoints: (builder) => ({
-    // getMoughataas: builder.query({
-    //   query: (obj) => ({
-    //     url: "/list",
-    //     method: "GET",
-    //   }),
-    // }),
+    getPvalide: builder.query({
+      query: (id) => ({
+        url: `/listpublicationvalide/${id}`,
+        method: "GET",
+      }),
+    }),
     getDashboardById: builder.query({
       query: (id) => {
        console.log("ID:", id)
@@ -93,7 +93,7 @@ export const useDashboardApi = createApi({
   
 
 
-export const {useGetDashboardByIdQuery}  = useDashboardApi;
+export const {useGetDashboardByIdQuery,useGetPvalideQuery}  = useDashboardApi;
 const initialState = {};
 
 export const dashboardSlice = createSlice({

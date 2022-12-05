@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import { ADMIN,CONSEILLER_AGRICOLE, UserHasAccess ,getUser} from "../extends/GlobalFunctions";
+import domtoimage from 'dom-to-image';
 //import "./style.css";
 //import Publications from "../data/data-publication";
 import { BsCardList, BsFillGrid1X2Fill } from "react-icons/bs";
@@ -6,6 +8,14 @@ import { BiSort, BiDotsHorizontalRounded } from "react-icons/bi";
 import { useSelector, useDispatch } from "react-redux";
 import { SwitchMode, toGrid, ToList } from "../../app/features/local-config";
 import { NavLink } from "react-router-dom";
+import axios from "axios";
+import Dialog from "@mui/material/Dialog";
+import DialogTitle from "@mui/material/DialogTitle";
+import DialogContent from "@mui/material/DialogContent";
+import DialogContentText from "@mui/material/DialogContentText";
+import DialogActions from "@mui/material/DialogActions";
+import Button from "@mui/material/Button";import { jsPDF } from 'jspdf';
+import { useRef } from 'react';
 import {
     BrowserRouter as Router,
     
@@ -13,7 +23,10 @@ import {
   } from 'react-router-dom'
 import { publicationSlice,useGetPublicationsQuery,useGetPublicationByIdQuery,useDeletepublicationMutation } from "../Publications/publication-services";
 export default function PublicationsDetailMoughataa() {
-    const { id } = useParams();
+    const { id } = useParams(); 
+    const [showAlert, setShowAlert] = useState(false);
+    const [showAlert2, setShowAlert2] = useState(false);
+    const pdfRef = useRef(null);
   const dispatch = useDispatch();
   const show = () => {
     document.getElementById("slide").classList.remove("d-none");
@@ -27,8 +40,119 @@ export default function PublicationsDetailMoughataa() {
   console.log("responseInfop.data")
   const responseInfop = useGetPublicationByIdQuery(id);
   console.log(responseInfop.data)
+  const MSG_DELETE = "Voulez-vous vraiment valider cette publication ?"; 
+   const MSG_DELETE2 = "Voulez-vous rendre cette publication en Non_valide ?";
   const  [deletepublication]  =useDeletepublicationMutation();
+  const onItemClick = () => {
+    setShowAlert(false);
+     axios.put('publication/validatepublication/'+id).then((response) => {
+         console.log("la pubication a ete validé");
+         setShowAlert(false);
+         alert("la pubication a ete validé");
+         window.location.reload(false);
+       // setResponseInfop(responseInfop);
+     });
+     
+ } 
+ 
+ const onItemClick2 = () => {
+  setShowAlert2(false);
+   axios.put('publication/nvalidatepublication/'+id).then((response) => {
+       
+       setShowAlert2(false);
+       console.log("la pubication est non valide");
+       alert("la pubication est maintenant non valide");
+       window.location.reload(false);
+     //  setResponseInfop(responseInfop);
+      
+   });
+   
+ }
+   const content = pdfRef.current;
+  
+   const downloadAsPDF= () => {
+   
+     let div = content;
+ 
+     var img;
+     var filename;
+     var newImage;
+ 
+ console.log("vhhhhhhhhhhhhh")
+     domtoimage.toPng(div, { bgcolor: '#fff' })
+       .then(function(dataUrl) {
+         console.log("dotu")
+         img = new Image();
+         img.src = dataUrl;
+         newImage = img.src;
+ 
+         img.onload = function(){
+           console.log("loading")
+           
+           var pdfWidth = img.width;
+           var pdfHeight = img.height;
+ 
+           // FileSaver.saveAs(dataUrl, 'my-pdfimage.png'); // Save as Image
+ 
+           var doc;
+ 
+           if(pdfWidth > pdfHeight)
+           {
+             doc = new jsPDF('l', 'px', [pdfWidth , pdfHeight]);
+           }
+           else
+           {
+             doc = new jsPDF('p', 'px', [pdfWidth , pdfHeight]);
+           }
+ 
+ 
+           var width = doc.internal.pageSize.getWidth();
+           var height = doc.internal.pageSize.getHeight();
+ 
+ 
+           doc.addImage(newImage, 'PNG',  10, 10, width, height);
+           filename = 'Publication' + '.pdf';
+           console.log("kkkkkk")
+           doc.save(filename);
+ 
+         };
+ 
+ 
+       })
+       .catch(function(error) {
+ 
+         // Error Handling
+ 
+       });
+ 
+   }
 
+   const etat = () => {
+    if(responseInfop.data.valide){
+      return true;
+    }
+    return false;
+      }
+      const validep = () => {
+       
+            const v=responseInfop.data.valide
+           // responseInfop;
+        if(v){
+            return true;
+        
+        }
+        return false;
+    }
+    const nvalidep = () => {
+       
+      const v=responseInfop.data.valide
+     // responseInfop;
+    if(v){
+      return false;
+    
+    }
+    return true;
+    }
   if (responseInfop.isLoading) {
     return (
     <div class="app-content  ">
@@ -169,75 +293,173 @@ export default function PublicationsDetailMoughataa() {
            
         
                
-                <div class=" divb2">
-            
-                <section class="product2">
-                <div class="product__photo">
-                  <div class="photo-container">
-                    <div class="photo-main">
-                      {/* <div class="controls">
-                        <i class="material-icons">share</i>
-                        <i class="material-icons">favorite_border</i>
-                      </div> */}
-                      {/* src="https://res.cloudinary.com/john-mantas/image/upload/v1537291846/codepen/delicious-apples/green-apple-with-slice.png
-                       */}
-                      <img class="imdetail"
-                      src={`http://localhost:8080/publication/sid/${responseInfop.data.image}`} height={300}
-                      width={500}
-                      style={{ alignSelf: 'center', marginLeft:"60px" }} alt="green apple slice"
+        <div class=" divb2">
 
-                      />
-                    </div>
+<div ref={pdfRef}>
+<section class="product2">
+<div class="product__photo">
+<div class="photo-container">
+  <div class="photo-main">
+    {/* <div class="controls">
+      <i class="material-icons">share</i>
+      <i class="material-icons">favorite_border</i>
+    </div> */}
+    {/* src="https://res.cloudinary.com/john-mantas/image/upload/v1537291846/codepen/delicious-apples/green-apple-with-slice.png
+     */}
+    <img class="imdetail"
+    src={`http://localhost:8080/publication/sid/${responseInfop.data.image}`} height={300}
+    width={500}
+    style={{ alignSelf: 'center', marginLeft:"60px" }} alt="green apple slice"
 
-                  </div>
-                </div>
-                <div class="product__info">
+    />
+  </div>
 
-
-                  </div>
-
-              </section>
-
-              <section class="prod">
-
-                <div class="product__info">
-                <span className="des">{responseInfop.data.description}</span>
-                <br></br><br></br>
+</div>
+</div>
+<div class="product__info">
 
 
-                  <span className="price">Semences    : </span> <span className="bl">{responseInfop.data.semences}</span>
-                  <br></br>
+</div>
 
-                  <span className="price">anneerecolte   : </span> <span className="bl">{responseInfop.data.anneerecolte}</span>
-                  <br></br>
-                  <span className="price"> quantite   : </span> <span className="bl">{responseInfop.data.quantite}</span>
-                  <br></br>
-                  <span className="price"> type_dirrigation : </span> <span className="bl">{responseInfop.data.type_dirrigation}</span>
-                  <br></br>
-                  <span className="price"> Typologies_agricoles  : </span> <span className="bl">{responseInfop.typologies_agricoles}</span>
-                  <br></br>
-                  <span className="price"> Superficies_agricoles  : </span> <span className="bl">{responseInfop.superficies_agricoles}</span>
-                  <br></br>
-                  <span className="price"> Type_Sol  : </span> <span className="bl">{responseInfop.typesol}</span>
-                  <br></br>
+</section>
+
+<section class="prod" >
+
+<div class="product__info">
+<span className="des">{responseInfop.data.description}</span>
+<br></br><br></br>
 
 
-
-                  <span className="price">Publié le :</span> <span className="bl">{responseInfop.data.date_publication.toString().substring(0, 10)}</span>
-                  <br></br>
-                  <span className="price">wilaya de : </span> <span className="bl">{responseInfop.data.moughataa?.nom}</span>
-
-                  </div>
-
-              </section>
+<span className="price">Semences    : </span> <span className="bl">{responseInfop.data.semences}</span>
+<br></br>
+{
+etat() &&
+<><span className="price ">etat: </span><span className="bl valide">Validée</span><br></br></>
 
 
-               
-            
-            
-             </div>
+}    {
+  !etat() &&
+                    <><span className="price ">etat: </span><span className="bl nvalide">Non Validée</span><br></br></>
+                    
+                    
+                    }
+<span className="price">anneerecolte   : </span> <span className="bl">{responseInfop.data.anneerecolte.toString().substring(0, 10)}</span>
+<br></br>
+
+<span className="price">moughataa de : </span> <span className="bl">{responseInfop.data.moughataa?.nom}</span>
+<br></br>
+
+<span className="price"> type_dirrigation : </span> <span className="bl">{responseInfop.data.typeIrrigation.nom}</span>
+<br></br>
+<span className="price"> Typologies_agricoles  : </span> <span className="bl">{responseInfop.data.typologieAgricole?.nom}</span>
+<br></br>
+<span className="price"> Superficies_agricoles  : </span> <span className="bl">{responseInfop.data.superficies_agricoles}</span>
+<br></br>
+<span className="price"> quantite   : </span> <span className="bl">{responseInfop.data.quantite}</span>
+<br></br>
+<span className="price"> cout de main_ouvre  : </span> <span className="bl">{responseInfop.data.main_ouvre}</span>
+<br></br>
+<span className="price"> cout des outils : </span> <span className="bl">{responseInfop.data.prix_outils}</span>
+<br></br><span className="price">cout de semances  : </span> <span className="bl">{responseInfop.data.prix_semance}</span>
+<br></br><span className="price">cout Totales  : </span> <span className="bl">{responseInfop.data.prix_semance +responseInfop.data.prix_outils+responseInfop.data.main_ouvre}</span>
+<br></br>
+
+
+<span className="price">Publié le :</span> <span className="bl">{responseInfop.data.date_publication.toString().substring(0, 10)}</span>
+
+</div>
+
+</section>
+</div>
+<br></br>
+<button onClick={ 
+downloadAsPDF
+} class=" button4 " ><svg xmlns="http://www.w3.org/2000/svg" width="25" height="30" fill="currentColor" class="bi bi-arrow-down-circle" viewBox="0 0 16 16">
+<path fill-rule="evenodd" d="M1 8a7 7 0 1 0 14 0A7 7 0 0 0 1 8zm15 0A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8.5 4.5a.5.5 0 0 0-1 0v5.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V4.5z"/>
+</svg></button>
+{
+      nvalidep() && UserHasAccess(ADMIN) &&
+<button  onClick={() => {
+                                          //  setSelectedId(wilaya.id);
+                                            setShowAlert(true);
+                                        }} class=" button5 " ><svg xmlns="http://www.w3.org/2000/svg" width="25" height="30" fill="currentColor" class="bi bi-check-circle" viewBox="0 0 16 16">
+<path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+<path d="M10.97 4.97a.235.235 0 0 0-.02.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-1.071-1.05z"/>
+</svg></button>
+}
+
+{
+      validep() && UserHasAccess(ADMIN) && <button  onClick={() => {
+        //  setSelectedId(wilaya.id);
+          setShowAlert2(true);
+      }} class=" button5 " ><svg xmlns="http://www.w3.org/2000/svg" width="25" height="30" fill="currentColor" class="bi bi-file-excel-fill" viewBox="0 0 16 16">
+      <path d="M12 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2zM5.884 4.68 8 7.219l2.116-2.54a.5.5 0 1 1 .768.641L8.651 8l2.233 2.68a.5.5 0 0 1-.768.64L8 8.781l-2.116 2.54a.5.5 0 0 1-.768-.641L7.349 8 5.116 5.32a.5.5 0 1 1 .768-.64z"/>
+    </svg></button>
+      
+      }
+
+
+
+</div>
          </div>
       </div>
+
+      <div>
+
+<Dialog
+              open={showAlert}
+              onClose={() => setShowAlert(false)}
+              aria-labelledby="alert-dialog-title"
+              aria-describedby="alert-dialog-description"
+          >
+              <DialogTitle id="alert-dialog-title" className="centerdiv">
+                  Alert
+              </DialogTitle>
+              <DialogContent>
+                  <DialogContentText id="alert-dialog-description">
+                      {MSG_DELETE}
+                  </DialogContentText>
+              </DialogContent>
+              <DialogActions>
+                  <Button color={"error"} onClick={()=>setShowAlert(false)} autoFocus>
+                      Annuler
+                  </Button>
+                  <Button onClick={onItemClick} autoFocus>
+                      Confirmer
+                  </Button>
+              </DialogActions>
+
+
+          </Dialog>
+</div> 
+<div>
+
+<Dialog
+              open={showAlert2}
+              onClose={() => setShowAlert2(false)}
+              aria-labelledby="alert-dialog-title"
+              aria-describedby="alert-dialog-description"
+          >
+              <DialogTitle id="alert-dialog-title" className="centerdiv">
+                  Alert
+              </DialogTitle>
+              <DialogContent>
+                  <DialogContentText id="alert-dialog-description">
+                      {MSG_DELETE2}
+                  </DialogContentText>
+              </DialogContent>
+              <DialogActions>
+                  <Button color={"error"} onClick={()=>setShowAlert2(false)} autoFocus>
+                      Annuler
+                  </Button>
+                  <Button onClick={onItemClick2} autoFocus>
+                      Confirmer
+                  </Button>
+              </DialogActions>
+
+
+          </Dialog>
+</div> 
     </>
   );
 }

@@ -17,6 +17,7 @@ import L from "leaflet/dist/leaflet";
 
 const Dashboards = (props) => {
     const geoJsonRef = useRef();
+    
     const mapRef = useRef();
     const onMapLoad = useCallback((map) => {
         mapRef.current = map;
@@ -49,6 +50,7 @@ const Dashboards = (props) => {
         const layer = e.target;
         const mough = e.target.feature.properties;
         const id= mough.ID;
+        const nomm= mough.nom;
         layer.setStyle({
             weight: 2,
             color: "#0434ab",
@@ -60,14 +62,18 @@ const Dashboards = (props) => {
                             <span class="sr-only">Loading...</span>
             </div>
                 </div>`;
-        axios.get(`publication/countByMoughataa/${id}`).then((res) => {
-
+        axios.get(`publication/countByMoughataa/${nomm}`).then((res) => {
+            axios.get(`moughataaa/findnom/${nomm}`).then((res2) => {
+                
+                console.log("asdfghjklasdfghjk moughataid",res2.data)
+console.log("asdfghjklasdfghjk")
             popupContent=`Moughataa : <strong>
                     ${mough.nom}
-                    </strong> <br>
-                    Publications : <strong>${res.data}</strong>
+                     </strong> <br>
+                     <a href="publicationsmap/${res2.data}"> Publications : <strong>${res.data}</strong></a>
+                   
     `;
-            layer.bindPopup(popupContent).openPopup();
+            layer.bindPopup(popupContent).openPopup(); });
         });
 
     };
@@ -75,7 +81,7 @@ const Dashboards = (props) => {
     const resetHighlight = (e) => {
        geoJsonRef.current.resetStyle(e.target);
        // close popup
-         e.target.closePopup();
+        // e.target.closePopup();
        // mapRef.current.leafletElement.closePopup();
     };
     const listp=[]
@@ -92,32 +98,8 @@ const Dashboards = (props) => {
         zoom: 11
     };
 
-        // useEffect(() => {
-        //     axios.get('http://localhost:8080/moughataaa/listmap')
-        //         .then(res => {
-        //             //   console.warn('res',res.data)
-        //             setMoutghataas(res.data);
-        //             // console.log(res.data.length)
-        //         })
-        //         .catch(err => console.log(err))
-        // }, [])
-
-
-        // const publlist = (id) => {
-        //
-        //     axios.get('http://localhost:8080/publication/listpublication/' + id)
-        //         .then(res => {
-        //             //    console.log(id)
-        //             //   console.warn('res',res.data)
-        //             // setNombrep(res.data);
-        //             console.log(res.data.length)
-        //             setNombrep(id)
-        //             listp.push(res.data.length)
-        //             //  return res.data.length;
-        //         })
-        //         .catch(err => console.log(err))
-        //     return id;
-        // };
+   
+       
 
 
 

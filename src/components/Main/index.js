@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
-import { ADMIN, CONSEILLER_AGRICOLE, USER, UserRoles } from "../extends/GlobalFunctions";
+import { ADMIN, CONSEILLER_AGRICOLE, AGRIGULTEUR, UserRoles } from "../extends/GlobalFunctions";
 import "./style.scss";
 import { FaBeer } from 'react-icons/fa';
 import { MdDashboardCustomize } from 'react-icons/md';
@@ -14,7 +14,7 @@ import log from '../../log.png'
 
 const Main = (props) => {
   const routes = [
-    { name: "Dashboard", path: "/" , icon : <MdDashboardCustomize/> ,roles: [ADMIN,CONSEILLER_AGRICOLE,USER]},
+    { name: "Dashboard", path: "/home" , icon : <MdDashboardCustomize/> ,roles: [ADMIN,CONSEILLER_AGRICOLE,AGRIGULTEUR]},
     //{ name: "Produits", path: "/produits",roles: [ADMIN,CONSEILLER_AGRICOLE,USER] },
     //{ name: "LigneCommandes", path: "/ligne_commande",roles: [ADMIN,CONSEILLER_AGRICOLE,USER] },
     //{ name: "Livraison", path: "/livraison" ,roles: [ADMIN,CONSEILLER_AGRICOLE,USER]},
@@ -23,11 +23,15 @@ const Main = (props) => {
     { name: "Wilayas", path: "/wilayas" ,  icon : <FaMapMarkerAlt/> , roles: [ADMIN,CONSEILLER_AGRICOLE]},
     { name: "Moughataas", path: "/moughataas", icon : <FaMapMarkerAlt/>,roles: [ADMIN,CONSEILLER_AGRICOLE] },
     //{ name: "Communes", path: "/communes" },
-    { name: "Publications", path: "/publications", icon : <FcStackOfPhotos/>, roles: [ADMIN,CONSEILLER_AGRICOLE,USER] },
-    { name: "Utilisateurs ", path: "/users" , icon : <FaUserFriends/>,roles: [ADMIN,CONSEILLER_AGRICOLE,USER]},
-    { name: "Roles", path: "/roles" , icon : <FaCriticalRole/>,roles: [ADMIN,CONSEILLER_AGRICOLE,USER]},
+    { name: "Publications", path: "/publications", icon : <FcStackOfPhotos/>, roles: [ADMIN,CONSEILLER_AGRICOLE] },
+    { name: "Utilisateurs ", path: "/users" , icon : <FaUserFriends/>,roles: [ADMIN]},
+    { name: "Roles", path: "/roles" , icon : <FaCriticalRole/>,roles: [ADMIN]},
     { name: "statistiques", path: "/statistiques" , icon : <ImStatsDots/>,roles: [ADMIN]},
     { name: "Se Connecter", path: "/login-signup", icon : <FaBeer/>,roles: [] },
+    { name: "Typologie_Agr", path: "/typologi", icon : <FaBeer/>,roles: [ADMIN,CONSEILLER_AGRICOLE] },
+    { name: "Type_Irrigation", path: "/typeirrigation", icon : <FaBeer/>,roles: [ADMIN,CONSEILLER_AGRICOLE] },
+    { name: "produits", path: "/produits", icon : <FaBeer/>,roles: [ADMIN,AGRIGULTEUR] },
+  
   ];
   return (
     <>

@@ -6,8 +6,7 @@ import {SwitchMode, toGrid, ToList} from "../../app/features/local-config";
 import {NavLink} from "react-router-dom";
 import React, {useEffect, useState} from "react";
 import {ADMIN, UserHasAccess} from "../extends/GlobalFunctions";
-// import {useGetWilayasQuery,useDeleteWilayaMutation } from "./wilayas-services";
-
+// import {useGetTypologieQuery,useDeleteWilayaMutation } from "./Typologie-services";
 import {MdDelete} from 'react-icons/md';
 
 import {MdModeEdit} from 'react-icons/md';
@@ -20,20 +19,20 @@ import DialogContentText from "@mui/material/DialogContentText";
 import DialogActions from "@mui/material/DialogActions";
 import Button from "@mui/material/Button";
 
-export default function Wilayas() {
+export default function Typologies() {
     const MSG_DELETE = "Voulez-vous vraiment supprimer cette wilaya ?";
     const MSG_DELETE_SUCCESS = "La wilaya a été supprimée avec succès";
     const MSG_ADD_SUCCESS = "La wilaya a été ajoutée avec succès";
 
-    const [listWilayas, setListWilayas] = useState([]);
+    const [listTypologie, setListTypologie] = useState([]);
     const [loading, setLoading] = useState(false);
     const [showAlert, setShowAlert] = useState(false);
     const [selectedId, setSelectedId] = useState(null);
 
     useEffect(() => {
         setLoading(true);
-        axios.get("wilaya/list").then((res) => {
-            setListWilayas(res.data);
+        axios.get("Typologie/list").then((res) => {
+            setListTypologie(res.data);
         }).catch((err) => {
             console.log("fetching wilaya error", err);
         }).finally(() => {
@@ -42,8 +41,8 @@ export default function Wilayas() {
     }, []);
     const deleteWilaya = () => {
             setShowAlert(true);
-        axios.delete("wilaya/delete/" + selectedId).then((res) => {
-            setListWilayas(listWilayas.filter((wilaya) => wilaya.id !== selectedId));
+        axios.delete("Typologie/delete/" + selectedId).then((res) => {
+            setListTypologie(listTypologie.filter((wilaya) => wilaya.id !== selectedId));
           
             setShowAlert(false);
         }).catch((err) => {
@@ -64,7 +63,7 @@ export default function Wilayas() {
 
     };
 
-    //  const responseInfo =useGetWilayasQuery();
+    //  const responseInfo =useGetTypologieQuery();
     // const  [deleteWilaya]  =useDeleteWilayaMutation();
     // const [responseInfo4] =useImportWilayaMutation();
 
@@ -104,7 +103,7 @@ export default function Wilayas() {
         <>
             <div className="app-content  ">
                 <div className="d-flex flex-row  justify-content-between mb-3">
-                    <h1 className="app-content-headerText">Wilayas</h1>
+                    <h1 className="app-content-headerText">Typologie</h1>
                     <div className="action-buttons">
                         <button
                             className="mode-switch"
@@ -153,21 +152,21 @@ export default function Wilayas() {
                     <div className="col  col-6">
                         {/* <NavLink to={"importer"}>
             {" "}
-            <button className="app-content-headerButton">Importer wilayas</button>
+            <button className="app-content-headerButton">Importer Typologie</button>
 
           </NavLink> */}
                     </div>
                     {
                         UserHasAccess(ADMIN) &&
                         <div className="col col-6  app-content-header justify-content-end  fixed">
-                            <NavLink to={"importer"}>
+                            {/* <NavLink to={"importer"}>
                                 {" "}
-                                <button className="m-2 app-content-headerButton">Importer wilayas</button>
+                                <button className="m-2 app-content-headerButton">Importer Typologie</button>
 
-                            </NavLink>
+                            </NavLink> */}
 
                             <NavLink to={"new"}>
-                                <button className="app-content-headerButton">Ajouter wilayas</button>
+                                <button className="app-content-headerButton">Ajouter Typologie</button>
                             </NavLink>
                         </div>
                     }
@@ -204,7 +203,7 @@ export default function Wilayas() {
                             </button>
                         </div>
                         <div className="product-cell category">
-                            Nom Wilaya
+                            Nom 
                             <button className="sort-button">
                                 <BiSort/>
                             </button>
@@ -224,7 +223,7 @@ export default function Wilayas() {
 
                     {
 
-                            listWilayas?.map((wilaya, position) => {
+                            listTypologie?.map((wilaya, position) => {
                                 return (
                                     <div className="products-row" key={position}>
                                         <button className="cell-more-button">
@@ -235,7 +234,7 @@ export default function Wilayas() {
                                             {wilaya.id}
                                         </div>
                                         <div className="product-cell category">
-                                            <span className="cell-label">Nom Wilaya :</span>
+                                            <span className="cell-label">Nom Typologie :</span>
                                             {wilaya.nom}
                                         </div>
 

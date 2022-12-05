@@ -1,5 +1,3 @@
-
-
 import {Link, Routes, Route, useNavigate} from 'react-router-dom';
 import Alert from "../Alert";
 
@@ -14,9 +12,9 @@ import DialogContentText from "@mui/material/DialogContentText";
 import DialogActions from "@mui/material/DialogActions";
 import Button from "@mui/material/Button";
 
-export default function RolesNew() {
+export default function TypologiesNew() {
   const navigate = useNavigate();
-  const [roleName, setRoleName] = useState('');
+  const [nom, setNom] = useState('');
   const [showMsg, setShowMsg] = useState(false);
 
   // const [newWilaya] = useCreateWilayaMutation();
@@ -29,10 +27,10 @@ export default function RolesNew() {
         className=""
         onSubmit={(e) => {
           e.preventDefault();
-           axios.post("role/save", {roleName})
+           axios.post("Typologie/save", {nom})
             .then(() => {
                 setShowMsg(true);
-                setRoleName('');
+                setNom('');
 
             })
 
@@ -42,14 +40,14 @@ export default function RolesNew() {
       >
         <input
           type="text"
-          value={roleName}
-          onChange={(e) => setRoleName(e.target.value)}
-          placeholder="role"
+          value={nom}
+          onChange={(e) => setNom(e.target.value)}
+          placeholder="Nom de la typologie"
           required="required"
         />
 
        <button className="btn btn-primary btn-block btn-large" type="submit">
-        Ajouter Role</button>
+        Ajouter Typologie</button>
 
       </form>
         <div>
@@ -66,15 +64,14 @@ export default function RolesNew() {
                 </DialogTitle>
                 <DialogContent>
                     <DialogContentText id="alert-dialog-description">
-                        Le role a été ajoutée avec succès
+                        La Typologie a été ajoutée avec succès
                     </DialogContentText>
                 </DialogContent>
                 <DialogActions>
                     <Button
                         onClick={function (){
                             setShowMsg(false);
-                            navigate('../../roles/');
-                            window.location.reload(false);
+                            navigate('../../typologi/');
                         }}
                         autoFocus>
                         OK

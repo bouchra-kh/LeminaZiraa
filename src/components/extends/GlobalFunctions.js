@@ -34,4 +34,4 @@ return user;
 
 export const ADMIN = 1;
 export const CONSEILLER_AGRICOLE = 2;
-export const USER = 3;
+export const AGRIGULTEUR = 3;
