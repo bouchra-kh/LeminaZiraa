@@ -10,6 +10,13 @@ import { useGetMoughataasQuery} from '../Moughataas/moughataas-services';
 import { useGetTypologiesQuery } from '../Typologie/typologie-service';
 import { useGetTypeirrigationsQuery } from '../Typeirrigation/typeirrigations-service';
 import { ADMIN,CONSEILLER_AGRICOLE, UserHasAccess ,getUser} from "../extends/GlobalFunctions";
+import axios from "axios";
+import Dialog from "@mui/material/Dialog";
+import DialogTitle from "@mui/material/DialogTitle";
+import DialogContent from "@mui/material/DialogContent";
+import DialogContentText from "@mui/material/DialogContentText";
+import DialogActions from "@mui/material/DialogActions";
+import Button from "@mui/material/Button";
 
 
 export default function PublicationsNew() {
@@ -64,6 +71,8 @@ console.log("date",formattedDate.toString().substring(0, 10));
   //usePhotopublicationMutation(image);
   const [responseInfo4] =usePhotopublicationMutation();
   const getpulication = useGetPublicationsQuery();
+  const [showMsg, setShowMsg] = useState(false);
+
   const affichage = [
     {
       id: true,
@@ -115,9 +124,9 @@ console.log("date",formattedDate.toString().substring(0, 10));
           
           responseInfo4(image);
          // getpulication.data.map((publication,key) => {});
-         
-          navigate('../../Publications/');
-         window.location.reload(false);
+         setShowMsg(true);
+        //  navigate('../../Publications/');
+         //window.location.reload(false);
          // responseInfo;
         }}
       >
@@ -273,6 +282,36 @@ console.log("date",formattedDate.toString().substring(0, 10));
           </button>
         </NavLink> */}
       </form>
+      <div>
+            <Dialog
+                open={showMsg}
+                onClose={function (){
+                    setShowMsg(false);
+                }}
+                aria-labelledby="alert-dialog-title"
+                aria-describedby="alert-dialog-description"
+            >
+                <DialogTitle id="alert-dialog-title" className="centerdiv">
+                    Alert
+                </DialogTitle>
+                <DialogContent>
+                    <DialogContentText id="alert-dialog-description">
+                        La publication a été ajoutée avec succès
+                    </DialogContentText>
+                </DialogContent>
+                <DialogActions>
+                    <Button
+                        onClick={function (){
+                            setShowMsg(false);
+                            navigate('../../Publications/');
+                            window.location.reload(false);
+                        }}
+                        autoFocus>
+                        OK
+                    </Button>
+                </DialogActions>
+            </Dialog>
+        </div>
     </div>
   );
 }

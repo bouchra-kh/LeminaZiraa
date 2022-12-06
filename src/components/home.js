@@ -1,5 +1,6 @@
 import React, {useEffect, useState} from "react";
 import './home.css'
+//import {Math} from 'mathjs';
 import Typography from '@mui/material/Typography';
 import {Paper} from "@mui/material";
 import axios from "axios";
@@ -14,11 +15,15 @@ const Home = () => {
     const produits = useGetProduitsQuery();
     const wilayas=useGetWilayasQuery();
     const moughataas=useGetMoughataasQuery();
-    const publicationst=useGetPublicationsQuery();
+    const [publicationst,setPublicationst]=useState("");;;
     const [conseill,setConseill]=useState("");;
     const [agrict,setAgrict]=useState("");;
     const [lpv,setLpv]=useState("");
+    const [sopp,setSopp]=useState("");
     useEffect(() => {
+      axios.get("publication/list").then((res) => {
+        setPublicationst(res)
+                    })
         axios.get("users/listagr").then((res) => {
             setAgrict(res)
                         })
@@ -42,9 +47,10 @@ const Home = () => {
         }).finally(() => {
            setLoading(false);
         });
-
-
+      
     }, []);
+    //setSopp((publicationsv.data.length/publicationst.data.length)*100);
+
 //     useEffect(() => {
 //         axios.get("users/listcons").then((res) => {
 //             setConseill(res);
@@ -163,8 +169,10 @@ const Home = () => {
             a 15.9155 15.9155 0 0 1 0 -31.831"></path>
         <path class="circle" stroke-dasharray="30, 100" d="M18 2.0845
             a 15.9155 15.9155 0 0 1 0 31.831
-            a 15.9155 15.9155 0 0 1 0 -31.831"></path>
-        <text x="18" y="20.35" class="percentage">{(publicationsv.data.length*100)/publicationst.data.length}%</text>
+            a 15.9155 15.9155 0 0 1 0 -31.831">parseInt(6.99)</path>
+        <text x="18" y="20.35" class="percentage">{Math.floor((publicationsv.data.length/publicationst.data.length)*100)}%</text>
+        {/* Math.floor({(publicationsv.data.length/publicationst.data.length)*100})
+      */}
       </svg>
             </div>
           </div>

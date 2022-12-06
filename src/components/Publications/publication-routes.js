@@ -11,7 +11,7 @@ const PublicationRoutes = () => {
     <Routes>
       <Route path="/" element={<Publications />} />
       <Route path="/new" element={<PublicationsNew />} />
-      <Route path="/update" element={<PublicationsUpdate/>} />
+      <Route path="/update/:id" element={<PublicationsUpdate/>} />
      
       <Route path="/detailAllpublications/:id" element={<PublicationsDetail />} />
     </Routes>
