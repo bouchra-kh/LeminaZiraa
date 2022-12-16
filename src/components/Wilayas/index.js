@@ -44,7 +44,7 @@ export default function Wilayas() {
             setShowAlert(true);
         axios.delete("wilaya/delete/" + selectedId).then((res) => {
             setListWilayas(listWilayas.filter((wilaya) => wilaya.id !== selectedId));
-          
+
             setShowAlert(false);
         }).catch((err) => {
             setShowAlert(false);
@@ -80,21 +80,21 @@ export default function Wilayas() {
     // if (responseInfo.isError) {
     //   return <div>erreur :{responseInfo.error.data}</div>
     // }
-    // if(inputText!==''){
-    //   // eslint-disable-next-line array-callback-return
-    //   responseInfo.data.map((wilaya, position) => {
-    //     if (inputText===wilaya.nom) {
-    //
-    //        responseInfos.push(wilaya);
-    //        //const wilaya=responseInfos[0];
-    //
-    //
-    //     }
-    //
-    //   }
-    //
-    //   );
-    // }
+    if(inputText!==''){
+      // eslint-disable-next-line array-callback-return
+      listWilayas.map((wilaya, position) => {
+        if (inputText.toLowerCase()===wilaya.nom.toLowerCase()) {
+
+           responseInfos.push(wilaya);
+           //const wilaya=responseInfos[0];
+
+
+        }
+
+      }
+
+      );
+    }
 
     if (loading) {
         return <div>recherche....</div>
@@ -173,7 +173,7 @@ export default function Wilayas() {
                     }
                 </div>
                 <div className="app-content-actions fixed">
-                    <input onChange={inputHandler} className="search-bar" placeholder="Search..." type="text"/>
+                    <input onChange={inputHandler} className="search-bar" placeholder="Recherche..." type="text"/>
 
                     <div className="app-content-actions-wrapper">
                         <button
@@ -224,7 +224,7 @@ export default function Wilayas() {
 
                     {
 
-                            listWilayas?.map((wilaya, position) => {
+responseInfos.length==0?   listWilayas?.map((wilaya, position) => {
                                 return (
                                     <div className="products-row" key={position}>
                                         <button className="cell-more-button">
@@ -263,7 +263,42 @@ export default function Wilayas() {
                                         }
                                     </div>
                                 );
-                            })
+                            }):<div className="products-row" >
+                            <button className="cell-more-button">
+                                <BiDotsHorizontalRounded/>
+                            </button>
+                            <div className="product-cell category">
+                                <span className="cell-label">Id :</span>
+                                {responseInfos[0].id}
+                            </div>
+                            <div className="product-cell category">
+                                <span className="cell-label">Nom Wilaya :</span>
+                                {responseInfos[0].nom}
+                            </div>
+
+
+                            {
+                                UserHasAccess(ADMIN) && <div className="product-cell category">
+                                    <MdDelete style={{fontSize: "22px", color: "red", marginLeft: "250px"}}
+                                              onClick={() => {
+                                                  setSelectedId(responseInfos[0].id);
+                                                  setShowAlert(true);
+                                              }}/>
+
+
+                                </div>
+
+                            }
+                            {
+                                UserHasAccess(ADMIN) && <div className="product-cell category">
+                                    <NavLink to={"update/" +responseInfos[0].id}>
+                                        {" "}
+                                        <MdModeEdit
+                                            style={{fontSize: "22px", color: "green", marginRight: "200px"}}/>
+                                    </NavLink>
+                                </div>
+                            }
+                        </div>
 
 
 

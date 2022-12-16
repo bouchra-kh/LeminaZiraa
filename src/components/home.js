@@ -29,9 +29,9 @@ const Home = () => {
                         })
         axios.get("users/listcons").then((res) => {
             setConseill(res);
-         
+
            // setLoading(false);
-           
+
         }).finally(() => {
           // setLoading(false);
         });
@@ -43,29 +43,21 @@ const Home = () => {
             console.log("vaaaa",publicationsv);
            // setLpv(publicationsv.data.length);
             setLoading(false);
-            
+
         }).finally(() => {
            setLoading(false);
         });
-      
+
     }, []);
-    //setSopp((publicationsv.data.length/publicationst.data.length)*100);
-
-//     useEffect(() => {
-//         axios.get("users/listcons").then((res) => {
-//             setConseill(res);
-         
-//             setLoading(false);
-//             axios.get("users/listagr").then((res) => {
-// setAgrict(res)
-//             })
-//         }).finally(() => {
-//            setLoading(false);
-//         });
-
-
-//     }, []);
-   // const pource=publicationsv.data.length
+    if (wilayas.isLoading) {
+      return <div>recherche....</div>
+    }
+    if (moughataas.isLoading) {
+      return <div>recherche....</div>
+    }
+    if (produits.isLoading) {
+      return <div>recherche....</div>
+    }
     if (loading) {
         return (
             <div className="d-flex justify-content-center">
@@ -75,14 +67,15 @@ const Home = () => {
             </div>
         )
     }
-
+ const boot=""+Math.floor((publicationsv.data.length/publicationst.data.length)*100)+","+100;
+// "30,100"
     return (
         <div class="app-container">
-         
+
 <div class="app-name">
 
 <div class="main-header-line">
-       <h1 >Dashboard Agriculture</h1>
+       <h1 >Tableau de Bord Agriculture</h1>
         <div class="action-buttons">
           <button class="open-right-area">
           <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-activity"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
@@ -105,7 +98,7 @@ const Home = () => {
         <path class="circle-bg" d="M18 2.0845
             a 15.9155 15.9155 0 0 1 0 31.831
             a 15.9155 15.9155 0 0 1 0 -31.831"></path>
-        <path class="circle" stroke-dasharray="30, 100" d="M18 2.0845
+        <path class="circle" stroke-dasharray="0,100" d="M18 2.0845
             a 15.9155 15.9155 0 0 1 0 31.831
             a 15.9155 15.9155 0 0 1 0 -31.831"></path>
         <text x="18" y="20.35" class="percentage"></text>
@@ -117,7 +110,7 @@ const Home = () => {
         <div class="chart-container-wrapper">
           <div class="chart-container wid he">
             <div class="chart-info-wrapper ">
-              <h2>Moughataaa</h2>
+              <h2>Moughataas</h2>
               <span>{moughataas.data.length}</span>
             </div>
             <div class="chart-svg">
@@ -125,7 +118,7 @@ const Home = () => {
         <path class="circle-bg" d="M18 2.0845
             a 15.9155 15.9155 0 0 1 0 31.831
             a 15.9155 15.9155 0 0 1 0 -31.831"></path>
-        <path class="circle" stroke-dasharray="30, 100" d="M18 2.0845
+        <path class="circle" stroke-dasharray="0, 100" d="M18 2.0845
             a 15.9155 15.9155 0 0 1 0 31.831
             a 15.9155 15.9155 0 0 1 0 -31.831"></path>
         <text x="18" y="20.35" class="percentage"></text>
@@ -145,7 +138,7 @@ const Home = () => {
         <path class="circle-bg" d="M18 2.0845
             a 15.9155 15.9155 0 0 1 0 31.831
             a 15.9155 15.9155 0 0 1 0 -31.831"></path>
-        <path class="circle" stroke-dasharray="30, 100" d="M18 2.0845
+        <path class="circle" stroke-dasharray="100, 100" d="M18 2.0845
             a 15.9155 15.9155 0 0 1 0 31.831
             a 15.9155 15.9155 0 0 1 0 -31.831"></path>
         <text x="18" y="20.35" class="percentage">100%</text>
@@ -167,9 +160,9 @@ const Home = () => {
         <path class="circle-bg" d="M18 2.0845
             a 15.9155 15.9155 0 0 1 0 31.831
             a 15.9155 15.9155 0 0 1 0 -31.831"></path>
-        <path class="circle" stroke-dasharray="30, 100" d="M18 2.0845
+        <path class="circle" stroke-dasharray={boot} d="M18 2.0845
             a 15.9155 15.9155 0 0 1 0 31.831
-            a 15.9155 15.9155 0 0 1 0 -31.831">parseInt(6.99)</path>
+            a 15.9155 15.9155 0 0 1 0 -31.831"></path>
         <text x="18" y="20.35" class="percentage">{Math.floor((publicationsv.data.length/publicationst.data.length)*100)}%</text>
         {/* Math.floor({(publicationsv.data.length/publicationst.data.length)*100})
       */}
@@ -189,7 +182,7 @@ const Home = () => {
         <path class="circle-bg" d="M18 2.0845
             a 15.9155 15.9155 0 0 1 0 31.831
             a 15.9155 15.9155 0 0 1 0 -31.831"></path>
-        <path class="circle" stroke-dasharray="30, 100" d="M18 2.0845
+        <path class="circle" stroke-dasharray="0, 100" d="M18 2.0845
             a 15.9155 15.9155 0 0 1 0 31.831
             a 15.9155 15.9155 0 0 1 0 -31.831"></path>
         <text x="18" y="20.35" class="percentage"></text>
@@ -209,7 +202,7 @@ const Home = () => {
         <path class="circle-bg" d="M18 2.0845
             a 15.9155 15.9155 0 0 1 0 31.831
             a 15.9155 15.9155 0 0 1 0 -31.831"></path>
-        <path class="circle" stroke-dasharray="30, 100" d="M18 2.0845
+        <path class="circle" stroke-dasharray="0, 100" d="M18 2.0845
             a 15.9155 15.9155 0 0 1 0 31.831
             a 15.9155 15.9155 0 0 1 0 -31.831"></path>
         <text x="18" y="20.35" class="percentage"></text>
@@ -220,12 +213,12 @@ const Home = () => {
       </div>
         {/* //32m2rowrow */}
      <div class="chart-row three">
-      
-      
+
+
          <div class="chart-container-wrapper ml-2">
           <div class="chart-container wid he">
             <div class="chart-info-wrapper ">
-              <h2>Conseilleurs Agricole</h2>
+              <h2>Conseillers Agricoles</h2>
               <span>{conseill.data.length}</span>
             </div>
             <div class="chart-svg">
@@ -233,7 +226,7 @@ const Home = () => {
         <path class="circle-bg" d="M18 2.0845
             a 15.9155 15.9155 0 0 1 0 31.831
             a 15.9155 15.9155 0 0 1 0 -31.831"></path>
-        <path class="circle" stroke-dasharray="30, 100" d="M18 2.0845
+        <path class="circle" stroke-dasharray="0, 100" d="M18 2.0845
             a 15.9155 15.9155 0 0 1 0 31.831
             a 15.9155 15.9155 0 0 1 0 -31.831"></path>
         <text x="18" y="20.35" class="percentage"></text>
@@ -250,4 +243,3 @@ const Home = () => {
 };
 
 export default Home;
-  

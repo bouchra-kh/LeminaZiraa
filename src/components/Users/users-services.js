@@ -6,7 +6,7 @@ import { axiosBaseQuery } from "../../app/config/rtk_query.ts";
 export const useUsersApi = createApi({
   reducerPath: "UsersApi",
   baseQuery: axiosBaseQuery({
-    baseUrl: "http://localhost:8080",
+    baseUrl: "http://localhost:8080/users",
   }),
   endpoints: (builder) => ({
     getUsers: builder.query({
@@ -65,14 +65,14 @@ export const useUsersApi = createApi({
        }
       }
      }),
-     
+
   }),
-  
- 
+
+
 });
 
 
-  
+
 
 
 export const { useGetUsersQuery,useGetUserByIdQuery,useDeleteUserMutation,useCreateUserMutation,useUpdateUserMutation} = useUsersApi;

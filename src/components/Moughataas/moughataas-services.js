@@ -53,7 +53,7 @@ export const useMoughataasApi = createApi({
        console.log("Create Post: ", newPost)
        var fd = new FormData();
      fd.append('file', newPost,newPost.name);
-     
+
        return {
         url: `/upload2`,
         method: 'POST',
@@ -82,15 +82,15 @@ export const useMoughataasApi = createApi({
        }
       }
      }),
-     
+
   }),
-  
- 
+
+
 });
 
 
-    
-  
+
+
 
 
 export const { useGetMoughataasQuery,useGetMoughataaByIdQuery,useDeleteMoughataaMutation,useCreateMoughataaMutation,useImportMoughataaMutation,useUpdateMoughataaMutation}  = useMoughataasApi;

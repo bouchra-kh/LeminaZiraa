@@ -71,10 +71,10 @@ if (roles.isLoading) {
   </div>
 
   <div>recherche</div>
-  
+
   </div>
   )
-  
+
 }
 console.log("rrrrrrrr",roles)
 
@@ -134,7 +134,7 @@ console.log("rrrrrrrr",roles)
           </NavLink>
         </div>
         <div class="app-content-actions fixed">
-          <input class="search-bar" placeholder="Search..." type="text" />
+          <input class="search-bar" placeholder="Recherche..." type="text" />
           <div class="app-content-actions-wrapper">
             <button
               class="action-button list active"

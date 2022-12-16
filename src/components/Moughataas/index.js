@@ -22,7 +22,7 @@ import Button from "@mui/material/Button";
 
 export default function Moughataas() {
     const dispatch = useDispatch();
-    // const responseInfos=[];
+     const responseInfos=[];
     const [moughataas, setMoughatas] = useState([]);
     const [loading, setLoading] = useState(false);
     const [showAlert, setShowAlert] = useState(false);
@@ -66,24 +66,24 @@ export default function Moughataas() {
     // if (responseInfo.isError) {
     //   return <div>erreur :{responseInfo.error.data}</div>
     // }
-    // if(inputText!=''){
-    //   responseInfo.data.map((wilaya, position) => {
-    //     if (inputText==wilaya.nom) {
-    //       console.log("hhhhhhhhhh")
-    //
-    //        ;
-    //        responseInfos.push(wilaya);
-    //        //const wilaya=responseInfos[0];
-    //
-    //
-    //     }
-    //
-    //   }
-    //
-    //   );
+    if(inputText!=''){
+        moughataas.map((wilaya, position) => {
+        if (inputText.toLowerCase()==wilaya.nom.toLowerCase()) {
+          console.log("hhhhhhhhhh")
+
+           ;
+           responseInfos.push(wilaya);
+           //const wilaya=responseInfos[0];
 
 
-    // }
+        }
+
+      }
+
+      );
+
+
+    }
     return (
         <>
             <div className="app-content  ">
@@ -139,7 +139,7 @@ export default function Moughataas() {
                         {/* <NavLink to={"importer"}>
             {" "}
             <button className="app-content-headerButton">Importer wilayas</button>
-         
+
           </NavLink> */}
                     </div>
                     {
@@ -161,7 +161,7 @@ export default function Moughataas() {
                     }
                 </div>
                 <div className="app-content-actions fixed">
-                    <input onChange={inputHandler} className="search-bar" placeholder="Search..." type="text"/>
+                    <input onChange={inputHandler} className="search-bar" placeholder="Recherche..." type="text"/>
                     <div className="app-content-actions-wrapper">
                         <button
                             className="action-button list active"
@@ -221,7 +221,7 @@ export default function Moughataas() {
 
                     {
 
-                            moughataas.map((moughataa, position) => {
+responseInfos.length==0?      moughataas.map((moughataa, position) => {
 
 
                                 return (
@@ -267,7 +267,46 @@ export default function Moughataas() {
                                     </div>
                                 )
 
-                            })
+                            }): <div className="products-row" >
+                            <button className="cell-more-button">
+                                <BiDotsHorizontalRounded/>
+                            </button>
+                            <div className="product-cell category">
+                                <span className="cell-label">Id :</span>
+                                {responseInfos[0].id}
+                            </div>
+                            <div className="product-cell category">
+                                <span className="cell-label">Nom Moughataa :</span>
+                                {responseInfos[0].nom}
+                            </div>
+                            {
+                                UserHasAccess(ADMIN) && <div className="product-cell category">
+
+
+                                    <MdDelete style={{fontSize: "22px", color: "red", marginLeft: "200px"}}
+                                              onClick={() => {
+                                                  setSelectedId(responseInfos[0].id)
+                                                  setShowAlert(true);
+                                              }}/>
+                                </div>
+
+                            }
+                            {
+                                UserHasAccess(ADMIN) && <div className="product-cell category">
+                                    <NavLink to={"update/" + responseInfos[0].id}>
+                                        {" "}
+                                        <MdModeEdit style={{fontSize: "22px", color: "green"}}/>
+                                    </NavLink>
+                                </div>}
+                            <div className="product-cell category">
+                                <NavLink to={"moughp/" + responseInfos[0].id}>
+                                    {" "}
+                                    < FcEditImage style={{marginRight: "30px", fontSize: "22px"}}/>
+                                </NavLink>
+                            </div>
+
+
+                        </div>
 
 
                     }

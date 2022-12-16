@@ -43,7 +43,7 @@ export default function Typeirrigations() {
             setShowAlert(true);
         axios.delete("Typeirrigation/delete/" + selectedId).then((res) => {
             setListTypeirrigation(listTypeirrigation.filter((wilaya) => wilaya.id !== selectedId));
-          
+
             setShowAlert(false);
         }).catch((err) => {
             setShowAlert(false);
@@ -172,7 +172,7 @@ export default function Typeirrigations() {
                     }
                 </div>
                 <div className="app-content-actions fixed">
-                    <input onChange={inputHandler} className="search-bar" placeholder="Search..." type="text"/>
+                    <input onChange={inputHandler} className="search-bar" placeholder="Recherche...." type="text"/>
 
                     <div className="app-content-actions-wrapper">
                         <button

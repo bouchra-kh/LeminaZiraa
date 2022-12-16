@@ -7,17 +7,17 @@ import axios from "axios";
 
 import { useNavigate } from "react-router-dom";
 const Login = () => {
-  
+
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const baseURL = "http://localhost:8080/login";
   const navigate = useNavigate();
- 
+
 const handleSubmit = (event) => {
   event.preventDefault();
   console.log(username)
   console.log(password)
-  
+
   const params = new URLSearchParams();
   params.append('username', username);
   params.append('password', password);
@@ -35,20 +35,20 @@ const handleSubmit = (event) => {
       console.log("idci front")
       localStorage.setItem("token", res.data.user.jwtToken)
       localStorage.setItem('user', JSON.stringify(res.data.user.user));
-      
+
       navigate("/home");
       window.location.reload();
-      
+
     })
     .catch((err) => {
-     
+
       console.log(err);
     });
 };
   //const [login] = useLoginMutation();
   return (
     <div class="login d-flex flex-column">
-      <h1>Login</h1>
+      <h1>Connecter</h1>
       <form
         className=""
         onSubmit={handleSubmit}
@@ -68,11 +68,11 @@ const handleSubmit = (event) => {
           required="required"
         />
         <button class="btn btn-primary btn-block btn-large" type="submit">
-          Connecter
+         Se connecter
         </button>
         <NavLink to="/signup">
           <button class="btn btn-success btn-block btn-large  mt-3">
-            Sign up
+            S'inscrire
           </button>
         </NavLink>
       </form>

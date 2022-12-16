@@ -14,7 +14,7 @@ import log from '../../log.png'
 
 const Main = (props) => {
   const routes = [
-    { name: "Dashboard", path: "/home" , icon : <MdDashboardCustomize/> ,roles: [ADMIN,CONSEILLER_AGRICOLE,AGRIGULTEUR]},
+    { name: "Tableau de Bord", path: "/home" , icon : <MdDashboardCustomize/> ,roles: [ADMIN,CONSEILLER_AGRICOLE,AGRIGULTEUR]},
     //{ name: "Produits", path: "/produits",roles: [ADMIN,CONSEILLER_AGRICOLE,USER] },
     //{ name: "LigneCommandes", path: "/ligne_commande",roles: [ADMIN,CONSEILLER_AGRICOLE,USER] },
     //{ name: "Livraison", path: "/livraison" ,roles: [ADMIN,CONSEILLER_AGRICOLE,USER]},
@@ -31,7 +31,7 @@ const Main = (props) => {
     { name: "Typologie_Agr", path: "/typologi", icon : <FaBeer/>,roles: [ADMIN,CONSEILLER_AGRICOLE] },
     { name: "Type_Irrigation", path: "/typeirrigation", icon : <FaBeer/>,roles: [ADMIN,CONSEILLER_AGRICOLE] },
     { name: "produits", path: "/produits", icon : <FaBeer/>,roles: [ADMIN,AGRIGULTEUR] },
-  
+
   ];
   return (
     <>

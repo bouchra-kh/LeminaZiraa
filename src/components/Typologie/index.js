@@ -43,7 +43,7 @@ export default function Typologies() {
             setShowAlert(true);
         axios.delete("Typologie/delete/" + selectedId).then((res) => {
             setListTypologie(listTypologie.filter((wilaya) => wilaya.id !== selectedId));
-          
+
             setShowAlert(false);
         }).catch((err) => {
             setShowAlert(false);
@@ -172,7 +172,7 @@ export default function Typologies() {
                     }
                 </div>
                 <div className="app-content-actions fixed">
-                    <input onChange={inputHandler} className="search-bar" placeholder="Search..." type="text"/>
+                    <input onChange={inputHandler} className="search-bar" placeholder="Recherche..." type="text"/>
 
                     <div className="app-content-actions-wrapper">
                         <button
@@ -203,7 +203,7 @@ export default function Typologies() {
                             </button>
                         </div>
                         <div className="product-cell category">
-                            Nom 
+                            Nom
                             <button className="sort-button">
                                 <BiSort/>
                             </button>

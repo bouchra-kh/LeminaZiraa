@@ -10,7 +10,7 @@ const show = () => {
 };
 const Statistiques = () => {
     const [chartData, setChartData] = useState({
-                        
+
 
   datasets: [{
     label: 'My First Dataset',
@@ -52,19 +52,19 @@ const Statistiques = () => {
           console.log("dddddddddd",res.data);
           setMoughataas(res);
       })
-     
-        
+
+
     }, []);
 
-    
+
     const user = getUser();
-  
-   
-    
+
+
+
     return (
         <>
         <div className="App ml-5">
-	<h1>Statistiques des moughataas par annes</h1>
+	<h1>Statistiques des Moughataas par années</h1>
 	<div style={{ maxWidth: "650px" }}>
 		<Bar
 		data={{
@@ -109,7 +109,7 @@ const Statistiques = () => {
 	</div>
 	</div>
    {/* <div className="App">
-      
+
       <BarChart chartData={chartData} />
     </div> */}
 

@@ -145,14 +145,14 @@ function App() {
 
                     <li className="nav-item">
                         <Link to={"/home"} className="nav-link">
-                        Dashboard
+                        Tableau de Bord
                         </Link>
                     </li>
 
                     {currentUser &&(
                         <li className="nav-item">
                             <Link to={"/"} className="nav-link">
-                               
+
                                 Accueil
                             </Link>
                         </li>
@@ -200,7 +200,7 @@ function App() {
          <Route path="/moughataas/moughp/:id/detailMoughataapublications/:id" element={<PublicationsDetailMoughataa />} />
          <Route path="/publicationsmap/:id" element={<DashboardRoutes />} />
           <Route path="/publicationsmap/:id/detailMoughataapublications/:id" element={<PublicationsDetailMoughataa />} />
-         
+
                     {/* <Route path="/moughp/:id"  element={<MPublicationRoutes />} />
                     <Route path="/moughp/:id/detail/:id" element={<PublicationsDetail />} />
                     <Route path="/moughataas/moughp/:id/detail2/:id" element={<PublicationsDetail2 />} />

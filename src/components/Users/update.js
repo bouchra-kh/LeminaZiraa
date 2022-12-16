@@ -4,7 +4,7 @@ import {Link, Routes, Route, useNavigate} from 'react-router-dom';
 
 import {
     BrowserRouter as Router,
-    
+
     useParams
   } from 'react-router-dom'
   import {useGetUsersQuery,useGetUserByIdQuery,useUpdateUserMutation} from "./users-services";
@@ -17,11 +17,11 @@ export default function UsersUpdate() {
     useEffect(() => {
         setLoading(true);
         const fetchData = async () => {
-            const result = await axios.get(`user/${id}`);
+            const result = await axios.get(`users/user/${id}`);
             setUser(result.data);
         };
         fetchData().then(r=>{
-            axios.get('roles').then(res=>{
+            axios.get('users/roles').then(res=>{
                 setRoles(res.data)
                 setLoading(false);
             })
@@ -68,14 +68,14 @@ if (loading) {
                 </div>
             </div>
         </div>
-     
+
       <form
         className=""
         onSubmit={(e) => {
 
           e.preventDefault();
 
-          axios.put(`user_update/${id}`, user).then((res) => {
+          axios.put(`users/user_update/${id}`, user).then((res) => {
               // open modal
               // eslint-disable-next-line no-undef
                 const myModal = new bootstrap.Modal(document.getElementById('exampleModal'), {});
@@ -136,10 +136,10 @@ if (loading) {
           placeholder="Confirm Password"
           required="required"
         /> */}
-         
+
        <button class="btn btn-primary btn-block btn-large" type="submit">
         Modifier user</button>
-      
+
         {/* <button class="btn btn-primary btn-block btn-large" type="submit">
           Sign up
         </button> */}

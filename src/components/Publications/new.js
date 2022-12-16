@@ -22,8 +22,8 @@ import Button from "@mui/material/Button";
 export default function PublicationsNew() {
   const [image, setImage] = useState("");
   const [imagename, setImagename] = useState("");
-  
- 
+
+
   const navigate = useNavigate();
   const [username, setUsername] = useState("");
   const [main_ouvre, setMain_ouvre] = useState("");
@@ -37,7 +37,7 @@ const [prix_semance,setPrix_semance]=useState("")
 
 
 
-  
+
   const [date, setDate] = useState("");
   const [aff,setAff ] = useState("");
   //const current = new Date();
@@ -58,7 +58,7 @@ var year= date2.getFullYear();
 
 var formattedDate =  year+"-"+month+"-"+day;
 console.log("date",formattedDate.toString().substring(0, 10));
-//alert(formattedDate); 
+//alert(formattedDate);
   const [newpublication] = useCreatepublicationMutation();
   const [moughataa, setMoughataa] = useState("");
   const [typeIrrigation,setTypeIrrigation]=useState("");
@@ -92,17 +92,17 @@ console.log("date",formattedDate.toString().substring(0, 10));
     return <div>recherch....</div>
   }
   return (
-  
+
     <div class="login d-flex flex-column formulairep ">
-        
+
       <h2 class="mt-3">Ajout</h2>
       <form
         className=""
         onSubmit={(e) => {
-         
-       
+
+
           e.preventDefault();
-          
+
           newpublication({
             description: username,
             date_publication:formattedDate,
@@ -117,11 +117,11 @@ console.log("date",formattedDate.toString().substring(0, 10));
             typeIrrigation:{"id":typeIrrigation},
             typologieAgricole:{"id":typologieAgricole},
             utilisateur:UserHasAccess(ADMIN)?null:{"id":getUser().id},
-          
+
             moughataa:{"id":moughataa}
-         
+
           });
-          
+
           responseInfo4(image);
          // getpulication.data.map((publication,key) => {});
          setShowMsg(true);
@@ -137,9 +137,9 @@ console.log("date",formattedDate.toString().substring(0, 10));
           placeholder="Description"
           required="required"style={{height: "60px"}}
         />
-           
-              
-           
+
+
+
   <div className="side-by-side">
   <input class="inputp"
           type="number"
@@ -148,7 +148,7 @@ console.log("date",formattedDate.toString().substring(0, 10));
           placeholder="main-d'œuvre"
           required="required"
         />
-          
+
           <input
           type="text"
           value={semences}
@@ -158,62 +158,62 @@ console.log("date",formattedDate.toString().substring(0, 10));
         />
   </div>
 
-       
-         
-         <div className="side-by-side"> 
+
+
+         <div className="side-by-side">
         <input class="inputp"
           type="number"
           value={quantite}
           onChange={(e) => setQuantite(e.target.value)}
-          placeholder="Quantite"
+          placeholder="Quantite (KG)"
           required="required"
         />
          <input
           type="text"
           value={superficies_agricoles}
           onChange={(e) => setSuperficie_agricoles(e.target.value)}
-          placeholder="Superficies_agricoles"
+          placeholder="Superficies_agricoles(Ha)"
           required="required"
         />
-      
+
         </div>
         <div className="side-by-side">
         <input
           type="number"
           value={prix_outils}
           onChange={(e) => setPrix_outils(e.target.value)}
-          placeholder="prix_outils"
+          placeholder="prix_outils(MRU)"
           required="required"
           />
-        
+
           <input
           type="number"
           value={prix_semance}
           onChange={(e) => setPrix_semance(e.target.value)}
-          placeholder="Prix de Semances"
+          placeholder="Prix Semences(MRU)"
           required="required"
           />
 
-       
+
           <input
           type="date"
           value={date}
           onChange={(e) => setDate(e.target.value)}
-          placeholder="Annee_Recolte"
+          placeholder="Annee_Récolte"
           required="required"
         /> </div>
         {/* <div class="libele">estAffiche</div>
          <select value={aff} name={aff} onChange={(e) => setAff(e.target.value)} component="select" class="sel">
              <option></option>
-             
+
              {affichage.map((moughataa, position) => {
             return (
-              
-              
+
+
               <>
-               
+
               <option  key={position} value={moughataa.id}  required="required" >{moughataa.nom}</option>
-              
+
                 </>
                   );
                 })}
@@ -223,53 +223,53 @@ console.log("date",formattedDate.toString().substring(0, 10));
              <option></option>
              {responseInfo.data.map((moughataa, position) => {
             return (
-              
-              
+
+
                 <>
-               
+
                 <option class="option" key={position} value={moughataa.id}  required="required" >{moughataa.nom}</option>
-                
+
                   </>
                     );
                   })}
         </select>
-        
+
         <div class="libele">type Irrigation</div>
          <select  value={typeIrrigation} name={typeIrrigation} onChange={(e) => setTypeIrrigation(e.target.value)} component="select option" class="sel">
              <option></option>
              {responseInfoI.data.map((ti, posti) => {
             return (
-              
-              
+
+
                 <>
-               
+
                 <option class="option" key={posti} value={ti.id}  required="required" >{ti.nom}</option>
-                
+
                   </>
                     );
                   })}
-        </select>  
+        </select>
         <div class="libele">typologie Agricole</div>
          <select  value={typologieAgricole} name={typologieAgricole} onChange={(e) => setTypologieAgricole(e.target.value)} component="select option" class="sel">
              <option></option>
              {responseInfoT.data.map((typo, postypo) => {
             return (
-              
-              
+
+
                 <>
-               
+
                 <option class="option" key={postypo} value={typo.id}  required="required" >{typo.nom}</option>
-                
+
                   </>
                     );
                   })}
-        </select> 
+        </select>
         <input type="file" onChange={(e) => {
               console.log("nammmmmmmmm",e.target.files[0].name)
               setImage(e.target.files[0]);setImagename(image.name);
-              
+
               } }/>
-  
+
        <button class="btn btn-primary btn-block btn-large" type="submit">
         Ajouter publication</button>
         {/* </NavLink> */}
@@ -315,9 +315,3 @@ console.log("date",formattedDate.toString().substring(0, 10));
     </div>
   );
 }
-
- 
-
-
- 
-

@@ -9,14 +9,14 @@ import Snackbar from "@mui/material/Snackbar";
 import Alert from "@mui/material/Alert";
 
 export default function SignUp() {
-  const baseURL = "http://localhost:8080/register";
+  const baseURL = "http://localhost:8080/users/register";
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [role, setRole] = useState([]);
  // const responseInfo =useGetRolesQuery();
   //console.log("role",responseInfo.data)
-  
- 
+
+
   const [confirmedPassword, setConfirmedPassword] = useState("");
   const [email, setEmail] = useState("");
   const [adresse, setAdresse] = useState("");
@@ -54,14 +54,14 @@ export default function SignUp() {
           email,
           adresse,
           telephone,
-          
+
         },
-        
+
       )
       .then((res) => {
         console.log("data", res.data);
         setOpenInfo(true);
-        
+
       })
       .catch((err) => {
         // setErrorAlert(true);
@@ -73,11 +73,11 @@ export default function SignUp() {
 
   return (
     <div class="login d-flex flex-column">
-      <h1>Sign up</h1>
+      <h1>S'inscrire</h1>
       <form
         className=""
         onSubmit={handleSubmit}
-        
+
       >
         <input
           type="text"
@@ -121,16 +121,16 @@ export default function SignUp() {
           placeholder="Telephone"
           required="required"
         />
-   
-            
-               
-               
+
+
+
+
         <button class="btn btn-primary btn-block btn-large" type="submit">
-          Sign up
+          S'inscrire
         </button>
         <NavLink to="/login">
           <button class="btn btn-success btn-block btn-large  mt-3">
-            Login
+            Connecter
           </button>
         </NavLink>
       </form>
@@ -157,7 +157,7 @@ export default function SignUp() {
                     severity="success"
                     sx={{ width: "100%", fontFamily: "Calibri" }}
                   >
-                    Compte crée avec succés   
+                    Compte crée avec succés
                   </Alert>
                 </Snackbar>
     </div>

@@ -34,7 +34,7 @@ const Produits = () => {
  const [quantite, setQuantite] = useState('');
  const [nom, setNom] = useState('');
  //const [prix, setPrix] = useState('');
- const [type, setType] = useState(''); 
+ const [type, setType] = useState('');
  const [localisation, setLocalisation] = useState('');
  //const [numero, setNumero] = useState('');
  const deleteWilaya = () => {
@@ -106,16 +106,16 @@ axios.delete("produit/delete/" + selectedId).then((res) => {
         </button>
       </NavLink>
     </div>
-  
+
     <div>recherche</div>
-    
+
     </div>
     )
-    
+
   }
   return (
     <>
-   
+
         <div class="container-fluid pt-5 pb-3">
         {
                       UserHasAccess(AGRIGULTEUR) &&
@@ -129,33 +129,33 @@ axios.delete("produit/delete/" + selectedId).then((res) => {
           </NavLink></h1></div>
 }
         <h2 class="section-title position-relative text-uppercase mx-xl-5 mb-3"><span class="bg-secondary pr-3">List des Produits</span></h2>
-                 
+
                   <div class="row px-xl-5">
           {produits.data.map((produit, position) => {
             return (
-            
-              
-                 
-                 
+
+
+
+
                       <div class="col-lg-3 col-md-3 col-sm-6 pb-1 " >
                           <div class="product-item bg-light mb-1">
                               <div class="product-img position-relative overflow-hidden largeur">
                              <img  class="img-fluid w-100 " src={`http://localhost:8080/publication/sid/${produit.image}`} alt="lllllllllll"/>
-                    
-                     
+
+
                               </div>
                               <div class="text-center py-4">
-                                  <a class="h6 text-decoration-none text-truncate">{produit.nom_produit}</a>
+                                  <a class="h6 text-decoration-none text-truncate">{produit.nom}</a>
                                   <div class="d-flex align-items-center justify-content-center mt-0">
-                                      <h5>$123.00</h5><h6 class="text-muted ml-2"></h6>
-                                  </div>  
+                                      <h5>{produit.prix} MRU</h5><h6 class="text-muted ml-2"></h6>
+                                  </div>
                                   <div class="d-flex align-items-center justify-content-center mt-0">
-                                     <span><h5>22001209</h5><h6 class="text-muted ml-2"></h6></span> 
+                                     <span><h5>{produit.numero} </h5><h6 class="text-muted ml-2"></h6></span>
                                   </div>
                                   {/* <div class="d-flex align-items-center justify-content-center ">
                                       <h5>Nouackchott</h5>
                                   </div> */}
-                                         
+
                                   <div  class="  d-flex align-items-center justify-content-center mb-0">
                                   <svg onClick={() => {
                         setQuantite(produit.quantite);
@@ -168,8 +168,8 @@ axios.delete("produit/delete/" + selectedId).then((res) => {
   <path d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0z"/>
 </svg>
 {
-                        UserHasAccess(AGRIGULTEUR) && 
-                       
+                        UserHasAccess(AGRIGULTEUR) &&
+
                        <svg onClick={() => {
                         setSelectedId(produit.id_produit);
                         setShowAlert(true);
@@ -178,26 +178,26 @@ axios.delete("produit/delete/" + selectedId).then((res) => {
   <path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>
 </svg>
           } {
-            UserHasAccess(AGRIGULTEUR) &&     
+            UserHasAccess(AGRIGULTEUR) &&
             <NavLink to={"update"}>
             <svg xmlns="http://www.w3.org/2000/svg"  fill="currentColor" class="icon3 bi bi-pencil-fill" viewBox="0 0 16 16">
   <path d="M12.854.146a.5.5 0 0 0-.707 0L10.5 1.793 14.207 5.5l1.647-1.646a.5.5 0 0 0 0-.708l-3-3zm.646 6.061L9.793 2.5 3.293 9H3.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.207l6.5-6.5zm-7.468 7.468A.5.5 0 0 1 6 13.5V13h-.5a.5.5 0 0 1-.5-.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.5-.5V10h-.5a.499.499 0 0 1-.175-.032l-.179.178a.5.5 0 0 0-.11.168l-2 5a.5.5 0 0 0 .65.65l5-2a.5.5 0 0 0 .168-.11l.178-.178z"/>
-</svg>       </NavLink>        
+</svg>       </NavLink>
 
 }
                                   </div>
 
-                  
+
 
                               </div>
                           </div>
                       </div>
-                     
-                     
-                
 
-            
-              
+
+
+
+
+
             )
           })}  </div>
             </div>
@@ -214,8 +214,8 @@ axios.delete("produit/delete/" + selectedId).then((res) => {
                     <DialogContent>
                         <DialogContentText id="alert-dialog-description">
                             {MSG_DELETE}
-                         
-                            
+
+
                         </DialogContentText>
                     </DialogContent>
                     <DialogActions>
@@ -238,17 +238,17 @@ axios.delete("produit/delete/" + selectedId).then((res) => {
                     aria-describedby="alert-dialog-description"
                 >
                     <DialogTitle id="alert-dialog-title" className="centerdiv">
-                        detailes sur le produit:"{nom}"
+                        détail sur le produit:"{nom}"
                     </DialogTitle>
                     <DialogContent>
                         <DialogContentText id="alert-dialog-description">
-                            
+
                             <br></br>
-                            <div> <span class="pr">quantite: </span>{quantite}</div>
+                            <div> <span class="pr">quantite: </span>{quantite} KG</div>
                            <div><span class="pr">type: </span> {type}</div>
                             <div><span class="pr">localisation: </span>{localisation}</div>
-                            <div><span class="pr">AGRIGULTEUR: </span>{getUser().username}</div>
-                            
+                            <div><span class="pr">AGRICULTEUR: </span>{getUser().username}</div>
+
                         </DialogContentText>
                     </DialogContent>
                     <DialogActions>
