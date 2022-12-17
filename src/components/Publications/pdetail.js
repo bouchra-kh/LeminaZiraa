@@ -85,7 +85,7 @@ const onItemClick2 = () => {
     var newImage;
     var name = document.getElementById('name').value;
 console.log("vhhhhhhhhhhhhh")
-    domtoimage.toPng(content, { bgcolor: '#fff' })
+    domtoimage.toPng(pdfRef.current, { bgcolor: '#fff' })
       .then(function(dataUrl) {
         console.log("dotu")
         img = new Image();
@@ -347,34 +347,34 @@ function refreshPage() {
                   <br></br>
                   {
 etat() &&
-                  <><span className="price ">etat: </span><span className="bl valide">Validée</span><br></br></>
+                  <><span className="price ">Etat: </span><span className="bl valide">Validée</span><br></br></>
 
 
                   }    {
                     !etat() &&
-                                      <><span className="price ">etat: </span><span className="bl nvalide">Non Validée</span><br></br></>
+                                      <><span className="price ">Etat: </span><span className="bl nvalide">Non Validée</span><br></br></>
 
 
                                       }
-                  <span className="price">anneerecolte   : </span> <span className="bl">{responseInfop.data.anneerecolte.toString().substring(0, 10)}</span>
+                  <span className="price">Année de la récolte   : </span> <span className="bl">{responseInfop.data.anneerecolte.toString().substring(0, 10)}</span>
                   <br></br>
 
-                  <span className="price">moughataa de : </span> <span className="bl">{responseInfop.data.moughataa?.nom}</span>
+                  <span className="price">Moughataa de : </span> <span className="bl">{responseInfop.data.moughataa?.nom}</span>
                   <br></br>
 
-                  <span className="price"> type_dirrigation : </span> <span className="bl">{responseInfop.data.typeIrrigation.nom}</span>
+                  <span className="price"> Type_dirrigation : </span> <span className="bl">{responseInfop.data.typeIrrigation.nom}</span>
                   <br></br>
                   <span className="price"> Typologies_agricoles  : </span> <span className="bl">{responseInfop.data.typologieAgricole?.nom}</span>
                   <br></br>
-                  <span className="price"> Superficies_agricoles  : </span> <span className="bl">{responseInfop.data.superficies_agricoles}</span>
+                  <span className="price"> Superficies_agricoles  : </span> <span className="bl">{responseInfop.data.superficies_agricoles}</span><span class="unite"> HA</span>
                   <br></br>
-                  <span className="price"> quantite   : </span> <span className="bl">{responseInfop.data.quantite}KG</span>
+                  <span className="price"> Quantite   : </span> <span className="bl">{responseInfop.data.quantite}</span ><span class="unite">  KG</span>
                   <br></br>
-                  <span className="price"> cout de main_ouvre  : </span> <span className="bl">{responseInfop.data.main_ouvre}</span>
+                  <span className="price"> Coût de main_ouvre  : </span> <span className="bl">{responseInfop.data.main_ouvre}</span> <span class="unite"> MRU</span>
                   <br></br>
-                  <span className="price"> cout des outils : </span> <span className="bl">{responseInfop.data.prix_outils}</span>
-                  <br></br><span className="price">cout de semances  : </span> <span className="bl">{responseInfop.data.prix_semance}</span>
-                <br></br><span className="price">cout Totales  : </span> <span className="bl">{responseInfop.data.prix_semance +responseInfop.data.prix_outils+responseInfop.data.main_ouvre}</span>
+                  <span className="price"> Coût des outils : </span> <span className="bl">{responseInfop.data.prix_outils}</span><span class="unite"> MRU</span>
+                  <br></br><span className="price">coût de semances  : </span> <span className="bl">{responseInfop.data.prix_semance} </span><span class="unite"> MRU</span>
+                <br></br><span className="price">coût Totales  : </span> <span className="bl">{responseInfop.data.prix_semance +responseInfop.data.prix_outils+responseInfop.data.main_ouvre}</span><span class="unite"> MRU</span>
                   <br></br>
 
 

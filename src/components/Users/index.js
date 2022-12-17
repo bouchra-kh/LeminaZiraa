@@ -11,6 +11,14 @@ import { MdDelete } from 'react-icons/md';
 import {MdModeEdit } from 'react-icons/md';
 import { userSlice,useGetUsersQuery,useDeleteUserMutation } from "./users-services";
 import { ADMIN, UserHasAccess } from "../extends/GlobalFunctions";
+import axios from "axios";
+import Dialog from "@mui/material/Dialog";
+import DialogTitle from "@mui/material/DialogTitle";
+import DialogContent from "@mui/material/DialogContent";
+import DialogContentText from "@mui/material/DialogContentText";
+import DialogActions from "@mui/material/DialogActions";
+import Button from "@mui/material/Button";
+
 export default function Users() {
   const dispatch = useDispatch();
   const show = () => {
@@ -24,7 +32,21 @@ export default function Users() {
   const responseInfos=[];
   const responseInfo =useGetUsersQuery();
  const  [deleteUser]  =useDeleteUserMutation();
-
+ const [selectedId, setSelectedId] = useState(null);
+ const [showAlert, setShowAlert] = useState(false);
+ function deleteMoughataa(id) {
+  setShowAlert(true);
+  axios.delete("users/delete/" + selectedId).then((res) => {
+     // setMoughatas(moughataas.filter((wilaya) => wilaya.id !== selectedId));
+      setShowAlert(false);
+      //alert("suppression avec succes")
+      window.location.reload(false);
+      
+  }).catch((err) => {
+      setShowAlert(false);
+      console.log("delete moughataa error", err);
+  });
+}
 console.log("userrrr")
  console.log("Reponse: ", responseInfo)
   console.log("Data: ", responseInfo.data);
@@ -220,7 +242,12 @@ console.log("userrrr")
                 {
                UserHasAccess(ADMIN) &&   <div className="product-cell category">
 
-    <MdDelete style={{   fontSize:"22px" , color:"red" , marginLeft:"260px" }}onClick={() => {deleteUser(responseInfos[0].id)}}/>
+    <MdDelete style={{   fontSize:"22px" , color:"red" , marginLeft:"260px" }} onClick={() => {
+                                                              setSelectedId(wilaya.id)
+                                                              setShowAlert(true);
+                                                        
+                                                        }
+                                                        }/>
 
 
 
@@ -276,6 +303,33 @@ console.log("userrrr")
 
                     </div>
                   </div>
+                  <div>
+                <Dialog
+                    open={showAlert}
+                    onClose={() => setShowAlert(false)}
+                    aria-labelledby="alert-dialog-title"
+                    aria-describedby="alert-dialog-description"
+                >
+                    <DialogTitle id="alert-dialog-title" className="centerdiv">
+                        Alert
+                    </DialogTitle>
+                    <DialogContent>
+                        <DialogContentText id="alert-dialog-description">
+                            etes vous sur de vouloir supprimer cet utilisateur ?
+                        </DialogContentText>
+                    </DialogContent>
+                    <DialogActions>
+                        <Button color={"error"} onClick={()=>setShowAlert(false)} autoFocus>
+                            Annuler
+                        </Button>
+                        <Button onClick={deleteMoughataa} autoFocus>
+                            Confirmer
+                        </Button>
+                    </DialogActions>
+
+
+                </Dialog>
+            </div>
                 </>
               );
 

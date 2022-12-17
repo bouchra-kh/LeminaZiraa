@@ -32,6 +32,8 @@ export default function PublicationsUpdate() {
   const [main_ouvre, setMain_ouvre] = useState(responseInfo2.data.main_ouvre);
   const [quantite, setQuantite] = useState(responseInfo2.data.quantite);
   const [semences, setSemences] = useState(responseInfo2.data.semences);
+  const [valide, setValide] = useState(responseInfo2.data.valide);
+  
   const [superficies_agricoles, setSuperficie_agricoles] = useState(responseInfo2.data.superficies_agricoles);
   const [type_dirrigation, setType] = useState("");
   const [Typologies_agricoles ,setTypologie] = useState("");
@@ -117,7 +119,8 @@ console.log("date",formattedDate.toString().substring(0, 10));
             typeIrrigation:{"id":typeIrrigation},
             typologieAgricole:{"id":typologieAgricole},
             utilisateur:UserHasAccess(ADMIN)?null:{"id":getUser().id},
-            moughataa:{"id":moughataa}
+            moughataa:{"id":moughataa},
+            valide:valide
          
           });
           

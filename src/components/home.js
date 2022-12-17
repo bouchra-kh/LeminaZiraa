@@ -1,5 +1,7 @@
 import React, {useEffect, useState} from "react";
-import './home.css'
+import './home.css';
+import {useDispatch} from "react-redux";
+import {SwitchMode, toGrid, ToList} from "../app/features/local-config";
 //import {Math} from 'mathjs';
 import Typography from '@mui/material/Typography';
 import {Paper} from "@mui/material";
@@ -20,6 +22,7 @@ const Home = () => {
     const [agrict,setAgrict]=useState("");;
     const [lpv,setLpv]=useState("");
     const [sopp,setSopp]=useState("");
+    const dispatch = useDispatch();
     useEffect(() => {
       axios.get("publication/list").then((res) => {
         setPublicationst(res)
@@ -76,6 +79,26 @@ const Home = () => {
 
 <div class="main-header-line">
        <h1 >Tableau de Bord Agriculture</h1>
+       <button
+                            className="mode-switch"
+                            title="Switch Theme"
+                            onClick={() => dispatch(SwitchMode())}
+                        >
+                            <svg
+                                className="moon"
+                                fill="none"
+                                stroke="currentColor"
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                                strokeWidth="2"
+                                width="24"
+                                height="24"
+                                viewBox="0 0 24 24"
+                            >
+                                <defs></defs>
+                                <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+                            </svg>
+                        </button>
         <div class="action-buttons">
           <button class="open-right-area">
           <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-activity"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>

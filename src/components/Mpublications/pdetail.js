@@ -79,7 +79,7 @@ export default function PublicationsDetailMoughataa() {
      var newImage;
  
  console.log("vhhhhhhhhhhhhh")
-     domtoimage.toPng(div, { bgcolor: '#fff' })
+     domtoimage.toPng(pdfRef.current, { bgcolor: '#fff' })
        .then(function(dataUrl) {
          console.log("dotu")
          img = new Image();
@@ -343,26 +343,26 @@ etat() &&
                     
                     
                     }
-<span className="price">anneerecolte   : </span> <span className="bl">{responseInfop.data.anneerecolte.toString().substring(0, 10)}</span>
-<br></br>
+ <span className="price">Année de la récolte   : </span> <span className="bl">{responseInfop.data.anneerecolte.toString().substring(0, 10)}</span>
+                  <br></br>
 
-<span className="price">moughataa de : </span> <span className="bl">{responseInfop.data.moughataa?.nom}</span>
-<br></br>
+                  <span className="price">Moughataa de : </span> <span className="bl">{responseInfop.data.moughataa?.nom}</span>
+                  <br></br>
 
-<span className="price"> type_dirrigation : </span> <span className="bl">{responseInfop.data.typeIrrigation.nom}</span>
-<br></br>
-<span className="price"> Typologies_agricoles  : </span> <span className="bl">{responseInfop.data.typologieAgricole?.nom}</span>
-<br></br>
-<span className="price"> Superficies_agricoles  : </span> <span className="bl">{responseInfop.data.superficies_agricoles}</span>
-<br></br>
-<span className="price"> quantite   : </span> <span className="bl">{responseInfop.data.quantite}</span>
-<br></br>
-<span className="price"> cout de main_ouvre  : </span> <span className="bl">{responseInfop.data.main_ouvre}</span>
-<br></br>
-<span className="price"> cout des outils : </span> <span className="bl">{responseInfop.data.prix_outils}</span>
-<br></br><span className="price">cout de semances  : </span> <span className="bl">{responseInfop.data.prix_semance}</span>
-<br></br><span className="price">cout Totales  : </span> <span className="bl">{responseInfop.data.prix_semance +responseInfop.data.prix_outils+responseInfop.data.main_ouvre}</span>
-<br></br>
+                  <span className="price"> Type_dirrigation : </span> <span className="bl">{responseInfop.data.typeIrrigation.nom}</span>
+                  <br></br>
+                  <span className="price"> Typologies_agricoles  : </span> <span className="bl">{responseInfop.data.typologieAgricole?.nom}</span>
+                  <br></br>
+                  <span className="price"> Superficies_agricoles  : </span> <span className="bl">{responseInfop.data.superficies_agricoles}</span><span class="unite"> HA</span>
+                  <br></br>
+                  <span className="price"> Quantite   : </span> <span className="bl">{responseInfop.data.quantite}</span ><span class="unite">  KG</span>
+                  <br></br>
+                  <span className="price"> Coût de main_ouvre  : </span> <span className="bl">{responseInfop.data.main_ouvre}</span> <span class="unite"> MRU</span>
+                  <br></br>
+                  <span className="price"> Coût des outils : </span> <span className="bl">{responseInfop.data.prix_outils}</span><span class="unite"> MRU</span>
+                  <br></br><span className="price">coût de semances  : </span> <span className="bl">{responseInfop.data.prix_semance} </span><span class="unite"> MRU</span>
+                <br></br><span className="price">coût Totales  : </span> <span className="bl">{responseInfop.data.prix_semance +responseInfop.data.prix_outils+responseInfop.data.main_ouvre}</span><span class="unite"> MRU</span>
+                  <br></br>
 
 
 <span className="price">Publié le :</span> <span className="bl">{responseInfop.data.date_publication.toString().substring(0, 10)}</span>

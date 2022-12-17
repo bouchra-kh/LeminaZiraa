@@ -9,7 +9,7 @@ export const configurationSlice = createSlice({
     SwitchMode: () => {
       var modeSwitch = document.querySelector(".mode-switch");
       document.documentElement.classList.toggle("light");
-      modeSwitch.classList.toggle("active");
+   //   modeSwitch.classList.toggle("active");
       document.querySelector(".feather").classList.toggle("active");
     },
     toGrid: () => {

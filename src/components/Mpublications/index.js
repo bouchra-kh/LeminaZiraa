@@ -39,7 +39,9 @@ console.log("publiiiiiiiicmmmmough")
     return <div>recherch....</div>
   }
   if (responseInfop.data.length==0) {
-    return <div class="centerdiv">Cette Moughataa n'as pas de publications</div>
+   // alert("Cette Moughataa n'as pas de publications")
+    return <h2 class="centerdiv">Cette Moughataa n'as pas de publications</h2>
+ 
   }
   if (responseInfop.isError) {
     return <div>erreur :{responseInfop.error.data}</div>

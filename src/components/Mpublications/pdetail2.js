@@ -212,7 +212,7 @@ export default function PublicationsDetail2() {
 
                   <span className="price">Publié le :</span> <span className="bl">{responseInfop.data.date_publication.toString().substring(0, 10)}</span>
                   <br></br>
-                  <span className="price">jjjwilaya de : </span> <span className="bl">{responseInfop.data.moughataa?.nom}</span>
+                  <span className="price">wilaya de : </span> <span className="bl">{responseInfop.data.moughataa?.nom}</span>
 
                   </div>
 

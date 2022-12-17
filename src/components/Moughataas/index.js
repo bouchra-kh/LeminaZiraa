@@ -245,7 +245,11 @@ responseInfos.length==0?      moughataas.map((moughataa, position) => {
                                                           onClick={() => {
                                                               setSelectedId(moughataa.id)
                                                               setShowAlert(true);
-                                                          }}/>
+                                                        
+                                                        }
+                                                        }
+                                                        
+                                                        />
                                             </div>
 
                                         }

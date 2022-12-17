@@ -64,7 +64,7 @@ export default function WilayasUpdate() {
           type="text"
           value={username}
           onChange={(e) => setUsername(e.target.value)}
-          placeholder="Username"
+          placeholder="nom du wilaya"
           required="required"
         />
         {/* <input

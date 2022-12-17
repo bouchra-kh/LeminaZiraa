@@ -17,7 +17,8 @@ import DialogContentText from "@mui/material/DialogContentText";
 import DialogActions from "@mui/material/DialogActions";
 import Button from "@mui/material/Button";
 import axios from "axios";
-
+//import {useDispatch} from "react-redux";
+//import {SwitchMode, toGrid, ToList} from "../../app/features/local-config";
 const Produits = () => {
   const dispatch = useDispatch();
   const show = () => {
@@ -32,11 +33,13 @@ const Produits = () => {
  const [showAlert2, setShowAlert2] = useState(false);
  const [selectedId, setSelectedId] = useState(null);
  const [quantite, setQuantite] = useState('');
+ const [usernom, setUsernom] = useState('');
  const [nom, setNom] = useState('');
  //const [prix, setPrix] = useState('');
  const [type, setType] = useState('');
  const [localisation, setLocalisation] = useState('');
  //const [numero, setNumero] = useState('');
+ 
  const deleteWilaya = () => {
   setShowAlert(true);
 axios.delete("produit/delete/" + selectedId).then((res) => {
@@ -129,6 +132,26 @@ axios.delete("produit/delete/" + selectedId).then((res) => {
           </NavLink></h1></div>
 }
         <h2 class="section-title position-relative text-uppercase mx-xl-5 mb-3"><span class="bg-secondary pr-3">List des Produits</span></h2>
+        <button
+                            className="mode-switch"
+                            title="Switch Theme"
+                            onClick={() => dispatch(SwitchMode())}
+                        >
+                            <svg
+                                className="moon"
+                                fill="none"
+                                stroke="currentColor"
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                                strokeWidth="2"
+                                width="24"
+                                height="24"
+                                viewBox="0 0 24 24"
+                            >
+                                <defs></defs>
+                                <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+                            </svg>
+                        </button>
 
                   <div class="row px-xl-5">
           {produits.data.map((produit, position) => {
@@ -162,6 +185,8 @@ axios.delete("produit/delete/" + selectedId).then((res) => {
                         setType(produit.type);
                         setNom(produit.nom);
                         setLocalisation(produit.localisation)
+
+                        setUsernom(produit.utilisateur.username)
                         setShowAlert2(true);
                     }} xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="icon bi bi-info-circle" viewBox="0 0 16 16">
   <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
@@ -247,7 +272,7 @@ axios.delete("produit/delete/" + selectedId).then((res) => {
                             <div> <span class="pr">quantite: </span>{quantite} KG</div>
                            <div><span class="pr">type: </span> {type}</div>
                             <div><span class="pr">localisation: </span>{localisation}</div>
-                            <div><span class="pr">AGRICULTEUR: </span>{getUser().username}</div>
+                            <div><span class="pr">AGRICULTEUR: </span>{usernom}</div>
 
                         </DialogContentText>
                     </DialogContent>

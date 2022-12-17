@@ -59,7 +59,7 @@ console.log(nom)
           type="text"
           value={username}
           onChange={(e) => setUsername(e.target.value)}
-          placeholder="Username"
+          placeholder="nom du moughataa"
           required="required"
         />
         {/* <input

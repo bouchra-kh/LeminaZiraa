@@ -195,7 +195,7 @@ console.log("asdfghjklasdfghjk")
 
 
                             {user?.roles ?
-                                <p class="profile-text">{user?.roles.length > 0 ? user?.roles[0]?.roleName : 'pas de role'} </p> : 'pas de role'}
+                                <p class="profile-text">{user?.roles.length > 0 ? user?.roles[0]?.roleName : ''} </p> : ''}
                             <p class="profile-text">{user?.username} </p>
                         </div>
 

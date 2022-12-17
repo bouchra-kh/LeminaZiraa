@@ -143,20 +143,20 @@ function App() {
 
 
 
-                    <li className="nav-item">
+                    {/* <li className="nav-item">
                         <Link to={"/home"} className="nav-link">
-                        Tableau de Bord
+                        Dashboard
                         </Link>
-                    </li>
+                    </li> */}
 
-                    {currentUser &&(
+                  
                         <li className="nav-item">
                             <Link to={"/"} className="nav-link">
-
+                               
                                 Accueil
                             </Link>
                         </li>
-                    )}
+                    
                 </div>
 
                 {currentUser ? (
@@ -188,10 +188,10 @@ function App() {
                     </div>
                 )}
             </nav>
-
+            {currentUser ? (
             <div className="App  d-flex flex-row text-white">
 
-
+          
                 <Main clicked={clicked} setClicked={setClicked} />
                 <Routes>
                     <Route path="/home" element={<Home />} />
@@ -200,7 +200,7 @@ function App() {
          <Route path="/moughataas/moughp/:id/detailMoughataapublications/:id" element={<PublicationsDetailMoughataa />} />
          <Route path="/publicationsmap/:id" element={<DashboardRoutes />} />
           <Route path="/publicationsmap/:id/detailMoughataapublications/:id" element={<PublicationsDetailMoughataa />} />
-
+         
                     {/* <Route path="/moughp/:id"  element={<MPublicationRoutes />} />
                     <Route path="/moughp/:id/detail/:id" element={<PublicationsDetail />} />
                     <Route path="/moughataas/moughp/:id/detail2/:id" element={<PublicationsDetail2 />} />
@@ -233,9 +233,34 @@ function App() {
                     }
                     {/* <Route path="/mp/:id" element={<MPublicationRoutes />} /> */}
                 </Routes>
+          
 
 
             </div>
+
+            ):( <div className="App  d-flex flex-row text-white">
+
+
+              
+ <Routes>
+ <Route path="/home" element={<Home />} />
+                    <Route path="/" element={<Dashboards />} />
+                    <Route path="/moughp/:id"  element={<MPublicationRoutes />} />
+         <Route path="/moughataas/moughp/:id/detailMoughataapublications/:id" element={<PublicationsDetailMoughataa />} />
+         <Route path="/publicationsmap/:id" element={<DashboardRoutes />} />
+          <Route path="/publicationsmap/:id/detailMoughataapublications/:id" element={<PublicationsDetailMoughataa />} />
+         
+                    <Route path="/login" element={<Login/>} />
+                    <Route path="/signup" element={<SignUp />} />
+                    <Route path="/produits/*" element={<ProduitRoutes />} />
+                   
+                     </Routes>
+
+
+
+ 
+            </div>
+            )}
         </div>
     );
 }
